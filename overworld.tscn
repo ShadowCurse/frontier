@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://vqwwft3aangw"]
+[gd_scene load_steps=10 format=3 uid="uid://vqwwft3aangw"]
 
-[ext_resource type="TileSet" uid="uid://dkenr8x2wcr0g" path="res://assets/tile_set.tres" id="1_1kray"]
+[ext_resource type="TileSet" uid="uid://dkenr8x2wcr0g" path="res://assets/environment_tile_set.tres" id="1_1kray"]
 [ext_resource type="Texture2D" uid="uid://b3qol6e82u8f0" path="res://assets/TinySwords/Resources/Trees/Tree.png" id="2_wnpm8"]
 [ext_resource type="PackedScene" uid="uid://becobpr455lln" path="res://player_city.tscn" id="3_6tt3t"]
+[ext_resource type="PackedScene" uid="uid://cd8tkx0y8ylm6" path="res://player_character.tscn" id="4_nlfwv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g5jva"]
 atlas = ExtResource("2_wnpm8")
@@ -60,5 +61,8 @@ layer_2/tile_data = PackedInt32Array(589835, 4, 0, 589836, 4, 0, 786453, 4, 0, 1
 position = Vector2(670, -205)
 sprite_frames = SubResource("SpriteFrames_mbhr4")
 frame_progress = 0.130508
+
+[node name="player_character" parent="." instance=ExtResource("4_nlfwv")]
+position = Vector2(-806, 17)
 
 [node name="player_city" parent="." instance=ExtResource("3_6tt3t")]
