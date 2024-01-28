@@ -71,4 +71,4 @@ frame_progress = 0.130508
 
 [node name="player_city" parent="." instance=ExtResource("3_6tt3t")]
 
-[connection signal="switch_worlds" from="player_city" to="." method="on_player_city_switch_worlds"]
+[connection signal="switch_worlds_signal" from="player_city" to="." method="on_player_city_switch_worlds"]

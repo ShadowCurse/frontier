@@ -2,7 +2,7 @@ extends Node2D
 
 class_name PlayerCity
 
-signal switch_worlds
+signal switch_worlds_signal
 
 @onready var camera_2d: Camera2D = $Camera2D
 
@@ -18,6 +18,6 @@ func enable():
 func disable():
     self.camera_2d.enabled = false
 
-func on_teleport_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func on_teleport_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
     if event.is_pressed():
-        switch_worlds.emit()
+        switch_worlds_signal.emit()

@@ -1,5 +1,7 @@
 extends Node2D
 
+signal world_switch_signal
+
 @onready var player_character: PlayerCharacter = $tile_map/player_character
 @onready var player_city: PlayerCity = $player_city
 
@@ -20,4 +22,4 @@ func _process(_delta: float) -> void:
             self.city_selected = true
 
 func on_player_city_switch_worlds() -> void:
-    print("switching worlds")
+    self.world_switch_signal.emit()
