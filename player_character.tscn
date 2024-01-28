@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://cd8tkx0y8ylm6"]
+[gd_scene load_steps=17 format=3 uid="uid://cd8tkx0y8ylm6"]
 
 [ext_resource type="Texture2D" uid="uid://byjy6lrmb0l3e" path="res://assets/TinySwords/Factions/Knights/Troops/Warrior/Blue/Warrior_Blue.png" id="1_1amri"]
+[ext_resource type="Script" path="res://player_character.gd" id="1_vpvyh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aw4ly"]
 atlas = ExtResource("1_1amri")
@@ -99,7 +100,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="player_character" type="Node2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c1l4x"]
+radius = 22.0
+height = 72.0
+
+[node name="player_character" type="CharacterBody2D"]
+collision_mask = 2
+script = ExtResource("1_vpvyh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_aa8t2")
@@ -108,3 +115,6 @@ frame = 4
 frame_progress = 0.16726
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_c1l4x")
