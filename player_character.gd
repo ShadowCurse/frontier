@@ -1,12 +1,19 @@
 extends CharacterBody2D
 
+class_name PlayerCharacter
+
 const SPEED = 300.0
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var camera_2d: Camera2D = $Camera2D
 
+var enabled: bool = true
 var last_facing_direction_left: bool = true
 
 func _physics_process(_delta: float) -> void:
+    if !self.enabled:
+        return
+
     var direction := Input.get_vector("game_left", "game_right", "game_up", "game_down")
 
     # Handle movement
@@ -34,3 +41,10 @@ func _physics_process(_delta: float) -> void:
     else:
         self.animated_sprite_2d.play("idle")
 
+func enable():
+    self.camera_2d.enabled = true
+    self.enabled = true
+
+func disable():
+    self.camera_2d.enabled = false
+    self.enabled = false

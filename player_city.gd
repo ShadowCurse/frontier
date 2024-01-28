@@ -1,11 +1,17 @@
 extends Node2D
 
+class_name PlayerCity
 
-# Called when the node enters the scene tree for the first time.
+@onready var camera_2d: Camera2D = $Camera2D
+
 func _ready() -> void:
-    pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
     pass
+
+func _process(_delta: float) -> void:
+    pass
+
+func enable():
+    self.camera_2d.enabled = true
+
+func disable():
+    self.camera_2d.enabled = false
