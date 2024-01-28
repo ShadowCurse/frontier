@@ -18,3 +18,6 @@ func _process(_delta: float) -> void:
             self.player_city.enable()
             self.player_character.disable()
             self.city_selected = true
+
+func on_player_city_switch_worlds() -> void:
+    print("switching worlds")
