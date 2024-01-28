@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name Overworld
+
 signal world_switch_signal
 
 @onready var player_character: PlayerCharacter = $tile_map/player_character
@@ -21,5 +23,14 @@ func _process(_delta: float) -> void:
             self.player_character.disable()
             self.city_selected = true
 
-func on_player_city_switch_worlds() -> void:
+func world_enter() -> void:
+    self.visible = true
+    self.player_city.enable()
+
+func world_leave() -> void:
+    self.player_character.disable()
+    self.player_city.disable()
+    self.visible = false
+
+func on_world_switch():
     self.world_switch_signal.emit()
