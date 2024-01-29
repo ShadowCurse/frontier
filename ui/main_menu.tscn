@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://1lqll0fpf3x6"]
+[gd_scene load_steps=2 format=3 uid="uid://1lqll0fpf3x6"]
+
+[ext_resource type="Script" path="res://ui/main_menu.gd" id="1_qrpd2"]
 
 [node name="main_menu" type="Control"]
 layout_mode = 3
@@ -7,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_qrpd2")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 1
@@ -44,3 +47,7 @@ text = "Settings"
 layout_mode = 2
 theme_type_variation = &"ButtonBig"
 text = "Exit"
+
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/Start" to="." method="on_start_pressed"]
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/Settings" to="." method="on_settings_pressed"]
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/Exit" to="." method="on_exit_pressed"]
