@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://b0wvheaknnupw"]
 
-[ext_resource type="Script" path="res://player_castle.gd" id="1_hfjyj"]
+[ext_resource type="Script" path="res://underworld/player_castle.gd" id="1_hfjyj"]
 [ext_resource type="TileSet" uid="uid://dkenr8x2wcr0g" path="res://assets/environment_tile_set.tres" id="1_p4mh5"]
 [ext_resource type="Texture2D" uid="uid://b3qol6e82u8f0" path="res://assets/TinySwords/Resources/Trees/Tree.png" id="2_3f15s"]
 

@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bnfhgcrp7ayga"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_2r27h"]
-[ext_resource type="PackedScene" uid="uid://vqwwft3aangw" path="res://overworld.tscn" id="2_03ylu"]
-[ext_resource type="PackedScene" uid="uid://04ppgioepri3" path="res://underworld.tscn" id="3_wr2bv"]
+[ext_resource type="PackedScene" uid="uid://vqwwft3aangw" path="res://overworld/overworld.tscn" id="2_03ylu"]
+[ext_resource type="PackedScene" uid="uid://04ppgioepri3" path="res://underworld/underworld.tscn" id="3_wr2bv"]
 [ext_resource type="PackedScene" uid="uid://1lqll0fpf3x6" path="res://ui/main_menu.tscn" id="4_pg763"]
 
 [node name="game" type="Node"]

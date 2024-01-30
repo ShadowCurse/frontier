@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://vqwwft3aangw"]
 
 [ext_resource type="TileSet" uid="uid://dkenr8x2wcr0g" path="res://assets/environment_tile_set.tres" id="1_1kray"]
-[ext_resource type="Script" path="res://overworld.gd" id="1_3dmib"]
+[ext_resource type="Script" path="res://overworld/overworld.gd" id="1_3dmib"]
 [ext_resource type="Texture2D" uid="uid://b3qol6e82u8f0" path="res://assets/TinySwords/Resources/Trees/Tree.png" id="2_wnpm8"]
-[ext_resource type="PackedScene" uid="uid://becobpr455lln" path="res://player_city.tscn" id="3_6tt3t"]
-[ext_resource type="PackedScene" uid="uid://cd8tkx0y8ylm6" path="res://player_character.tscn" id="4_nlfwv"]
+[ext_resource type="PackedScene" uid="uid://becobpr455lln" path="res://overworld/player_city.tscn" id="3_6tt3t"]
+[ext_resource type="PackedScene" uid="uid://cd8tkx0y8ylm6" path="res://overworld/player_character.tscn" id="4_nlfwv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g5jva"]
 atlas = ExtResource("2_wnpm8")
