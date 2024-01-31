@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://becobpr455lln"]
 
 [ext_resource type="Script" path="res://overworld/player_city.gd" id="1_a2vwd"]
-[ext_resource type="TileSet" uid="uid://dkenr8x2wcr0g" path="res://assets/environment_tile_set.tres" id="1_sy242"]
 [ext_resource type="Texture2D" uid="uid://b3qol6e82u8f0" path="res://assets/TinySwords/Resources/Trees/Tree.png" id="3_ykkw8"]
+[ext_resource type="PackedScene" uid="uid://crk7re7tacp13" path="res://overworld/player_city_ui.tscn" id="4_ppl5w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1hpjg"]
 atlas = ExtResource("3_ykkw8")
@@ -46,12 +46,6 @@ size = Vector2(70, 147)
 [node name="player_city" type="Node2D"]
 script = ExtResource("1_a2vwd")
 
-[node name="TileMap" type="TileMap" parent="."]
-tile_set = ExtResource("1_sy242")
-format = 2
-layer_0/name = "collision"
-layer_0/tile_data = PackedInt32Array(-131075, 18, 0, -196605, 18, 0, 262143, 18, 0)
-
 [node name="Camera2D" type="Camera2D" parent="."]
 enabled = false
 zoom = Vector2(0.5, 0.5)
@@ -67,5 +61,10 @@ frame_progress = 0.0111806
 [node name="CollisionShape2D" type="CollisionShape2D" parent="teleport"]
 position = Vector2(2, 4.5)
 shape = SubResource("RectangleShape2D_uuvwr")
+
+[node name="Ui" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="player_city_ui" parent="Ui" instance=ExtResource("4_ppl5w")]
 
 [connection signal="input_event" from="teleport" to="." method="on_teleport_input_event"]

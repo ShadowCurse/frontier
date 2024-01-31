@@ -1,0 +1,122 @@
+[gd_scene load_steps=9 format=3 uid="uid://crk7re7tacp13"]
+
+[ext_resource type="Texture2D" uid="uid://ctn2u4ghfq4cy" path="res://assets/TinySwords/Factions/Knights/Troops/Pawn/Blue/Pawn_Blue.png" id="1_5acp7"]
+[ext_resource type="Texture2D" uid="uid://chtrguk37mbhg" path="res://assets/TinySwords/Resources/Resources/G_Idle.png" id="1_lqiu0"]
+[ext_resource type="Texture2D" uid="uid://bwakooea0r0o0" path="res://assets/TinySwords/Resources/Resources/M_Idle.png" id="2_uvr24"]
+[ext_resource type="Texture2D" uid="uid://cqqko1rxqiww0" path="res://assets/TinySwords/Resources/Resources/W_Idle_(NoShadow).png" id="3_buhgl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e41fv"]
+atlas = ExtResource("1_5acp7")
+region = Rect2(64, 69, 65, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_138lc"]
+atlas = ExtResource("1_lqiu0")
+region = Rect2(44, 48, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l5htp"]
+atlas = ExtResource("2_uvr24")
+region = Rect2(43, 57, 50, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c34lo"]
+atlas = ExtResource("3_buhgl")
+region = Rect2(38, 72, 52, 28)
+
+[node name="player_city_ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="resources_panel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="resources_panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="resources_panel/MarginContainer"]
+layout_mode = 2
+
+[node name="units" type="TextureRect" parent="resources_panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_e41fv")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="units_label" type="Label" parent="resources_panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "10"
+
+[node name="gold" type="TextureRect" parent="resources_panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_138lc")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="gold_label" type="Label" parent="resources_panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "100"
+
+[node name="food" type="TextureRect" parent="resources_panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l5htp")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="food_label" type="Label" parent="resources_panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "100"
+
+[node name="wood" type="TextureRect" parent="resources_panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_c34lo")
+stretch_mode = 5
+
+[node name="wood_label" type="Label" parent="resources_panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "100"
+
+[node name="next_wave_time" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="next_wave_time"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="next_wave_time/MarginContainer"]
+layout_mode = 2
+
+[node name="next_wave_text" type="Label" parent="next_wave_time/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Next wave in: "
+
+[node name="next_wave_time" type="Label" parent="next_wave_time/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "1 m 24 s"
