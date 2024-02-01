@@ -10,7 +10,7 @@ signal world_switch_signal
 var city_selected: bool = true
 
 func _ready() -> void:
-    pass # Replace with function body.
+    pass
 
 func _process(_delta: float) -> void:
     if Input.is_action_just_pressed("game_switch"):
@@ -25,6 +25,7 @@ func _process(_delta: float) -> void:
 
 func world_enter() -> void:
     self.visible = true
+    self.player_character.disable()
     self.player_city.enable()
 
 func world_leave() -> void:

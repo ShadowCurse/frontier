@@ -14,7 +14,7 @@ func _process(_delta: float) -> void:
 
 func on_main_menu_start():
     self.canvas_layer.visible = false
-    self.overworld.visible = true
+    self.overworld.world_enter()
 
 func on_main_menu_exit() -> void:
     get_tree().quit()
