@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://crk7re7tacp13"]
+[gd_scene load_steps=16 format=3 uid="uid://crk7re7tacp13"]
 
 [ext_resource type="Texture2D" uid="uid://ctn2u4ghfq4cy" path="res://assets/TinySwords/Factions/Knights/Troops/Pawn/Blue/Pawn_Blue.png" id="1_5acp7"]
 [ext_resource type="Texture2D" uid="uid://chtrguk37mbhg" path="res://assets/TinySwords/Resources/Resources/G_Idle.png" id="1_lqiu0"]
+[ext_resource type="Script" path="res://overworld/player_city_ui.gd" id="1_rwbks"]
 [ext_resource type="Texture2D" uid="uid://bwakooea0r0o0" path="res://assets/TinySwords/Resources/Resources/M_Idle.png" id="2_uvr24"]
 [ext_resource type="Texture2D" uid="uid://cqqko1rxqiww0" path="res://assets/TinySwords/Resources/Resources/W_Idle_(NoShadow).png" id="3_buhgl"]
 [ext_resource type="Texture2D" uid="uid://b7qfr1sp7fbv5" path="res://assets/TinySwords/Factions/Knights/Buildings/House/House_Blue.png" id="5_21srg"]
@@ -40,6 +41,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_rwbks")
 
 [node name="resources_panel" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -61,16 +64,16 @@ theme_override_constants/margin_bottom = 10
 [node name="HBoxContainer" type="HBoxContainer" parent="resources_panel/MarginContainer"]
 layout_mode = 2
 
-[node name="units" type="TextureRect" parent="resources_panel/MarginContainer/HBoxContainer"]
+[node name="population" type="TextureRect" parent="resources_panel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_e41fv")
 expand_mode = 3
 stretch_mode = 4
 
-[node name="units_label" type="Label" parent="resources_panel/MarginContainer/HBoxContainer"]
+[node name="population_label" type="Label" parent="resources_panel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "10"
+text = "0"
 
 [node name="gold" type="TextureRect" parent="resources_panel/MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -183,3 +186,5 @@ theme_type_variation = &"ButtonBig"
 icon = SubResource("AtlasTexture_dbirb")
 icon_alignment = 1
 expand_icon = true
+
+[connection signal="pressed" from="build_panel/MarginContainer/VBoxContainer/house_button" to="." method="on_house_button_pressed"]
