@@ -84,7 +84,7 @@ stretch_mode = 4
 [node name="gold_label" type="Label" parent="resources_panel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "100"
+text = "0"
 
 [node name="food" type="TextureRect" parent="resources_panel/MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -188,3 +188,4 @@ icon_alignment = 1
 expand_icon = true
 
 [connection signal="pressed" from="build_panel/MarginContainer/VBoxContainer/house_button" to="." method="on_house_button_pressed"]
+[connection signal="pressed" from="build_panel/MarginContainer/VBoxContainer/gold_mine_button" to="." method="on_gold_mine_button_pressed"]
