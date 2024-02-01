@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://cqqko1rxqiww0" path="res://assets/TinySwords/Resources/Resources/W_Idle_(NoShadow).png" id="3_buhgl"]
 [ext_resource type="Texture2D" uid="uid://b7qfr1sp7fbv5" path="res://assets/TinySwords/Factions/Knights/Buildings/House/House_Blue.png" id="5_21srg"]
 [ext_resource type="Texture2D" uid="uid://bdbga1keu84ht" path="res://assets/TinySwords/Resources/Gold Mine/GoldMine_Inactive.png" id="6_k2ep1"]
-[ext_resource type="Texture2D" uid="uid://b3qol6e82u8f0" path="res://assets/TinySwords/Resources/Trees/Tree.png" id="7_uldcv"]
 [ext_resource type="Texture2D" uid="uid://7aekqyq0s1ku" path="res://assets/TinySwords/Resources/Sheep/HappySheep_Idle.png" id="8_po6hg"]
+[ext_resource type="Texture2D" uid="uid://d0ccfiowlx3yv" path="res://assets/TinySwords/Resources/Resources/W_Idle.png" id="9_4hqqx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e41fv"]
 atlas = ExtResource("1_5acp7")
@@ -30,9 +30,9 @@ region = Rect2(38, 72, 52, 28)
 atlas = ExtResource("8_po6hg")
 region = Rect2(39, 39, 51, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bbaol"]
-atlas = ExtResource("7_uldcv")
-region = Rect2(40, 10, 113, 164)
+[sub_resource type="AtlasTexture" id="AtlasTexture_cg6ux"]
+atlas = ExtResource("9_4hqqx")
+region = Rect2(39, 70, 51, 33)
 
 [node name="player_city_ui" type="Control"]
 layout_mode = 3
@@ -103,7 +103,7 @@ stretch_mode = 5
 
 [node name="wood_label" type="Label" parent="resources_panel/MarginContainer/HBoxContainer"]
 layout_mode = 2
-text = "100"
+text = "0"
 
 [node name="next_wave_time" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -183,10 +183,11 @@ expand_icon = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"ButtonBig"
-icon = SubResource("AtlasTexture_bbaol")
+icon = SubResource("AtlasTexture_cg6ux")
 icon_alignment = 1
 expand_icon = true
 
 [connection signal="pressed" from="build_panel/MarginContainer/VBoxContainer/house_button" to="." method="on_house_button_pressed"]
 [connection signal="pressed" from="build_panel/MarginContainer/VBoxContainer/gold_mine_button" to="." method="on_gold_mine_button_pressed"]
 [connection signal="pressed" from="build_panel/MarginContainer/VBoxContainer/food_hut_button" to="." method="on_food_hut_button_pressed"]
+[connection signal="pressed" from="build_panel/MarginContainer/VBoxContainer/wood_cutter_button" to="." method="on_wood_cutter_button_pressed"]

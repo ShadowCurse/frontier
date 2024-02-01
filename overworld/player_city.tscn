@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://becobpr455lln"]
+[gd_scene load_steps=14 format=3 uid="uid://becobpr455lln"]
 
 [ext_resource type="Script" path="res://overworld/player_city.gd" id="1_a2vwd"]
 [ext_resource type="PackedScene" uid="uid://ctthoyjnhwnp7" path="res://overworld/house.tscn" id="2_7d8li"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b3qol6e82u8f0" path="res://assets/TinySwords/Resources/Trees/Tree.png" id="3_ykkw8"]
 [ext_resource type="PackedScene" uid="uid://b5so4pklxgnv" path="res://overworld/food_hut.tscn" id="4_2laik"]
 [ext_resource type="PackedScene" uid="uid://crk7re7tacp13" path="res://overworld/player_city_ui.tscn" id="4_ppl5w"]
+[ext_resource type="PackedScene" uid="uid://djyde0rq2d6i5" path="res://overworld/wood_cutter.tscn" id="5_noukh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1hpjg"]
 atlas = ExtResource("3_ykkw8")
@@ -51,6 +52,7 @@ script = ExtResource("1_a2vwd")
 house_scene = ExtResource("2_7d8li")
 gold_mine_scene = ExtResource("3_gf3vi")
 food_hut_scene = ExtResource("4_2laik")
+wood_cutter_scene = ExtResource("5_noukh")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 enabled = false
@@ -76,7 +78,9 @@ visible = false
 [connection signal="food_update_signal" from="." to="Ui/player_city_ui" method="on_food_update_signal"]
 [connection signal="gold_update_signal" from="." to="Ui/player_city_ui" method="on_gold_update_signal"]
 [connection signal="population_update_signal" from="." to="Ui/player_city_ui" method="on_population_update_signal"]
+[connection signal="wood_update_signal" from="." to="Ui/player_city_ui" method="on_wood_update_signal"]
 [connection signal="input_event" from="teleport" to="." method="on_teleport_input_event"]
 [connection signal="build_food_hut_signal" from="Ui/player_city_ui" to="." method="on_player_city_ui_build_food_hut_signal"]
 [connection signal="build_gold_mine_signal" from="Ui/player_city_ui" to="." method="on_player_city_ui_build_gold_mine_signal"]
 [connection signal="build_house_signal" from="Ui/player_city_ui" to="." method="on_player_city_ui_build_house_signal"]
+[connection signal="build_wood_cutter_signal" from="Ui/player_city_ui" to="." method="on_player_city_ui_build_wood_cutter_signal"]
