@@ -48,6 +48,7 @@ animations = [{
 size = Vector2(70, 147)
 
 [node name="player_city" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_a2vwd")
 house_scene = ExtResource("2_7d8li")
 gold_mine_scene = ExtResource("3_gf3vi")

@@ -5,7 +5,7 @@ class_name Overworld
 signal world_switch_signal
 
 @onready var player_character: PlayerCharacter = $tile_map/player_character
-@onready var player_city: PlayerCity = $player_city
+@onready var player_city: PlayerCity = $tile_map/player_city
 
 var city_selected: bool = true
 
