@@ -26,13 +26,13 @@ region = Rect2(43, 57, 50, 43)
 atlas = ExtResource("3_buhgl")
 region = Rect2(38, 72, 52, 28)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bbaol"]
-atlas = ExtResource("7_uldcv")
-region = Rect2(40, 10, 113, 164)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_dbirb"]
 atlas = ExtResource("8_po6hg")
 region = Rect2(39, 39, 51, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bbaol"]
+atlas = ExtResource("7_uldcv")
+region = Rect2(40, 10, 113, 164)
 
 [node name="player_city_ui" type="Control"]
 layout_mode = 3
@@ -94,7 +94,7 @@ stretch_mode = 4
 
 [node name="food_label" type="Label" parent="resources_panel/MarginContainer/HBoxContainer"]
 layout_mode = 2
-text = "100"
+text = "0"
 
 [node name="wood" type="TextureRect" parent="resources_panel/MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -171,6 +171,14 @@ icon = ExtResource("6_k2ep1")
 icon_alignment = 1
 expand_icon = true
 
+[node name="food_hut_button" type="Button" parent="build_panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"ButtonBig"
+icon = SubResource("AtlasTexture_dbirb")
+icon_alignment = 1
+expand_icon = true
+
 [node name="wood_cutter_button" type="Button" parent="build_panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -179,13 +187,6 @@ icon = SubResource("AtlasTexture_bbaol")
 icon_alignment = 1
 expand_icon = true
 
-[node name="huter_button" type="Button" parent="build_panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_type_variation = &"ButtonBig"
-icon = SubResource("AtlasTexture_dbirb")
-icon_alignment = 1
-expand_icon = true
-
 [connection signal="pressed" from="build_panel/MarginContainer/VBoxContainer/house_button" to="." method="on_house_button_pressed"]
 [connection signal="pressed" from="build_panel/MarginContainer/VBoxContainer/gold_mine_button" to="." method="on_gold_mine_button_pressed"]
+[connection signal="pressed" from="build_panel/MarginContainer/VBoxContainer/food_hut_button" to="." method="on_food_hut_button_pressed"]

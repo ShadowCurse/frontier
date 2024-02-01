@@ -5,18 +5,22 @@ class_name PlayerCity
 signal switch_worlds_signal
 signal population_update_signal(int)
 signal gold_update_signal(int)
+signal food_update_signal(int)
 
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var ui: CanvasLayer = $Ui
 
 @export var house_scene: PackedScene
 @export var gold_mine_scene: PackedScene
+@export var food_hut_scene: PackedScene
 
 var houses: Array[House] = []
 var gold_mines: Array[GoldMine] = []
+var food_huts: Array[FoodHut] = []
 
 var total_population: int = 0
 var total_gold: int = 0
+var total_food: int = 0
 
 var under_cursor_object: Node2D = null
 
@@ -58,6 +62,14 @@ func on_player_city_ui_build_gold_mine_signal() -> void:
 
     self.call_deferred("add_child", gold_mine)
     self.gold_mines.append(gold_mine)
+    
+func on_player_city_ui_build_food_hut_signal() -> void:
+    var food_hut: FoodHut = self.food_hut_scene.instantiate()
+    under_cursor_object = food_hut
+    food_hut.food_update_signal.connect(on_food_update_signal)
+
+    self.call_deferred("add_child", food_hut)
+    self.food_huts.append(food_hut)
 
 func on_population_incease_signal(population: int) -> void:
     self.total_population += population
@@ -66,5 +78,9 @@ func on_population_incease_signal(population: int) -> void:
 func on_gold_update_signal(gold: int) -> void:
     self.total_gold += gold
     self.gold_update_signal.emit(self.total_gold)
+    
+func on_food_update_signal(food: int) -> void:
+    self.total_food += food
+    self.food_update_signal.emit(self.total_food)
 
 
