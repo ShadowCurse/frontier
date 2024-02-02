@@ -14,6 +14,10 @@ config/name="frontier"
 run/main_scene="res://game.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 
+[display]
+
+mouse_cursor/custom_image="res://assets/TinySwords/UI/Pointers/01.png"
+
 [gui]
 
 theme/custom="res://ui/game_theme.tres"
