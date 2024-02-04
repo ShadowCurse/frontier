@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://djyde0rq2d6i5"]
 
 [ext_resource type="Texture2D" uid="uid://d0ccfiowlx3yv" path="res://assets/TinySwords/Resources/Resources/W_Idle.png" id="1_t6xrf"]
-[ext_resource type="Script" path="res://overworld/wood_cutter.gd" id="1_wqlyp"]
+[ext_resource type="Script" path="res://overworld/city/wood_cutter.gd" id="1_wqlyp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xdvli"]
 atlas = ExtResource("1_t6xrf")

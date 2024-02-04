@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://dkenr8x2wcr0g" path="res://assets/environment_tile_set.tres" id="1_1kray"]
 [ext_resource type="Script" path="res://overworld/overworld.gd" id="1_3dmib"]
-[ext_resource type="PackedScene" uid="uid://becobpr455lln" path="res://overworld/player_city.tscn" id="3_6tt3t"]
+[ext_resource type="PackedScene" uid="uid://becobpr455lln" path="res://overworld/city/player_city.tscn" id="3_6tt3t"]
 [ext_resource type="PackedScene" uid="uid://cd8tkx0y8ylm6" path="res://overworld/player_character.tscn" id="4_nlfwv"]
 
 [node name="overworld" type="Node2D"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b5so4pklxgnv"]
 
 [ext_resource type="Texture2D" uid="uid://cax76t55vfy41" path="res://assets/TinySwords/Resources/Sheep/HappySheep_All.png" id="1_vuafx"]
-[ext_resource type="Script" path="res://overworld/food_hut.gd" id="1_xejg8"]
+[ext_resource type="Script" path="res://overworld/city/food_hut.gd" id="1_xejg8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8hmtp"]
 atlas = ExtResource("1_vuafx")

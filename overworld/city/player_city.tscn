@@ -1,13 +1,13 @@
 [gd_scene load_steps=15 format=3 uid="uid://becobpr455lln"]
 
-[ext_resource type="Script" path="res://overworld/player_city.gd" id="1_a2vwd"]
-[ext_resource type="PackedScene" uid="uid://ba5oatb3jwohl" path="res://overworld/city_grid_tile.tscn" id="2_0nb4e"]
-[ext_resource type="PackedScene" uid="uid://ctthoyjnhwnp7" path="res://overworld/house.tscn" id="2_7d8li"]
-[ext_resource type="PackedScene" uid="uid://cnythimxbph1b" path="res://overworld/gold_mine.tscn" id="3_gf3vi"]
+[ext_resource type="Script" path="res://overworld/city/player_city.gd" id="1_a2vwd"]
+[ext_resource type="PackedScene" uid="uid://ba5oatb3jwohl" path="res://overworld/city/city_grid_tile.tscn" id="2_0nb4e"]
+[ext_resource type="PackedScene" uid="uid://ctthoyjnhwnp7" path="res://overworld/city/house.tscn" id="2_7d8li"]
+[ext_resource type="PackedScene" uid="uid://cnythimxbph1b" path="res://overworld/city/gold_mine.tscn" id="3_gf3vi"]
 [ext_resource type="Texture2D" uid="uid://b3qol6e82u8f0" path="res://assets/TinySwords/Resources/Trees/Tree.png" id="3_ykkw8"]
-[ext_resource type="PackedScene" uid="uid://b5so4pklxgnv" path="res://overworld/food_hut.tscn" id="4_2laik"]
-[ext_resource type="PackedScene" uid="uid://crk7re7tacp13" path="res://overworld/player_city_ui.tscn" id="4_ppl5w"]
-[ext_resource type="PackedScene" uid="uid://djyde0rq2d6i5" path="res://overworld/wood_cutter.tscn" id="5_noukh"]
+[ext_resource type="PackedScene" uid="uid://b5so4pklxgnv" path="res://overworld/city/food_hut.tscn" id="4_2laik"]
+[ext_resource type="PackedScene" uid="uid://crk7re7tacp13" path="res://overworld/city/player_city_ui.tscn" id="4_ppl5w"]
+[ext_resource type="PackedScene" uid="uid://djyde0rq2d6i5" path="res://overworld/city/wood_cutter.tscn" id="5_noukh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1hpjg"]
 atlas = ExtResource("3_ykkw8")
