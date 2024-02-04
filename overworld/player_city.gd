@@ -25,7 +25,7 @@ signal wood_update_signal(int)
 
 class GridTile:
     var node: Node2D
-    var used: bool
+    var occupied: bool
 
 # map of Vector2 to GridTile
 var grid: Dictionary = {}
@@ -57,7 +57,7 @@ func _ready() -> void:
             tile.position = bottom_left_corner + Vector2(x * self.tile_offset, y * self.tile_offset)
             var grid_tile = GridTile.new()
             grid_tile.node = tile
-            grid_tile.used = false
+            grid_tile.occupied = false
             self.grid[tile.position] = grid_tile
             self.grid_root.call_deferred("add_child", tile)
 
@@ -83,8 +83,10 @@ func move_under_cursor_object(cursor_pos: Vector2):
         var tile_right = grid_tile_position.x + self.tile_offset / 2.0
         var tile_top = grid_tile_position.y + self.tile_offset / 2.0
         var tile_bottom = grid_tile_position.y - self.tile_offset / 2.0
+        var tile = self.grid[grid_tile_position]
         if tile_left < cursor_pos.x && cursor_pos.x < tile_right \
-          && tile_bottom < cursor_pos.y && cursor_pos.y < tile_top:
+          && tile_bottom < cursor_pos.y && cursor_pos.y < tile_top \
+          && tile.occupied == false:
             self.under_cursor_object.position = grid_tile_position
             self.under_cursor_object_can_place = true
             return
@@ -94,7 +96,10 @@ func move_under_cursor_object(cursor_pos: Vector2):
 
 func try_place_object():
     if self.under_cursor_object_can_place:
-        self.under_cursor_object = null
+        var tile = self.grid.get(self.under_cursor_object.position)
+        if tile:
+            tile.occupied = true
+            self.under_cursor_object = null
 
 func on_teleport_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
     if event.is_pressed():
