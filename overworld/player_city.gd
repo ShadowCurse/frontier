@@ -10,11 +10,24 @@ signal wood_update_signal(int)
 
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var ui: CanvasLayer = $Ui
+@onready var node_2d: Node2D = $Node2D
+
+@export var tile_scene: PackedScene
+@export var tile_offset: float = 150.0
+@export var grid_size: int = 6
+@export var grid_clear_center_size: int = 2
 
 @export var house_scene: PackedScene
 @export var gold_mine_scene: PackedScene
 @export var food_hut_scene: PackedScene
 @export var wood_cutter_scene: PackedScene
+
+class GridTile:
+    var node: Node2D
+    var used: bool
+
+# map of Vector2 to GridTile
+var grid: Dictionary = {}
 
 var houses: Array[House] = []
 var gold_mines: Array[GoldMine] = []
@@ -29,7 +42,21 @@ var total_wood: int = 0
 var under_cursor_object: Node2D = null
 
 func _ready() -> void:
-    pass
+    var half_offset = self.tile_offset / 2.0
+    var empty_delta = (self.grid_size - self.grid_clear_center_size) / 2
+    var bottom_left_corner = self.position - Vector2(half_offset * (self.grid_size - 1), half_offset * (self.grid_size - 1))
+    for x in range(self.grid_size):
+        for y in range(self.grid_size):
+            # skip cental nodes
+            if empty_delta <= x && x < (self.grid_size - empty_delta) && empty_delta <= y && y < (self.grid_size - empty_delta):
+                    continue
+            var tile = self.tile_scene.instantiate()
+            tile.position = bottom_left_corner + Vector2(x * self.tile_offset, y * self.tile_offset)
+            var grid_tile = GridTile.new()
+            grid_tile.node = tile
+            grid_tile.used = false
+            self.grid[tile.position] = grid_tile
+            self.node_2d.call_deferred("add_child", tile)
 
 func _process(_delta: float) -> void:
     if under_cursor_object:
