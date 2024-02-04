@@ -32,10 +32,6 @@ position = Vector2(-806, 17)
 [node name="player_city" parent="tile_map" instance=ExtResource("3_6tt3t")]
 z_index = 1
 
-[node name="red_village" parent="tile_map" instance=ExtResource("5_jsmi5")]
-z_index = 99
-position = Vector2(2591, 2918)
-
 [node name="yello_village" parent="tile_map" instance=ExtResource("5_jsmi5")]
 z_index = 99
 position = Vector2(-2844, 2213)
@@ -44,7 +40,14 @@ position = Vector2(-2844, 2213)
 z_index = 99
 position = Vector2(-2310, -2943)
 
+[node name="red_village" parent="tile_map" instance=ExtResource("5_jsmi5")]
+z_index = 99
+position = Vector2(2591, 2918)
+
 [connection signal="switch_worlds_signal" from="tile_map/player_city" to="." method="on_world_switch"]
-[connection signal="player_enter_signal" from="tile_map/red_village" to="tile_map/player_city" method="on_red_village_player_enter_signal"]
+[connection signal="player_enter_signal" from="tile_map/yello_village" to="tile_map/player_character" method="on_yello_village_player_enter_signal"]
 [connection signal="player_enter_signal" from="tile_map/yello_village" to="tile_map/player_city" method="on_yello_village_player_enter_signal"]
+[connection signal="player_enter_signal" from="tile_map/purple_village" to="tile_map/player_character" method="on_purple_village_player_enter_signal"]
 [connection signal="player_enter_signal" from="tile_map/purple_village" to="tile_map/player_city" method="on_purple_village_player_enter_signal"]
+[connection signal="player_enter_signal" from="tile_map/red_village" to="tile_map/player_character" method="on_red_village_player_enter_signal"]
+[connection signal="player_enter_signal" from="tile_map/red_village" to="tile_map/player_city" method="on_red_village_player_enter_signal"]

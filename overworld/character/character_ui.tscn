@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://d36etgjaa1fvo"]
+[gd_scene load_steps=4 format=3 uid="uid://d36etgjaa1fvo"]
 
+[ext_resource type="Script" path="res://overworld/character/character_ui.gd" id="1_7ihq4"]
 [ext_resource type="PackedScene" uid="uid://cdgjn1vonodr1" path="res://overworld/character/character_ui_minimap.tscn" id="1_eeixe"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_x51in"]
@@ -12,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_7ihq4")
 
 [node name="next_wave_time" type="PanelContainer" parent="."]
 layout_mode = 0
@@ -114,5 +116,37 @@ layout_mode = 2
 handle_input_locally = false
 size = Vector2i(200, 200)
 size_2d_override = Vector2i(200, 200)
+render_target_update_mode = 4
 
 [node name="character_ui_minimap" parent="map/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("1_eeixe")]
+
+[node name="notification" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -255.5
+offset_top = -42.0
+offset_right = 255.5
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="notification"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="notification_label" type="Label" parent="notification/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Some text"
+
+[node name="notification_timer" type="Timer" parent="notification"]
+
+[connection signal="timeout" from="notification/notification_timer" to="." method="on_notification_timer_timeout"]

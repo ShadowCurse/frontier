@@ -2,11 +2,12 @@ extends CharacterBody2D
 
 class_name PlayerCharacter
 
-const SPEED = 300.0
-
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var ui_root: CanvasLayer = $ui_root
+@onready var character_ui: ChracterUi = $ui_root/character_ui
+
+@export var speed: float = 600.0
 
 var enabled: bool = true
 var last_facing_direction_left: bool = true
@@ -23,10 +24,10 @@ func _physics_process(_delta: float) -> void:
 
     # Handle movement
     if direction:
-        self.velocity = direction * SPEED
+        self.velocity = direction * self.speed
     else:
-        self.velocity.x = move_toward(self.velocity.x, 0, SPEED)
-        self.velocity.y = move_toward(self.velocity.y, 0, SPEED)
+        self.velocity.x = move_toward(self.velocity.x, 0, self.speed)
+        self.velocity.y = move_toward(self.velocity.y, 0, self.speed)
     self.move_and_slide()
 
 func _process(_delta: float) -> void:
@@ -86,3 +87,12 @@ func disable():
     self.ui_root.visible = false
     self.visible = false
     self.enabled = false
+
+func on_yello_village_player_enter_signal() -> void:
+    self.character_ui.show_notification("Found Yello Village")
+
+func on_purple_village_player_enter_signal() -> void:
+    self.character_ui.show_notification("Found Purple Village")
+
+func on_red_village_player_enter_signal() -> void:
+    self.character_ui.show_notification("Found Red Village")
