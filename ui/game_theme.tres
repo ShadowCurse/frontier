@@ -1,9 +1,13 @@
-[gd_resource type="Theme" load_steps=10 format=3 uid="uid://ckpwgjunwycxs"]
+[gd_resource type="Theme" load_steps=19 format=3 uid="uid://ckpwgjunwycxs"]
 
 [ext_resource type="Texture2D" uid="uid://dgchp3yogyph1" path="res://assets/TinySwords/UI/Buttons/Button_Disable_9Slides.png" id="1_0yc0y"]
 [ext_resource type="Texture2D" uid="uid://ggnerbjwwt7n" path="res://assets/TinySwords/UI/Buttons/Button_Hover_9Slides.png" id="2_p2eit"]
 [ext_resource type="Texture2D" uid="uid://besqywqgl2hxf" path="res://assets/TinySwords/UI/Buttons/Button_Blue_9Slides.png" id="3_jn78v"]
 [ext_resource type="Texture2D" uid="uid://ygdlhfy7txcw" path="res://assets/TinySwords/UI/Buttons/Button_Blue_9Slides_Pressed.png" id="4_j8cgv"]
+[ext_resource type="Texture2D" uid="uid://bopsp26lwti6u" path="res://assets/TinySwords/UI/Buttons/Button_Disable_3Slides.png" id="5_bbem2"]
+[ext_resource type="Texture2D" uid="uid://b0s2gqn24qtvf" path="res://assets/TinySwords/UI/Buttons/Button_Hover_3Slides.png" id="6_yv1u5"]
+[ext_resource type="Texture2D" uid="uid://dmqnib6w6ogjt" path="res://assets/TinySwords/UI/Buttons/Button_Blue_3Slides.png" id="7_f1spl"]
+[ext_resource type="Texture2D" uid="uid://clyb0q1g4wyqd" path="res://assets/TinySwords/UI/Buttons/Button_Blue_3Slides_Pressed.png" id="8_wwook"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fnc6m"]
 texture = ExtResource("1_0yc0y")
@@ -35,6 +39,36 @@ texture_margin_top = 12.0
 texture_margin_right = 24.0
 texture_margin_bottom = 32.0
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_312bg"]
+texture = ExtResource("5_bbem2")
+texture_margin_left = 24.0
+texture_margin_top = 12.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xrya0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bx6gb"]
+texture = ExtResource("6_yv1u5")
+texture_margin_left = 24.0
+texture_margin_top = 12.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ajopk"]
+texture = ExtResource("7_f1spl")
+texture_margin_left = 24.0
+texture_margin_top = 12.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_atwp5"]
+texture = ExtResource("8_wwook")
+texture_margin_left = 24.0
+texture_margin_top = 12.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
 [resource]
 ButtonBig/base_type = &"Button"
 ButtonBig/font_sizes/font_size = 48
@@ -43,3 +77,9 @@ ButtonBig/styles/focus = SubResource("StyleBoxEmpty_tisn7")
 ButtonBig/styles/hover = SubResource("StyleBoxTexture_o4hef")
 ButtonBig/styles/normal = SubResource("StyleBoxTexture_6xg33")
 ButtonBig/styles/pressed = SubResource("StyleBoxTexture_4ijk6")
+ButtonMid/base_type = &"Button"
+ButtonMid/styles/disabled = SubResource("StyleBoxTexture_312bg")
+ButtonMid/styles/focus = SubResource("StyleBoxEmpty_xrya0")
+ButtonMid/styles/hover = SubResource("StyleBoxTexture_bx6gb")
+ButtonMid/styles/normal = SubResource("StyleBoxTexture_ajopk")
+ButtonMid/styles/pressed = SubResource("StyleBoxTexture_atwp5")

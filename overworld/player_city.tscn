@@ -73,20 +73,20 @@ frame_progress = 0.0111806
 position = Vector2(2, 4.5)
 shape = SubResource("RectangleShape2D_uuvwr")
 
-[node name="Ui" type="CanvasLayer" parent="."]
+[node name="ui_root" type="CanvasLayer" parent="."]
 visible = false
 
-[node name="player_city_ui" parent="Ui" instance=ExtResource("4_ppl5w")]
+[node name="city_ui" parent="ui_root" instance=ExtResource("4_ppl5w")]
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="grid_root" type="Node2D" parent="."]
 z_index = -1
 
-[connection signal="food_update_signal" from="." to="Ui/player_city_ui" method="on_food_update_signal"]
-[connection signal="gold_update_signal" from="." to="Ui/player_city_ui" method="on_gold_update_signal"]
-[connection signal="population_update_signal" from="." to="Ui/player_city_ui" method="on_population_update_signal"]
-[connection signal="wood_update_signal" from="." to="Ui/player_city_ui" method="on_wood_update_signal"]
+[connection signal="food_update_signal" from="." to="ui_root/city_ui" method="on_food_update_signal"]
+[connection signal="gold_update_signal" from="." to="ui_root/city_ui" method="on_gold_update_signal"]
+[connection signal="population_update_signal" from="." to="ui_root/city_ui" method="on_population_update_signal"]
+[connection signal="wood_update_signal" from="." to="ui_root/city_ui" method="on_wood_update_signal"]
 [connection signal="input_event" from="teleport" to="." method="on_teleport_input_event"]
-[connection signal="build_food_hut_signal" from="Ui/player_city_ui" to="." method="on_player_city_ui_build_food_hut_signal"]
-[connection signal="build_gold_mine_signal" from="Ui/player_city_ui" to="." method="on_player_city_ui_build_gold_mine_signal"]
-[connection signal="build_house_signal" from="Ui/player_city_ui" to="." method="on_player_city_ui_build_house_signal"]
-[connection signal="build_wood_cutter_signal" from="Ui/player_city_ui" to="." method="on_player_city_ui_build_wood_cutter_signal"]
+[connection signal="build_food_hut_signal" from="ui_root/city_ui" to="." method="on_city_ui_build_food_hut_signal"]
+[connection signal="build_gold_mine_signal" from="ui_root/city_ui" to="." method="on_city_ui_build_gold_mine_signal"]
+[connection signal="build_house_signal" from="ui_root/city_ui" to="." method="on_city_ui_build_house_signal"]
+[connection signal="build_wood_cutter_signal" from="ui_root/city_ui" to="." method="on_city_ui_build_wood_cutter_signal"]

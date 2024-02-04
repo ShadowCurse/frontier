@@ -9,8 +9,9 @@ signal food_update_signal(int)
 signal wood_update_signal(int)
 
 @onready var camera_2d: Camera2D = $Camera2D
-@onready var ui: CanvasLayer = $Ui
-@onready var node_2d: Node2D = $Node2D
+@onready var ui_root: CanvasLayer = $ui_root
+@onready var city_ui: Control = $ui_root/city_ui
+@onready var grid_root: Node2D = $grid_root
 
 @export var tile_scene: PackedScene
 @export var tile_offset: float = 150.0
@@ -58,7 +59,7 @@ func _ready() -> void:
             grid_tile.node = tile
             grid_tile.used = false
             self.grid[tile.position] = grid_tile
-            self.node_2d.call_deferred("add_child", tile)
+            self.grid_root.call_deferred("add_child", tile)
 
 func _process(_delta: float) -> void:
     if under_cursor_object:
@@ -70,11 +71,11 @@ func _process(_delta: float) -> void:
 
 func enable():
     self.camera_2d.enabled = true
-    self.ui.visible = true
+    self.ui_root.visible = true
 
 func disable():
     self.camera_2d.enabled = false
-    self.ui.visible = false
+    self.ui_root.visible = false
 
 func move_under_cursor_object(cursor_pos: Vector2):
     for grid_tile_position in self.grid:
@@ -99,7 +100,7 @@ func on_teleport_input_event(_viewport: Node, event: InputEvent, _shape_idx: int
     if event.is_pressed():
         switch_worlds_signal.emit()
 
-func on_player_city_ui_build_house_signal() -> void:
+func on_city_ui_build_house_signal() -> void:
     var house: House = self.house_scene.instantiate()
     under_cursor_object = house
     house.population_update_signal.connect(on_population_incease_signal)
@@ -107,7 +108,7 @@ func on_player_city_ui_build_house_signal() -> void:
     self.call_deferred("add_child", house)
     self.houses.append(house)
     
-func on_player_city_ui_build_gold_mine_signal() -> void:
+func on_city_ui_build_gold_mine_signal() -> void:
     var gold_mine: GoldMine = self.gold_mine_scene.instantiate()
     under_cursor_object = gold_mine
     gold_mine.gold_update_signal.connect(on_gold_update_signal)
@@ -115,7 +116,7 @@ func on_player_city_ui_build_gold_mine_signal() -> void:
     self.call_deferred("add_child", gold_mine)
     self.gold_mines.append(gold_mine)
     
-func on_player_city_ui_build_food_hut_signal() -> void:
+func on_city_ui_build_food_hut_signal() -> void:
     var food_hut: FoodHut = self.food_hut_scene.instantiate()
     under_cursor_object = food_hut
     food_hut.food_update_signal.connect(on_food_update_signal)
@@ -123,7 +124,7 @@ func on_player_city_ui_build_food_hut_signal() -> void:
     self.call_deferred("add_child", food_hut)
     self.food_huts.append(food_hut)
     
-func on_player_city_ui_build_wood_cutter_signal() -> void:
+func on_city_ui_build_wood_cutter_signal() -> void:
     var wood_cutter: WoodCutter = self.wood_cutter_scene.instantiate()
     under_cursor_object = wood_cutter
     wood_cutter.wood_update_signal.connect(on_wood_update_signal)
