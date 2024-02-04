@@ -153,4 +153,12 @@ func on_wood_update_signal(wood: int) -> void:
     self.total_wood += wood
     self.wood_update_signal.emit(self.total_wood)
 
+func on_yello_village_player_enter_signal() -> void:
+    self.city_ui.unlock_yellow_village()
+
+func on_purple_village_player_enter_signal() -> void:
+    self.city_ui.unlock_purple_village()
+
+func on_red_village_player_enter_signal() -> void:
+    self.city_ui.unlock_red_village()
 

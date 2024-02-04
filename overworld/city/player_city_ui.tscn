@@ -192,7 +192,7 @@ icon = SubResource("AtlasTexture_cg6ux")
 icon_alignment = 1
 expand_icon = true
 
-[node name="other_cities_panel" type="PanelContainer" parent="."]
+[node name="villages_panel" type="PanelContainer" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -207,123 +207,126 @@ offset_bottom = 194.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="other_cities_panel"]
+[node name="MarginContainer" type="MarginContainer" parent="villages_panel"]
 layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="GridContainer" type="GridContainer" parent="other_cities_panel/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="villages_panel/MarginContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="yellow_city_panel" type="PanelContainer" parent="other_cities_panel/MarginContainer/GridContainer"]
+[node name="yellow_village_panel" type="PanelContainer" parent="villages_panel/MarginContainer/GridContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="other_cities_panel/MarginContainer/GridContainer/yellow_city_panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="villages_panel/MarginContainer/GridContainer/yellow_village_panel"]
 layout_mode = 2
 
-[node name="yellow_city_label" type="Label" parent="other_cities_panel/MarginContainer/GridContainer/yellow_city_panel/VBoxContainer"]
+[node name="yellow_city_label" type="Label" parent="villages_panel/MarginContainer/GridContainer/yellow_village_panel/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Banana central"
 
-[node name="yellow_city_info" type="HBoxContainer" parent="other_cities_panel/MarginContainer/GridContainer/yellow_city_panel/VBoxContainer"]
+[node name="yellow_city_info" type="HBoxContainer" parent="villages_panel/MarginContainer/GridContainer/yellow_village_panel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="yellow_city_icon" type="TextureRect" parent="other_cities_panel/MarginContainer/GridContainer/yellow_city_panel/VBoxContainer/yellow_city_info"]
+[node name="yellow_city_icon" type="TextureRect" parent="villages_panel/MarginContainer/GridContainer/yellow_village_panel/VBoxContainer/yellow_city_info"]
 layout_mode = 2
 texture = ExtResource("10_oemma")
 expand_mode = 3
 stretch_mode = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="other_cities_panel/MarginContainer/GridContainer/yellow_city_panel/VBoxContainer/yellow_city_info"]
+[node name="VBoxContainer" type="VBoxContainer" parent="villages_panel/MarginContainer/GridContainer/yellow_village_panel/VBoxContainer/yellow_city_info"]
 layout_mode = 2
 
-[node name="yellow_city_rep" type="Label" parent="other_cities_panel/MarginContainer/GridContainer/yellow_city_panel/VBoxContainer/yellow_city_info/VBoxContainer"]
+[node name="yellow_city_rep" type="Label" parent="villages_panel/MarginContainer/GridContainer/yellow_village_panel/VBoxContainer/yellow_city_info/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 text = "Reputation"
 
-[node name="yellow_city_rep_value" type="Label" parent="other_cities_panel/MarginContainer/GridContainer/yellow_city_panel/VBoxContainer/yellow_city_info/VBoxContainer"]
+[node name="yellow_city_rep_value" type="Label" parent="villages_panel/MarginContainer/GridContainer/yellow_village_panel/VBoxContainer/yellow_city_info/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 text = "0"
 
-[node name="purple_city_panel" type="PanelContainer" parent="other_cities_panel/MarginContainer/GridContainer"]
+[node name="purple_village_panel" type="PanelContainer" parent="villages_panel/MarginContainer/GridContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="other_cities_panel/MarginContainer/GridContainer/purple_city_panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="villages_panel/MarginContainer/GridContainer/purple_village_panel"]
 layout_mode = 2
 
-[node name="purple_city_label" type="Label" parent="other_cities_panel/MarginContainer/GridContainer/purple_city_panel/VBoxContainer"]
+[node name="purple_city_label" type="Label" parent="villages_panel/MarginContainer/GridContainer/purple_village_panel/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Grapes Apes"
 
-[node name="purple_city_info" type="HBoxContainer" parent="other_cities_panel/MarginContainer/GridContainer/purple_city_panel/VBoxContainer"]
+[node name="purple_city_info" type="HBoxContainer" parent="villages_panel/MarginContainer/GridContainer/purple_village_panel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="purple_city_icon" type="TextureRect" parent="other_cities_panel/MarginContainer/GridContainer/purple_city_panel/VBoxContainer/purple_city_info"]
+[node name="purple_city_icon" type="TextureRect" parent="villages_panel/MarginContainer/GridContainer/purple_village_panel/VBoxContainer/purple_city_info"]
 layout_mode = 2
 texture = ExtResource("11_0ns6i")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="other_cities_panel/MarginContainer/GridContainer/purple_city_panel/VBoxContainer/purple_city_info"]
+[node name="VBoxContainer" type="VBoxContainer" parent="villages_panel/MarginContainer/GridContainer/purple_village_panel/VBoxContainer/purple_city_info"]
 layout_mode = 2
 
-[node name="purple_city_rep" type="Label" parent="other_cities_panel/MarginContainer/GridContainer/purple_city_panel/VBoxContainer/purple_city_info/VBoxContainer"]
+[node name="purple_city_rep" type="Label" parent="villages_panel/MarginContainer/GridContainer/purple_village_panel/VBoxContainer/purple_city_info/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 text = "Reputation"
 
-[node name="purplu_city_rep_value" type="Label" parent="other_cities_panel/MarginContainer/GridContainer/purple_city_panel/VBoxContainer/purple_city_info/VBoxContainer"]
+[node name="purplu_city_rep_value" type="Label" parent="villages_panel/MarginContainer/GridContainer/purple_village_panel/VBoxContainer/purple_city_info/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 text = "0"
 
-[node name="red_city_panel" type="PanelContainer" parent="other_cities_panel/MarginContainer/GridContainer"]
+[node name="red_village_panel" type="PanelContainer" parent="villages_panel/MarginContainer/GridContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="other_cities_panel/MarginContainer/GridContainer/red_city_panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="villages_panel/MarginContainer/GridContainer/red_village_panel"]
 layout_mode = 2
 
-[node name="red_city_label" type="Label" parent="other_cities_panel/MarginContainer/GridContainer/red_city_panel/VBoxContainer"]
+[node name="red_city_label" type="Label" parent="villages_panel/MarginContainer/GridContainer/red_village_panel/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Crab Sticks"
 
-[node name="red_city_info" type="HBoxContainer" parent="other_cities_panel/MarginContainer/GridContainer/red_city_panel/VBoxContainer"]
+[node name="red_city_info" type="HBoxContainer" parent="villages_panel/MarginContainer/GridContainer/red_village_panel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="red_city_icon" type="TextureRect" parent="other_cities_panel/MarginContainer/GridContainer/red_city_panel/VBoxContainer/red_city_info"]
+[node name="red_city_icon" type="TextureRect" parent="villages_panel/MarginContainer/GridContainer/red_village_panel/VBoxContainer/red_city_info"]
 layout_mode = 2
 texture = ExtResource("12_dvr8g")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="other_cities_panel/MarginContainer/GridContainer/red_city_panel/VBoxContainer/red_city_info"]
+[node name="VBoxContainer" type="VBoxContainer" parent="villages_panel/MarginContainer/GridContainer/red_village_panel/VBoxContainer/red_city_info"]
 layout_mode = 2
 
-[node name="red_city_rep" type="Label" parent="other_cities_panel/MarginContainer/GridContainer/red_city_panel/VBoxContainer/red_city_info/VBoxContainer"]
+[node name="red_city_rep" type="Label" parent="villages_panel/MarginContainer/GridContainer/red_village_panel/VBoxContainer/red_city_info/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 text = "Reputation"
 
-[node name="red_city_rep_value" type="Label" parent="other_cities_panel/MarginContainer/GridContainer/red_city_panel/VBoxContainer/red_city_info/VBoxContainer"]
+[node name="red_city_rep_value" type="Label" parent="villages_panel/MarginContainer/GridContainer/red_village_panel/VBoxContainer/red_city_info/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6

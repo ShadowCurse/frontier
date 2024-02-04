@@ -6,12 +6,16 @@ signal build_food_hut_signal
 signal build_wood_cutter_signal
 
 @onready var build_panel: PanelContainer = $build_panel
-@onready var other_cities_panel: PanelContainer = $other_cities_panel
+@onready var villages_panel: PanelContainer = $villages_panel
 
 @onready var population_label: Label = $resources_panel/MarginContainer/HBoxContainer/population_label
 @onready var gold_label: Label = $resources_panel/MarginContainer/HBoxContainer/gold_label
 @onready var food_label: Label = $resources_panel/MarginContainer/HBoxContainer/food_label
 @onready var wood_label: Label = $resources_panel/MarginContainer/HBoxContainer/wood_label
+
+@onready var yellow_village_panel: PanelContainer = $villages_panel/MarginContainer/GridContainer/yellow_village_panel
+@onready var purple_village_panel: PanelContainer = $villages_panel/MarginContainer/GridContainer/purple_village_panel
+@onready var red_village_panel: PanelContainer = $villages_panel/MarginContainer/GridContainer/red_village_panel
 
 func _ready() -> void:
     pass
@@ -24,8 +28,17 @@ func _unhandled_input(event: InputEvent) -> void:
         self.hide_modes()
 
 func hide_modes() -> void:
-    self.other_cities_panel.visible = false
+    self.villages_panel.visible = false
     self.build_panel.visible = false
+
+func unlock_yellow_village() -> void:
+    self.yellow_village_panel.visible = true
+
+func unlock_purple_village() -> void:
+    self.purple_village_panel.visible = true
+
+func unlock_red_village() -> void:
+    self.red_village_panel.visible = true
 
 func on_house_button_pressed() -> void:
     self.hide_modes()
@@ -56,9 +69,9 @@ func on_wood_update_signal(new_wood: int) -> void:
     self.wood_label.text = "%d" % new_wood
 
 func on_build_mode_button_pressed() -> void:
-    self.other_cities_panel.visible = false
+    self.villages_panel.visible = false
     self.build_panel.visible = true
 
 func on_other_cities_mode_button_pressed() -> void:
     self.build_panel.visible = false
-    self.other_cities_panel.visible = true
+    self.villages_panel.visible = true
