@@ -74,13 +74,12 @@ func _process(_delta: float) -> void:
         else:
             self.animated_sprite_2d.play("idle")
 
-
-
-
 func enable():
     self.camera_2d.enabled = true
+    self.visible = true
     self.enabled = true
 
 func disable():
     self.camera_2d.enabled = false
+    self.visible = false
     self.enabled = false
