@@ -1,0 +1,118 @@
+[gd_scene load_steps=3 format=3 uid="uid://d36etgjaa1fvo"]
+
+[ext_resource type="PackedScene" uid="uid://cdgjn1vonodr1" path="res://overworld/character/character_ui_minimap.tscn" id="1_eeixe"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_x51in"]
+viewport_path = NodePath("map/MarginContainer/SubViewportContainer/SubViewport")
+
+[node name="character_ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="next_wave_time" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 47.0
+
+[node name="MarginContainer" type="MarginContainer" parent="next_wave_time"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="next_wave_time/MarginContainer"]
+layout_mode = 2
+
+[node name="next_wave_text" type="Label" parent="next_wave_time/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Next wave in: "
+
+[node name="next_wave_time" type="Label" parent="next_wave_time/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "1 m 24 s"
+
+[node name="health" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -164.0
+offset_top = -79.0
+offset_right = 164.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="health"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="ProgressBar" type="ProgressBar" parent="health/MarginContainer"]
+layout_mode = 2
+max_value = 1.0
+value = 1.0
+
+[node name="experience" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -506.0
+offset_top = -38.0
+offset_right = 506.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="experience"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="ProgressBar" type="ProgressBar" parent="experience/MarginContainer"]
+layout_mode = 2
+max_value = 1.0
+
+[node name="map" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="map"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="TextureRect" type="TextureRect" parent="map/MarginContainer"]
+layout_mode = 2
+texture = SubResource("ViewportTexture_x51in")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="map/MarginContainer"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="map/MarginContainer/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(200, 200)
+size_2d_override = Vector2i(200, 200)
+
+[node name="character_ui_minimap" parent="map/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("1_eeixe")]

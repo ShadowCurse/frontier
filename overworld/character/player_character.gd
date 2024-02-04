@@ -6,6 +6,7 @@ const SPEED = 300.0
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var camera_2d: Camera2D = $Camera2D
+@onready var ui_root: CanvasLayer = $ui_root
 
 var enabled: bool = true
 var last_facing_direction_left: bool = true
@@ -76,10 +77,12 @@ func _process(_delta: float) -> void:
 
 func enable():
     self.camera_2d.enabled = true
+    self.ui_root.visible = true
     self.visible = true
     self.enabled = true
 
 func disable():
     self.camera_2d.enabled = false
+    self.ui_root.visible = false
     self.visible = false
     self.enabled = false

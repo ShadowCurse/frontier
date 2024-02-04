@@ -1,7 +1,8 @@
-[gd_scene load_steps=35 format=3 uid="uid://cd8tkx0y8ylm6"]
+[gd_scene load_steps=36 format=3 uid="uid://cd8tkx0y8ylm6"]
 
 [ext_resource type="Texture2D" uid="uid://byjy6lrmb0l3e" path="res://assets/TinySwords/Factions/Knights/Troops/Warrior/Blue/Warrior_Blue.png" id="1_1amri"]
-[ext_resource type="Script" path="res://overworld/player_character.gd" id="1_vpvyh"]
+[ext_resource type="Script" path="res://overworld/character/player_character.gd" id="1_vpvyh"]
+[ext_resource type="PackedScene" uid="uid://d36etgjaa1fvo" path="res://overworld/character/character_ui.tscn" id="3_etns2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5geya"]
 atlas = ExtResource("1_1amri")
@@ -258,3 +259,8 @@ enabled = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_c1l4x")
+
+[node name="ui_root" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="character_ui" parent="ui_root" instance=ExtResource("3_etns2")]
