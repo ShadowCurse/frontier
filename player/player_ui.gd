@@ -1,6 +1,6 @@
 extends Control
 
-class_name ChracterUi
+class_name PlayerUi
 
 @onready var notification_panel: PanelContainer = $notification
 @onready var notification_label: Label = $notification/MarginContainer/notification_label

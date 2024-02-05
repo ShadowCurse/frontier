@@ -1,11 +1,11 @@
 extends CharacterBody2D
 
-class_name PlayerCharacter
+class_name Player
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var ui_root: CanvasLayer = $ui_root
-@onready var character_ui: ChracterUi = $ui_root/character_ui
+@onready var ui: PlayerUi = $ui_root/ui
 
 @export var speed: float = 600.0
 
@@ -89,10 +89,10 @@ func disable():
     self.enabled = false
 
 func on_yello_village_player_enter_signal() -> void:
-    self.character_ui.show_notification("Found Yello Village")
+    self.ui.show_notification("Found Yello Village")
 
 func on_purple_village_player_enter_signal() -> void:
-    self.character_ui.show_notification("Found Purple Village")
+    self.ui.show_notification("Found Purple Village")
 
 func on_red_village_player_enter_signal() -> void:
-    self.character_ui.show_notification("Found Red Village")
+    self.ui.show_notification("Found Red Village")

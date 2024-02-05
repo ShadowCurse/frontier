@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var game_map: TileMap = get_node("/root/game/overworld/tile_map")
-@onready var player: PlayerCharacter = get_node("/root/game/overworld/tile_map/player_character")
+@onready var player: Player = get_node("/root/game/overworld/tile_map/player")
 
 @onready var tile_map: TileMap = $TileMap
 @onready var player_icon: Sprite2D = $TileMap/player_icon

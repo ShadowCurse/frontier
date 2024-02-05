@@ -1,19 +1,19 @@
 [gd_scene load_steps=4 format=3 uid="uid://d36etgjaa1fvo"]
 
-[ext_resource type="Script" path="res://overworld/character/character_ui.gd" id="1_7ihq4"]
-[ext_resource type="PackedScene" uid="uid://cdgjn1vonodr1" path="res://overworld/character/character_ui_minimap.tscn" id="1_eeixe"]
+[ext_resource type="Script" path="res://player/player_ui.gd" id="1_ky2jm"]
+[ext_resource type="PackedScene" uid="uid://cdgjn1vonodr1" path="res://player/player_ui_minimap.tscn" id="2_l5bns"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_x51in"]
 viewport_path = NodePath("map/MarginContainer/SubViewportContainer/SubViewport")
 
-[node name="character_ui" type="Control"]
+[node name="player_ui" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_7ihq4")
+script = ExtResource("1_ky2jm")
 
 [node name="next_wave_time" type="PanelContainer" parent="."]
 layout_mode = 0
@@ -118,7 +118,7 @@ size = Vector2i(200, 200)
 size_2d_override = Vector2i(200, 200)
 render_target_update_mode = 4
 
-[node name="character_ui_minimap" parent="map/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("1_eeixe")]
+[node name="ui_minimap" parent="map/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("2_l5bns")]
 
 [node name="notification" type="PanelContainer" parent="."]
 visible = false
