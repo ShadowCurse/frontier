@@ -147,7 +147,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_down",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -170,7 +170,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_right",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -193,7 +193,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_up",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -214,9 +214,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0u4ki")
 }],
-"loop": true,
+"loop": false,
 "name": &"idle",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -237,9 +237,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_h6xbj")
 }],
-"loop": true,
+"loop": false,
 "name": &"run",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c1l4x"]
@@ -252,15 +252,27 @@ script = ExtResource("1_vpvyh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_aa8t2")
-animation = &"idle"
+animation = &"attack_down"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 enabled = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="player_collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_c1l4x")
+
+[node name="weapon_area" type="Area2D" parent="."]
+visible = false
+collision_layer = 4
+collision_mask = 8
+input_pickable = false
+monitoring = false
+
+[node name="weapon_collision" type="CollisionPolygon2D" parent="weapon_area"]
+polygon = PackedVector2Array(0, 0, 100, 100, 100, -100)
 
 [node name="ui_root" type="CanvasLayer" parent="."]
 visible = false
 
 [node name="ui" parent="ui_root" instance=ExtResource("3_etns2")]
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="on_animated_sprite_2d_animation_finished"]
