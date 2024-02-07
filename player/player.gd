@@ -25,7 +25,6 @@ enum AttackDirection {
     Left,
     Right
 }
-
 var attacking_direction: AttackDirection = AttackDirection.None
 var last_facing_direction_left: bool = true
 

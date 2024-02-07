@@ -1,0 +1,237 @@
+[gd_scene load_steps=31 format=3 uid="uid://b8unxc5ktifq0"]
+
+[ext_resource type="Script" path="res://enemies/enemy.gd" id="1_msime"]
+[ext_resource type="Texture2D" uid="uid://bjggrchs66i50" path="res://assets/TinySwords/Factions/Goblins/Troops/Torch/Red/Torch_Red.png" id="2_rdtyt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45c53"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(0, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ahpx"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(192, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y2q8b"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(384, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cpev4"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(576, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pdi8j"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(768, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yi2b"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(960, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c27qa"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(0, 768, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qg8t0"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(192, 768, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_efj2u"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(384, 768, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oio5e"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(576, 768, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tu8gy"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(768, 768, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sd8qg"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(960, 768, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6sa1m"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cp4sr"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kw081"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rpwvc"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yqyoc"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qns3"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(960, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ql16t"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(1152, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7bacm"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(0, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_giius"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(192, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xig4r"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(384, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_334j3"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(576, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7bynb"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(768, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8vvst"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(960, 192, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_utw4n"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"attack_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45c53")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ahpx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y2q8b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cpev4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pdi8j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2yi2b")
+}],
+"loop": false,
+"name": &"attack_right",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c27qa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qg8t0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_efj2u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oio5e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tu8gy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sd8qg")
+}],
+"loop": false,
+"name": &"attack_up",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6sa1m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cp4sr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kw081")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rpwvc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yqyoc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7qns3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ql16t")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7bacm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_giius")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xig4r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_334j3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7bynb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8vvst")
+}],
+"loop": false,
+"name": &"run",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ujjuf"]
+radius = 34.0
+height = 82.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ct515"]
+radius = 472.424
+
+[node name="enemy" type="CharacterBody2D"]
+script = ExtResource("1_msime")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_utw4n")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_ujjuf")
+debug_color = Color(0.596078, 0.545098, 0, 0.419608)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="follow_area" type="Area2D" parent="."]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="follow_area"]
+shape = SubResource("CircleShape2D_ct515")
+debug_color = Color(0, 0.623529, 0.537255, 0.419608)
+
+[connection signal="body_entered" from="follow_area" to="." method="on_follow_area_body_entered"]
+[connection signal="body_exited" from="follow_area" to="." method="on_follow_area_body_exited"]

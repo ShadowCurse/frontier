@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://vqwwft3aangw"]
+[gd_scene load_steps=7 format=3 uid="uid://vqwwft3aangw"]
 
 [ext_resource type="TileSet" uid="uid://dkenr8x2wcr0g" path="res://assets/environment_tile_set.tres" id="1_1kray"]
 [ext_resource type="Script" path="res://overworld/overworld.gd" id="1_3dmib"]
 [ext_resource type="PackedScene" uid="uid://becobpr455lln" path="res://overworld/city/player_city.tscn" id="3_6tt3t"]
+[ext_resource type="PackedScene" uid="uid://b8unxc5ktifq0" path="res://enemies/enemy.tscn" id="4_72kh4"]
 [ext_resource type="PackedScene" uid="uid://cd8tkx0y8ylm6" path="res://player/player.tscn" id="4_nlfwv"]
 [ext_resource type="PackedScene" uid="uid://dgagh2vwcqv1w" path="res://overworld/village/village.tscn" id="5_jsmi5"]
 
@@ -28,6 +29,18 @@ layer_2/tile_data = PackedInt32Array(589835, 4, 0, 589836, 4, 0, 786453, 4, 0, 1
 visible = false
 z_index = 1
 position = Vector2(-806, 17)
+
+[node name="enemy" parent="tile_map" instance=ExtResource("4_72kh4")]
+z_index = 1
+position = Vector2(-2675, -1159)
+
+[node name="enemy2" parent="tile_map" instance=ExtResource("4_72kh4")]
+z_index = 1
+position = Vector2(-2718, -953)
+
+[node name="enemy3" parent="tile_map" instance=ExtResource("4_72kh4")]
+z_index = 1
+position = Vector2(-2827, -1115)
 
 [node name="player_city" parent="tile_map" instance=ExtResource("3_6tt3t")]
 z_index = 1
