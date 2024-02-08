@@ -214,6 +214,8 @@ height = 82.0
 radius = 472.424
 
 [node name="enemy" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 2
 script = ExtResource("1_msime")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

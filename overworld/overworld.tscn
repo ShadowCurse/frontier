@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://vqwwft3aangw"]
+[gd_scene load_steps=8 format=3 uid="uid://vqwwft3aangw"]
 
 [ext_resource type="TileSet" uid="uid://dkenr8x2wcr0g" path="res://assets/environment_tile_set.tres" id="1_1kray"]
 [ext_resource type="Script" path="res://overworld/overworld.gd" id="1_3dmib"]
@@ -7,10 +7,21 @@
 [ext_resource type="PackedScene" uid="uid://cd8tkx0y8ylm6" path="res://player/player.tscn" id="4_nlfwv"]
 [ext_resource type="PackedScene" uid="uid://dgagh2vwcqv1w" path="res://overworld/village/village.tscn" id="5_jsmi5"]
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_6m1nb"]
+vertices = PackedVector2Array(3339, 3354, -3332, 3374, -3222, -3248, 3320, -3267)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-3232, -3258, 3330, -3278, 3350, 3364, -3343, 3385)])
+parsed_geometry_type = 1
+source_geometry_mode = 1
+source_geometry_group_name = &"navigation"
+
 [node name="overworld" type="Node2D"]
 script = ExtResource("1_3dmib")
 
-[node name="tile_map" type="TileMap" parent="."]
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_6m1nb")
+
+[node name="tile_map" type="TileMap" parent="." groups=["navigation"]]
 y_sort_enabled = true
 tile_set = ExtResource("1_1kray")
 format = 2

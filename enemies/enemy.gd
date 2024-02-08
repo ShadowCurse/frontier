@@ -6,7 +6,7 @@ class_name Enemy
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
 
-@export var speed: float = 600.0
+@export var speed: float = 1.0
 
 enum State {
     Disabled,
@@ -45,15 +45,26 @@ func _physics_process(delta: float) -> void:
         State.Attack:
             pass
             
-func _process(delta: float) -> void:
-    if self.is_following:
-        self.navigation_agent_2d.target_position = player.position
-        self.position = self.navigation_agent_2d.get_next_path_position()
+func _process(delta: float) -> void: 
+    match self.current_state:
+        State.Disabled:
+            return
+        State.Idle:
+            self.animated_sprite_2d.play("idle")
+        State.Run:
+            if self.is_following:
+                self.navigation_agent_2d.set_target_position(player.position)
+                self.last_direction = self.navigation_agent_2d.get_next_path_position() - self.position
+            self.animated_sprite_2d.play("run")
+        State.Attack:
+            pass
 
 func on_follow_area_body_entered(body: Node2D) -> void:
     if body is Player:
+        self.current_state = State.Run
         self.is_following = true
 
 func on_follow_area_body_exited(body: Node2D) -> void:
     if body is Player:
+        self.current_state = State.Idle
         self.is_following = false
