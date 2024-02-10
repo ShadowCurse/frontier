@@ -31,6 +31,7 @@ var last_facing_direction_left: bool = true
 var last_direction: Vector2 = Vector2.ZERO
 var original_position: Vector2 = Vector2.ZERO
 var is_persuing: bool = false
+var damaged_this_attack: bool = false
 
 func _ready() -> void:
     self.original_position = self.position
@@ -129,3 +130,10 @@ func on_animated_sprite_2d_animation_finished() -> void:
             self.attacking_direction = AttackDirection.None
             self.weapon_area.visible = false
             self.weapon_area.monitoring = false
+            self.damaged_this_attack = false
+
+
+func on_weapon_area_body_exited(body: Node2D) -> void:
+    if body is Player and !self.damaged_this_attack:
+        body.take_damage(10)
+        self.damaged_this_attack = true

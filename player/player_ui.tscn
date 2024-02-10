@@ -1,7 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://d36etgjaa1fvo"]
+[gd_scene load_steps=6 format=3 uid="uid://d36etgjaa1fvo"]
 
 [ext_resource type="Script" path="res://player/player_ui.gd" id="1_ky2jm"]
 [ext_resource type="PackedScene" uid="uid://cdgjn1vonodr1" path="res://player/player_ui_minimap.tscn" id="2_l5bns"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vvuq1"]
+bg_color = Color(0.831373, 0, 0.231373, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_apxq1"]
+bg_color = Color(0, 0.721569, 0.329412, 1)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_x51in"]
 viewport_path = NodePath("map/MarginContainer/SubViewportContainer/SubViewport")
@@ -11,6 +17,10 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -1.0
+offset_right = 6.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ky2jm")
@@ -59,10 +69,18 @@ theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="ProgressBar" type="ProgressBar" parent="health/MarginContainer"]
+[node name="health_bar" type="ProgressBar" parent="health/MarginContainer"]
 layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_vvuq1")
 max_value = 1.0
 value = 1.0
+show_percentage = false
+
+[node name="health_label" type="Label" parent="health/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "100"
 
 [node name="experience" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -87,6 +105,7 @@ theme_override_constants/margin_bottom = 4
 
 [node name="ProgressBar" type="ProgressBar" parent="experience/MarginContainer"]
 layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_apxq1")
 max_value = 1.0
 
 [node name="map" type="PanelContainer" parent="."]

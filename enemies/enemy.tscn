@@ -283,7 +283,6 @@ debug_color = Color(0, 0.623529, 0.537255, 0.419608)
 
 [node name="weapon_area" type="Area2D" parent="."]
 collision_layer = 4
-collision_mask = 8
 input_pickable = false
 monitoring = false
 
@@ -294,3 +293,4 @@ polygon = PackedVector2Array(0, 0, 100, 100, 100, -100)
 [connection signal="target_reached" from="NavigationAgent2D" to="." method="on_navigation_agent_2d_target_reached"]
 [connection signal="body_entered" from="follow_area" to="." method="on_follow_area_body_entered"]
 [connection signal="body_exited" from="follow_area" to="." method="on_follow_area_body_exited"]
+[connection signal="body_exited" from="weapon_area" to="." method="on_weapon_area_body_exited"]

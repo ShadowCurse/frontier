@@ -8,6 +8,8 @@ class_name Player
 @onready var ui_root: CanvasLayer = $ui_root
 @onready var ui: PlayerUi = $ui_root/ui
 
+@export var max_health: int = 100
+@export var current_health: int = 100
 @export var speed: float = 600.0
 
 enum State {
@@ -122,6 +124,11 @@ func disable() -> void:
     self.ui_root.visible = false
     self.visible = false
     self.current_state = State.Disabled
+
+func take_damage(damage: int) -> void:
+    print("l", damage)
+    self.current_health -= damage
+    self.ui.update_health(self.current_health, self.max_health)
 
 func on_yello_village_player_enter_signal() -> void:
     self.ui.show_notification("Found Yello Village")
