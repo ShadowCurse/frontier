@@ -6,9 +6,11 @@ class_name Enemy
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
 @onready var weapon_area: Area2D = $weapon_area
+@onready var attack_timer: Timer = $attack_timer
 
 @export var speed: float = 100.0
 @export var attack_range: float = 100.0
+@export var attack_speed: float = 1.0
 
 enum State {
     Disabled,
@@ -56,7 +58,8 @@ func _process(delta: float) -> void:
         State.Disabled:
             return
         State.Idle:
-            if (self.position - player.position).length() < self.attack_range:
+            if (self.position - player.position).length() < self.attack_range \
+                 and self.attack_timer.is_stopped():
                 self.current_state = State.Attack
                 return
             if self.is_persuing:
@@ -64,17 +67,29 @@ func _process(delta: float) -> void:
                 return
             self.animated_sprite_2d.play("idle")
         State.Persuit:
-            if (self.position - player.position).length() < self.attack_range:
+            if (self.position - player.position).length() < self.attack_range \
+                 and self.attack_timer.is_stopped():
                 self.current_state = State.Attack
                 return
             self.navigation_agent_2d.set_target_position(player.position)
             self.last_direction = (self.navigation_agent_2d.get_next_path_position() - self.position).normalized()
+            if last_direction.x < 0.0:
+                self.animated_sprite_2d.flip_h = true
+            else:
+                self.animated_sprite_2d.flip_h = false
             self.animated_sprite_2d.play("run")
         State.Return:
             self.navigation_agent_2d.set_target_position(self.original_position)
             self.last_direction = (self.navigation_agent_2d.get_next_path_position() - self.position).normalized()
+            if last_direction.x < 0.0:
+                self.animated_sprite_2d.flip_h = true
+            else:
+                self.animated_sprite_2d.flip_h = false
             self.animated_sprite_2d.play("run")
         State.Attack:
+            if !self.attack_timer.is_stopped():
+                return
+            self.attack_timer.start(self.attack_speed)
             var to_player = player.position - self.position
             var angle = to_player.angle()
             # Start motitoring weapon area
@@ -131,7 +146,6 @@ func on_animated_sprite_2d_animation_finished() -> void:
             self.weapon_area.visible = false
             self.weapon_area.monitoring = false
             self.damaged_this_attack = false
-
 
 func on_weapon_area_body_exited(body: Node2D) -> void:
     if body is Player and !self.damaged_this_attack:

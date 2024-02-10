@@ -262,7 +262,7 @@ script = ExtResource("1_msime")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_utw4n")
-animation = &"attack_down"
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 1
@@ -288,6 +288,9 @@ monitoring = false
 
 [node name="weapon_collision" type="CollisionPolygon2D" parent="weapon_area"]
 polygon = PackedVector2Array(0, 0, 100, 100, 100, -100)
+
+[node name="attack_timer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="on_animated_sprite_2d_animation_finished"]
 [connection signal="target_reached" from="NavigationAgent2D" to="." method="on_navigation_agent_2d_target_reached"]
