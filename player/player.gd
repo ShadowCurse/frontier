@@ -126,7 +126,6 @@ func disable() -> void:
     self.current_state = State.Disabled
 
 func take_damage(damage: int) -> void:
-    print("l", damage)
     self.current_health -= damage
     self.ui.update_health(self.current_health, self.max_health)
 
