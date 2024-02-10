@@ -252,7 +252,7 @@ script = ExtResource("1_vpvyh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_aa8t2")
-animation = &"attack_down"
+animation = &"idle"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 enabled = false

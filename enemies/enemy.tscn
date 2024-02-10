@@ -1,7 +1,31 @@
-[gd_scene load_steps=31 format=3 uid="uid://b8unxc5ktifq0"]
+[gd_scene load_steps=37 format=3 uid="uid://b8unxc5ktifq0"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_msime"]
 [ext_resource type="Texture2D" uid="uid://bjggrchs66i50" path="res://assets/TinySwords/Factions/Goblins/Troops/Torch/Red/Torch_Red.png" id="2_rdtyt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1m46p"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(0, 576, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bdfvy"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(192, 576, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3k3lv"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(384, 576, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_odvux"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(576, 576, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gnpe2"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(768, 576, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k8n0n"]
+atlas = ExtResource("2_rdtyt")
+region = Rect2(960, 576, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_45c53"]
 atlas = ExtResource("2_rdtyt")
@@ -105,10 +129,28 @@ region = Rect2(960, 192, 192, 192)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_utw4n"]
 animations = [{
-"frames": [],
-"loop": true,
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1m46p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bdfvy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3k3lv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_odvux")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gnpe2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k8n0n")
+}],
+"loop": false,
 "name": &"attack_down",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -207,8 +249,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ujjuf"]
-radius = 34.0
-height = 82.0
+radius = 24.0
+height = 62.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ct515"]
 radius = 472.424
@@ -220,13 +262,17 @@ script = ExtResource("1_msime")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_utw4n")
-animation = &"idle"
+animation = &"attack_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
 shape = SubResource("CapsuleShape2D_ujjuf")
-debug_color = Color(0.596078, 0.545098, 0, 0.419608)
+debug_color = Color(0.988235, 0, 0.286275, 0.419608)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
+avoidance_enabled = true
+debug_enabled = true
 
 [node name="follow_area" type="Area2D" parent="."]
 collision_layer = 16
@@ -235,5 +281,16 @@ collision_layer = 16
 shape = SubResource("CircleShape2D_ct515")
 debug_color = Color(0, 0.623529, 0.537255, 0.419608)
 
+[node name="weapon_area" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
+input_pickable = false
+monitoring = false
+
+[node name="weapon_collision" type="CollisionPolygon2D" parent="weapon_area"]
+polygon = PackedVector2Array(0, 0, 100, 100, 100, -100)
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="on_animated_sprite_2d_animation_finished"]
+[connection signal="target_reached" from="NavigationAgent2D" to="." method="on_navigation_agent_2d_target_reached"]
 [connection signal="body_entered" from="follow_area" to="." method="on_follow_area_body_entered"]
 [connection signal="body_exited" from="follow_area" to="." method="on_follow_area_body_exited"]
