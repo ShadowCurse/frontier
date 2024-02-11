@@ -130,6 +130,9 @@ func take_damage(damage: int) -> void:
     var percent = float(self.current_health) / float(self.max_health)
     self.health_bar.set_value_no_signal(percent)
     self.health_label.text = "%d" % self.current_health
+    
+    if self.current_health <= 0:
+        self.queue_free()
 
 func on_follow_area_body_entered(body: Node2D) -> void:
     if body is Player:
