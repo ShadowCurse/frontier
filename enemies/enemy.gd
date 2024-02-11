@@ -12,6 +12,7 @@ class_name Enemy
 
 @export var max_health: int = 100
 @export var current_health: int = 100
+@export var damage: int = 10
 @export var speed: float = 100.0
 @export var attack_range: float = 100.0
 @export var attack_speed: float = 1.0
@@ -160,5 +161,5 @@ func on_animated_sprite_2d_animation_finished() -> void:
 
 func on_weapon_area_body_exited(body: Node2D) -> void:
     if body is Player and !self.damaged_this_attack:
-        body.take_damage(10)
+        body.take_damage(self.damage)
         self.damaged_this_attack = true

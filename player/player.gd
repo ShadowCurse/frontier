@@ -10,6 +10,7 @@ class_name Player
 
 @export var max_health: int = 100
 @export var current_health: int = 100
+@export var damage: int = 20
 @export var speed: float = 600.0
 
 enum State {
@@ -155,4 +156,4 @@ func on_animated_sprite_2d_animation_finished() -> void:
 
 func on_weapon_area_body_entered(body: Node2D) -> void:
     if body is Enemy:
-        body.take_damage(10)
+        body.take_damage(self.damage)
