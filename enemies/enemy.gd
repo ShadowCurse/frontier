@@ -7,7 +7,11 @@ class_name Enemy
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
 @onready var weapon_area: Area2D = $weapon_area
 @onready var attack_timer: Timer = $attack_timer
+@onready var health_bar: ProgressBar = $health_ui/health_bar
+@onready var health_label: Label = $health_ui/health_label
 
+@export var max_health: int = 100
+@export var current_health: int = 100
 @export var speed: float = 100.0
 @export var attack_range: float = 100.0
 @export var attack_speed: float = 1.0
@@ -37,6 +41,7 @@ var damaged_this_attack: bool = false
 
 func _ready() -> void:
     self.original_position = self.position
+    self.health_bar.set_value_no_signal(1)
 
 func _physics_process(delta: float) -> void:
     match self.current_state:
@@ -118,6 +123,12 @@ func _process(delta: float) -> void:
                 self.animated_sprite_2d.play("attack_down")
                 self.weapon_area.rotation = PI / 2.0
             pass
+
+func take_damage(damage: int) -> void:
+    self.current_health -= damage
+    var percent = float(self.current_health) / float(self.max_health)
+    self.health_bar.set_value_no_signal(percent)
+    self.health_label.text = "%d" % self.current_health
 
 func on_follow_area_body_entered(body: Node2D) -> void:
     if body is Player:

@@ -151,3 +151,8 @@ func on_animated_sprite_2d_animation_finished() -> void:
             self.attacking_direction = AttackDirection.None
             self.weapon_area.visible = false
             self.weapon_area.monitoring = false
+
+
+func on_weapon_area_body_entered(body: Node2D) -> void:
+    if body is Enemy:
+        body.take_damage(10)

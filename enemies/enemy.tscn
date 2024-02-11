@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://b8unxc5ktifq0"]
+[gd_scene load_steps=38 format=3 uid="uid://b8unxc5ktifq0"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_msime"]
 [ext_resource type="Texture2D" uid="uid://bjggrchs66i50" path="res://assets/TinySwords/Factions/Goblins/Troops/Torch/Red/Torch_Red.png" id="2_rdtyt"]
@@ -255,6 +255,9 @@ height = 62.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_ct515"]
 radius = 472.424
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5rou0"]
+bg_color = Color(0.682353, 0, 0.227451, 1)
+
 [node name="enemy" type="CharacterBody2D"]
 collision_layer = 8
 collision_mask = 2
@@ -282,6 +285,7 @@ shape = SubResource("CircleShape2D_ct515")
 debug_color = Color(0, 0.623529, 0.537255, 0.419608)
 
 [node name="weapon_area" type="Area2D" parent="."]
+visible = false
 collision_layer = 4
 input_pickable = false
 monitoring = false
@@ -291,6 +295,45 @@ polygon = PackedVector2Array(0, 0, 100, 100, 100, -100)
 
 [node name="attack_timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="health_ui" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="health_bar" type="ProgressBar" parent="health_ui"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = -81.5
+offset_right = 38.0
+offset_bottom = -54.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_5rou0")
+max_value = 1.0
+show_percentage = false
+
+[node name="health_label" type="Label" parent="health_ui"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.0
+offset_top = -79.5
+offset_right = 1.0
+offset_bottom = -56.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "100"
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="on_animated_sprite_2d_animation_finished"]
 [connection signal="target_reached" from="NavigationAgent2D" to="." method="on_navigation_agent_2d_target_reached"]

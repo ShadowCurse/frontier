@@ -276,3 +276,4 @@ visible = false
 [node name="ui" parent="ui_root" instance=ExtResource("3_etns2")]
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="weapon_area" to="." method="on_weapon_area_body_entered"]
