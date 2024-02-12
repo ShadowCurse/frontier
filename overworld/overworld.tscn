@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://vqwwft3aangw"]
+[gd_scene load_steps=6 format=3 uid="uid://vqwwft3aangw"]
 
 [ext_resource type="TileSet" uid="uid://dkenr8x2wcr0g" path="res://assets/environment_tile_set.tres" id="1_1kray"]
 [ext_resource type="Script" path="res://overworld/overworld.gd" id="1_3dmib"]
 [ext_resource type="PackedScene" uid="uid://becobpr455lln" path="res://overworld/city/player_city.tscn" id="3_6tt3t"]
 [ext_resource type="PackedScene" uid="uid://b8unxc5ktifq0" path="res://enemies/enemy.tscn" id="4_72kh4"]
 [ext_resource type="PackedScene" uid="uid://cd8tkx0y8ylm6" path="res://player/player.tscn" id="4_nlfwv"]
-[ext_resource type="PackedScene" uid="uid://dgagh2vwcqv1w" path="res://overworld/village/village.tscn" id="5_jsmi5"]
 
 [node name="overworld" type="Node2D"]
 script = ExtResource("1_3dmib")
@@ -27,7 +26,7 @@ layer_2/tile_data = PackedInt32Array(589835, 4, 0, 589836, 4, 0, 786453, 4, 0, 1
 
 [node name="player" parent="tile_map" instance=ExtResource("4_nlfwv")]
 z_index = 1
-position = Vector2(-492, -1254)
+position = Vector2(-902, 49)
 
 [node name="enemy" parent="tile_map" instance=ExtResource("4_72kh4")]
 z_index = 1
@@ -39,27 +38,7 @@ position = Vector2(-2718, -953)
 
 [node name="enemy3" parent="tile_map" instance=ExtResource("4_72kh4")]
 z_index = 1
-position = Vector2(-512, -963)
+position = Vector2(-2513, -1078)
 
 [node name="player_city" parent="tile_map" instance=ExtResource("3_6tt3t")]
 z_index = 1
-
-[node name="yello_village" parent="tile_map" instance=ExtResource("5_jsmi5")]
-z_index = 99
-position = Vector2(-2844, 2213)
-
-[node name="purple_village" parent="tile_map" instance=ExtResource("5_jsmi5")]
-z_index = 99
-position = Vector2(-2310, -2943)
-
-[node name="red_village" parent="tile_map" instance=ExtResource("5_jsmi5")]
-z_index = 99
-position = Vector2(2591, 2918)
-
-[connection signal="switch_worlds_signal" from="tile_map/player_city" to="." method="on_world_switch"]
-[connection signal="player_enter_signal" from="tile_map/yello_village" to="tile_map/player" method="on_yello_village_player_enter_signal"]
-[connection signal="player_enter_signal" from="tile_map/yello_village" to="tile_map/player_city" method="on_yello_village_player_enter_signal"]
-[connection signal="player_enter_signal" from="tile_map/purple_village" to="tile_map/player" method="on_purple_village_player_enter_signal"]
-[connection signal="player_enter_signal" from="tile_map/purple_village" to="tile_map/player_city" method="on_purple_village_player_enter_signal"]
-[connection signal="player_enter_signal" from="tile_map/red_village" to="tile_map/player" method="on_red_village_player_enter_signal"]
-[connection signal="player_enter_signal" from="tile_map/red_village" to="tile_map/player_city" method="on_red_village_player_enter_signal"]

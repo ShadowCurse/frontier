@@ -2,15 +2,11 @@ extends Node2D
 
 class_name PlayerCity
 
-signal switch_worlds_signal
 signal population_update_signal(int)
 signal gold_update_signal(int)
 signal food_update_signal(int)
 signal wood_update_signal(int)
 
-@onready var camera_2d: Camera2D = $Camera2D
-@onready var ui_root: CanvasLayer = $ui_root
-@onready var city_ui: Control = $ui_root/city_ui
 @onready var grid_root: Node2D = $grid_root
 
 @export var tile_scene: PackedScene
@@ -69,14 +65,6 @@ func _process(_delta: float) -> void:
         if Input.is_action_just_pressed("game_place_object"):
             self.try_place_object()
 
-func enable():
-    self.camera_2d.enabled = true
-    self.ui_root.visible = true
-
-func disable():
-    self.camera_2d.enabled = false
-    self.ui_root.visible = false
-
 func move_under_cursor_object(cursor_pos: Vector2):
     for grid_tile_position in self.grid:
         var tile_left = grid_tile_position.x - self.tile_offset / 2.0
@@ -100,10 +88,6 @@ func try_place_object():
         if tile:
             tile.occupied = true
             self.under_cursor_object = null
-
-func on_teleport_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-    if event.is_pressed():
-        switch_worlds_signal.emit()
 
 func on_city_ui_build_house_signal() -> void:
     var house: House = self.house_scene.instantiate()
@@ -152,13 +136,3 @@ func on_food_update_signal(food: int) -> void:
 func on_wood_update_signal(wood: int) -> void:
     self.total_wood += wood
     self.wood_update_signal.emit(self.total_wood)
-
-func on_yello_village_player_enter_signal() -> void:
-    self.city_ui.unlock_yellow_village()
-
-func on_purple_village_player_enter_signal() -> void:
-    self.city_ui.unlock_purple_village()
-
-func on_red_village_player_enter_signal() -> void:
-    self.city_ui.unlock_red_village()
-

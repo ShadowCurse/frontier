@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bnfhgcrp7ayga"]
+[gd_scene load_steps=4 format=3 uid="uid://bnfhgcrp7ayga"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_2r27h"]
 [ext_resource type="PackedScene" uid="uid://vqwwft3aangw" path="res://overworld/overworld.tscn" id="2_03ylu"]
-[ext_resource type="PackedScene" uid="uid://04ppgioepri3" path="res://underworld/underworld.tscn" id="3_wr2bv"]
 [ext_resource type="PackedScene" uid="uid://1lqll0fpf3x6" path="res://ui/main_menu.tscn" id="4_pg763"]
 
 [node name="game" type="Node"]
@@ -11,15 +10,10 @@ script = ExtResource("1_2r27h")
 [node name="overworld" parent="." instance=ExtResource("2_03ylu")]
 visible = false
 
-[node name="underworld" parent="." instance=ExtResource("3_wr2bv")]
-visible = false
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="main_menu" parent="CanvasLayer" instance=ExtResource("4_pg763")]
 
-[connection signal="world_switch_signal" from="overworld" to="." method="on_world_switch"]
-[connection signal="world_switch_signal" from="underworld" to="." method="on_world_switch"]
 [connection signal="exit_signal" from="CanvasLayer/main_menu" to="." method="on_main_menu_exit"]
 [connection signal="settings_signal" from="CanvasLayer/main_menu" to="." method="on_main_menu_settings"]
 [connection signal="start_signal" from="CanvasLayer/main_menu" to="." method="on_main_menu_start"]
