@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://becobpr455lln"]
+[gd_scene load_steps=8 format=3 uid="uid://becobpr455lln"]
 
 [ext_resource type="Script" path="res://overworld/city/player_city.gd" id="1_a2vwd"]
 [ext_resource type="PackedScene" uid="uid://ba5oatb3jwohl" path="res://overworld/city/city_grid_tile.tscn" id="2_0nb4e"]
@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://cnythimxbph1b" path="res://overworld/city/gold_mine.tscn" id="3_gf3vi"]
 [ext_resource type="PackedScene" uid="uid://b5so4pklxgnv" path="res://overworld/city/food_hut.tscn" id="4_2laik"]
 [ext_resource type="PackedScene" uid="uid://djyde0rq2d6i5" path="res://overworld/city/wood_cutter.tscn" id="5_noukh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d1odw"]
+size = Vector2(1000, 1000)
 
 [node name="player_city" type="Node2D"]
 y_sort_enabled = true
@@ -18,3 +21,11 @@ wood_cutter_scene = ExtResource("5_noukh")
 
 [node name="grid_root" type="Node2D" parent="."]
 z_index = -1
+
+[node name="city_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="city_area"]
+shape = SubResource("RectangleShape2D_d1odw")
+
+[connection signal="body_entered" from="city_area" to="." method="on_city_area_body_entered"]
+[connection signal="body_exited" from="city_area" to="." method="on_city_area_body_exited"]

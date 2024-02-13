@@ -3,7 +3,6 @@ extends CharacterBody2D
 class_name Player
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var camera_2d: Camera2D = $Camera2D
 @onready var weapon_area: Area2D = $weapon_area
 @onready var ui_root: CanvasLayer = $ui_root
 @onready var ui: PlayerUi = $ui_root/ui
@@ -115,13 +114,11 @@ func _process(_delta: float) -> void:
                 self.weapon_area.rotation = PI / 2.0
 
 func enable() -> void:
-    self.camera_2d.enabled = true
     self.ui_root.visible = true
     self.visible = true
     self.current_state = State.Idle
 
 func disable() -> void:
-    self.camera_2d.enabled = false
     self.ui_root.visible = false
     self.visible = false
     self.current_state = State.Disabled

@@ -42,3 +42,10 @@ position = Vector2(-2513, -1078)
 
 [node name="player_city" parent="tile_map" instance=ExtResource("3_6tt3t")]
 z_index = 1
+
+[node name="game_camera" type="Camera2D" parent="."]
+zoom = Vector2(0.8, 0.8)
+position_smoothing_speed = 10.0
+
+[connection signal="player_entered" from="tile_map/player_city" to="." method="on_player_city_player_entered"]
+[connection signal="player_exited" from="tile_map/player_city" to="." method="on_player_city_player_exited"]

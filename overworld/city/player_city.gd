@@ -2,6 +2,8 @@ extends Node2D
 
 class_name PlayerCity
 
+signal player_entered
+signal player_exited
 signal population_update_signal(int)
 signal gold_update_signal(int)
 signal food_update_signal(int)
@@ -136,3 +138,11 @@ func on_food_update_signal(food: int) -> void:
 func on_wood_update_signal(wood: int) -> void:
     self.total_wood += wood
     self.wood_update_signal.emit(self.total_wood)
+
+func on_city_area_body_entered(body: Node2D) -> void:
+    if body is Player:
+        self.player_entered.emit()
+
+func on_city_area_body_exited(body: Node2D) -> void:
+    if body is Player:
+        self.player_exited.emit()
