@@ -13,8 +13,8 @@ signal wood_update_signal(int)
 
 @export var tile_scene: PackedScene
 @export var tile_offset: float = 150.0
-@export var grid_size: int = 6
-@export var grid_clear_center_size: int = 2
+@export var grid_size: int = 9
+@export var grid_clear_center_size: int = 1
 
 @export var house_scene: PackedScene
 @export var gold_mine_scene: PackedScene
@@ -49,7 +49,7 @@ func _ready() -> void:
         for y in range(self.grid_size):
             # skip cental nodes
             if empty_delta <= x && x < (self.grid_size - empty_delta) \
-              && empty_delta <= y && y < (self.grid_size - empty_delta):
+              || empty_delta <= y && y < (self.grid_size - empty_delta):
                     continue
             var tile = self.tile_scene.instantiate()
             tile.position = bottom_left_corner + Vector2(x * self.tile_offset, y * self.tile_offset)
