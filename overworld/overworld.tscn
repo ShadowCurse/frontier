@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://vqwwft3aangw"]
+[gd_scene load_steps=7 format=3 uid="uid://vqwwft3aangw"]
 
 [ext_resource type="TileSet" uid="uid://dkenr8x2wcr0g" path="res://assets/environment_tile_set.tres" id="1_1kray"]
 [ext_resource type="Script" path="res://overworld/overworld.gd" id="1_3dmib"]
 [ext_resource type="PackedScene" uid="uid://becobpr455lln" path="res://overworld/city/player_city.tscn" id="3_6tt3t"]
 [ext_resource type="PackedScene" uid="uid://b8unxc5ktifq0" path="res://enemies/enemy.tscn" id="4_72kh4"]
 [ext_resource type="PackedScene" uid="uid://cd8tkx0y8ylm6" path="res://player/player.tscn" id="4_nlfwv"]
+[ext_resource type="PackedScene" uid="uid://cfdp1a8h6vkuf" path="res://overworld/city/wall.tscn" id="6_nf0u7"]
 
 [node name="overworld" type="Node2D"]
 script = ExtResource("1_3dmib")
@@ -42,10 +43,21 @@ position = Vector2(-2513, -1078)
 
 [node name="player_city" parent="tile_map" instance=ExtResource("3_6tt3t")]
 z_index = 1
+wall_scene = ExtResource("6_nf0u7")
 
 [node name="game_camera" type="Camera2D" parent="."]
 zoom = Vector2(0.8, 0.8)
 position_smoothing_speed = 10.0
 
+[connection signal="build_food_hut_signal" from="tile_map/player" to="tile_map/player_city" method="on_city_ui_build_food_hut_signal"]
+[connection signal="build_gold_mine_signal" from="tile_map/player" to="tile_map/player_city" method="on_city_ui_build_gold_mine_signal"]
+[connection signal="build_house_signal" from="tile_map/player" to="tile_map/player_city" method="on_city_ui_build_house_signal"]
+[connection signal="build_wall_signal" from="tile_map/player" to="tile_map/player_city" method="on_city_ui_build_wall_signal"]
+[connection signal="build_wood_cutter_signal" from="tile_map/player" to="tile_map/player_city" method="on_city_ui_build_wood_cutter_signal"]
+[connection signal="food_update_signal" from="tile_map/player_city" to="tile_map/player" method="on_food_update_signal"]
+[connection signal="gold_update_signal" from="tile_map/player_city" to="tile_map/player" method="on_gold_update_signal"]
+[connection signal="object_placed" from="tile_map/player_city" to="tile_map/player" method="on_player_city_object_placed"]
 [connection signal="player_entered" from="tile_map/player_city" to="." method="on_player_city_player_entered"]
 [connection signal="player_exited" from="tile_map/player_city" to="." method="on_player_city_player_exited"]
+[connection signal="population_update_signal" from="tile_map/player_city" to="tile_map/player" method="on_population_update_signal"]
+[connection signal="wood_update_signal" from="tile_map/player_city" to="tile_map/player" method="on_wood_update_signal"]

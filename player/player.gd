@@ -2,6 +2,12 @@ extends CharacterBody2D
 
 class_name Player
 
+signal build_house_signal
+signal build_gold_mine_signal
+signal build_food_hut_signal
+signal build_wood_cutter_signal
+signal build_wall_signal
+
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var weapon_area: Area2D = $weapon_area
 @onready var ui_root: CanvasLayer = $ui_root
@@ -16,7 +22,8 @@ enum State {
     Disabled,
     Idle,
     Run,
-    Attack,   
+    Attack,
+    Building,   
 }
 var current_state: State = State.Disabled
 
@@ -29,6 +36,26 @@ enum AttackDirection {
 }
 var attacking_direction: AttackDirection = AttackDirection.None
 var last_facing_direction_left: bool = true
+
+func _input(event: InputEvent) -> void:
+     match self.current_state:
+        State.Disabled:
+            return
+        State.Idle:
+            if event.is_action_pressed("game_attack"):
+                self.current_state = State.Attack
+                return
+            if Input.get_vector("game_left", "game_right", "game_up", "game_down"):
+                self.current_state = State.Run
+                return
+        State.Run:
+            if event.is_action_pressed("game_attack"):
+                self.current_state = State.Attack
+                return
+        State.Attack:
+            pass
+        State.Building:
+            pass 
 
 func _physics_process(_delta: float) -> void:
     match self.current_state:
@@ -47,26 +74,17 @@ func _physics_process(_delta: float) -> void:
             self.move_and_slide()
         State.Attack:
             pass
+        State.Building:
+            pass
 
 func _process(_delta: float) -> void:
+    print(self.current_state)
     match self.current_state:
         State.Disabled:
             return
         State.Idle:
-            if Input.get_vector("game_left", "game_right", "game_up", "game_down"):
-                self.current_state = State.Run
-                return
-            if Input.is_action_pressed("game_attack"):
-                self.current_state = State.Attack
-                return
             self.animated_sprite_2d.play("idle")
         State.Run:
-            if not Input.get_vector("game_left", "game_right", "game_up", "game_down"):
-                self.current_state = State.Idle
-                return
-            if Input.is_action_pressed("game_attack"):
-                self.current_state = State.Attack
-                return
             var direction := Input.get_vector("game_left", "game_right", "game_up", "game_down")
             # Handle spite directon flipping
             if direction:
@@ -112,6 +130,8 @@ func _process(_delta: float) -> void:
                 self.attacking_direction = AttackDirection.Down
                 self.animated_sprite_2d.play("attack_down")
                 self.weapon_area.rotation = PI / 2.0
+        State.Building:
+            self.animated_sprite_2d.play("idle")
 
 func enable() -> void:
     self.ui_root.visible = true
@@ -122,6 +142,12 @@ func disable() -> void:
     self.ui_root.visible = false
     self.visible = false
     self.current_state = State.Disabled
+
+func enable_city_ui() -> void:
+    self.ui.enable_city_ui()
+
+func disable_city_ui() -> void:
+    self.ui.disable_city_ui()
 
 func take_damage(damage: int) -> void:
     self.current_health -= damage
@@ -149,8 +175,45 @@ func on_animated_sprite_2d_animation_finished() -> void:
             self.attacking_direction = AttackDirection.None
             self.weapon_area.visible = false
             self.weapon_area.monitoring = false
-
+        State.Building:
+            pass
 
 func on_weapon_area_body_entered(body: Node2D) -> void:
     if body is Enemy:
         body.take_damage(self.damage)
+
+func on_ui_build_mode_enter_signal() -> void:
+    self.current_state = State.Building
+    
+func on_ui_build_mode_exit_signal() -> void:
+    self.current_state = State.Idle
+
+func on_ui_build_house_signal() -> void:
+    self.build_house_signal.emit()
+
+func on_ui_build_gold_mine_signal() -> void:
+    self.build_gold_mine_signal.emit()
+
+func on_ui_build_food_hut_signal() -> void:
+    self.build_food_hut_signal.emit()
+
+func on_ui_build_wood_cutter_signal() -> void:
+    self.build_wood_cutter_signal.emit()
+
+func on_ui_build_wall_signal() -> void:
+    self.build_wall_signal.emit()
+    
+func on_population_update_signal(new_population: int) -> void:
+    self.ui.update_population(new_population)
+    
+func on_gold_update_signal(new_gold: int) -> void:
+    self.ui.update_gold(new_gold)
+    
+func on_food_update_signal(new_food: int) -> void:
+     self.ui.update_food(new_food)
+    
+func on_wood_update_signal(new_wood: int) -> void:
+    self.ui.update_wood(new_wood)
+
+func on_player_city_object_placed() -> void:
+    self.current_state = State.Idle

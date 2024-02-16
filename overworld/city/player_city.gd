@@ -4,6 +4,7 @@ class_name PlayerCity
 
 signal player_entered
 signal player_exited
+signal object_placed
 signal population_update_signal(int)
 signal gold_update_signal(int)
 signal food_update_signal(int)
@@ -20,6 +21,7 @@ signal wood_update_signal(int)
 @export var gold_mine_scene: PackedScene
 @export var food_hut_scene: PackedScene
 @export var wood_cutter_scene: PackedScene
+@export var wall_scene: PackedScene
 
 class GridTile:
     var node: Node2D
@@ -32,6 +34,7 @@ var houses: Array[House] = []
 var gold_mines: Array[GoldMine] = []
 var food_huts: Array[FoodHut] = []
 var wood_cutters: Array[WoodCutter] = []
+var walls: Array[Wall] = []
 
 var total_population: int = 0
 var total_gold: int = 0
@@ -65,7 +68,8 @@ func _process(_delta: float) -> void:
         self.move_under_cursor_object(cursor_pos)
 
         if Input.is_action_just_pressed("game_place_object"):
-            self.try_place_object()
+            if self.try_place_object():
+                self.object_placed.emit()
 
 func move_under_cursor_object(cursor_pos: Vector2):
     for grid_tile_position in self.grid:
@@ -84,12 +88,14 @@ func move_under_cursor_object(cursor_pos: Vector2):
     self.under_cursor_object_can_place = false
     self.under_cursor_object.position = cursor_pos
 
-func try_place_object():
+func try_place_object() -> bool:
     if self.under_cursor_object_can_place:
         var tile = self.grid.get(self.under_cursor_object.position)
         if tile:
             tile.occupied = true
             self.under_cursor_object = null
+            return true
+    return false
 
 func on_city_ui_build_house_signal() -> void:
     var house: House = self.house_scene.instantiate()
@@ -122,6 +128,13 @@ func on_city_ui_build_wood_cutter_signal() -> void:
 
     self.call_deferred("add_child", wood_cutter)
     self.wood_cutters.append(wood_cutter)
+    
+func on_city_ui_build_wall_signal() -> void:
+    var wall: Wall = self.wall_scene.instantiate()
+    under_cursor_object = wall
+
+    self.call_deferred("add_child", wall)
+    self.walls.append(wall)
 
 func on_population_incease_signal(population: int) -> void:
     self.total_population += population
