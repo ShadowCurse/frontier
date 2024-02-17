@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 class_name Enemy
 
-@onready var player: Player = get_node("/root/game/overworld/tile_map/player")
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
 @onready var weapon_area: Area2D = $weapon_area
@@ -17,6 +16,8 @@ class_name Enemy
 @export var attack_range: float = 100.0
 @export var attack_speed: float = 1.0
 
+var player: Player
+
 enum State {
     Disabled,
     Idle,
@@ -24,7 +25,7 @@ enum State {
     Return,
     Attack,   
 }
-var current_state: State = State.Disabled
+var current_state: State = State.Idle
 
 enum AttackDirection {
     None,
@@ -64,13 +65,6 @@ func _process(delta: float) -> void:
         State.Disabled:
             return
         State.Idle:
-            if (self.position - player.position).length() < self.attack_range \
-                 and self.attack_timer.is_stopped():
-                self.current_state = State.Attack
-                return
-            if self.is_persuing:
-                self.current_state = State.Persuit
-                return
             self.animated_sprite_2d.play("idle")
         State.Persuit:
             if (self.position - player.position).length() < self.attack_range \
@@ -136,11 +130,13 @@ func take_damage(damage: int) -> void:
 
 func on_follow_area_body_entered(body: Node2D) -> void:
     if body is Player:
+        self.player = body
         self.current_state = State.Persuit
         self.is_persuing = true
 
 func on_follow_area_body_exited(body: Node2D) -> void:
     if body is Player:
+        self.player = null
         self.current_state = State.Return
         self.is_persuing = false
 
@@ -153,10 +149,15 @@ func on_animated_sprite_2d_animation_finished() -> void:
             return
         State.Idle:
             return
-        State.Persuit or State.Return:
-            self.current_state = State.Idle
+        State.Persuit:
+            return
+        State.Return:
+            return
         State.Attack:
-            self.current_state = State.Idle
+            if self.is_persuing:
+                self.current_state = State.Persuit
+            else:
+                self.current_state = State.Idle
             self.attacking_direction = AttackDirection.None
             self.weapon_area.visible = false
             self.weapon_area.monitoring = false
