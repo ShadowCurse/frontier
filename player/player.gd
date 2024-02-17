@@ -100,15 +100,15 @@ func _process(_delta: float) -> void:
                 self.weapon_area.rotation = PI / 2.0
 
 func set_state(state: PlayerController.State) -> void:
-   match self.current_state:
-      PlayerController.State.Disabled:
-          self.current_state = state
-      PlayerController.State.Idle:
-          self.current_state = state
-      PlayerController.State.Run:
-          self.current_state = state
-      PlayerController.State.Attack:
-          pass
+    match self.current_state:
+        PlayerController.State.Disabled:
+            self.current_state = state
+        PlayerController.State.Idle:
+            self.current_state = state
+        PlayerController.State.Run:
+            self.current_state = state
+        PlayerController.State.Attack:
+            pass
 
 func take_damage(damage: int) -> void:
     self.current_health -= damage
@@ -121,7 +121,7 @@ func on_animated_sprite_2d_animation_finished() -> void:
         PlayerController.State.Idle:
             return
         PlayerController.State.Run:
-            self.current_state = PlayerController.State.Idle
+            return
         PlayerController.State.Attack:
             self.current_state = PlayerController.State.Idle
             self.attacking_direction = AttackDirection.None
