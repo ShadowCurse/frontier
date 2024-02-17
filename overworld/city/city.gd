@@ -8,6 +8,8 @@ signal player_exited
 @onready var grid_root: Node2D = $grid_root
 @onready var city_ui: CityUi = $CanvasLayer/city_ui
 
+@export var overworld: Overworld
+
 @export var tile_scene: PackedScene
 @export var tile_offset: float = 150.0
 @export var grid_size: int = 9
@@ -18,6 +20,7 @@ signal player_exited
 @export var food_hut_scene: PackedScene
 @export var wood_cutter_scene: PackedScene
 @export var wall_scene: PackedScene
+@export var character_hub_scene: PackedScene
 
 class GridTile:
     var node: Node2D
@@ -131,6 +134,12 @@ func on_city_ui_build_wall_signal() -> void:
 
     self.call_deferred("add_child", wall)
     self.walls.append(wall)
+
+func on_city_ui_build_character_hub_signal() -> void:
+    var character_hub: CharacterHub = self.character_hub_scene.instantiate()
+    character_hub.overworld = self.overworld
+    under_cursor_object = character_hub
+    self.call_deferred("add_child", character_hub)
 
 func on_population_incease_signal(population: int) -> void:
     self.total_population += population

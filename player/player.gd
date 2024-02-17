@@ -7,8 +7,6 @@ signal player_selected_signal(Player)
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var weapon_area: Area2D = $weapon_area
-@onready var ui_root: CanvasLayer = $ui_root
-@onready var ui: PlayerUi = $ui_root/ui
 
 @export var max_health: int = 100
 @export var current_health: int = 100

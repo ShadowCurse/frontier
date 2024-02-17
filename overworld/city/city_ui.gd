@@ -7,9 +7,9 @@ signal build_gold_mine_signal
 signal build_food_hut_signal
 signal build_wood_cutter_signal
 signal build_wall_signal
+signal build_character_hub_signal
 
 @onready var build_panel: PanelContainer = $build_panel
-@onready var villages_panel: PanelContainer = $villages_panel
 
 @onready var population_label: Label = $resources_panel/MarginContainer/HBoxContainer/population_label
 @onready var gold_label: Label = $resources_panel/MarginContainer/HBoxContainer/gold_label
@@ -48,6 +48,10 @@ func on_wood_cutter_button_pressed() -> void:
 func on_wall_button_pressed() -> void:
     self.hide_modes()
     self.build_wall_signal.emit()
+
+func on_character_hub_button_pressed() -> void:
+    self.hide_modes()
+    self.build_character_hub_signal.emit()
 
 func update_population(new_population: int) -> void:
     self.population_label.text = "%d" % new_population

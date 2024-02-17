@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://crk7re7tacp13"]
+[gd_scene load_steps=20 format=3 uid="uid://crk7re7tacp13"]
 
 [ext_resource type="Script" path="res://overworld/city/city_ui.gd" id="1_rboli"]
 [ext_resource type="Texture2D" uid="uid://ctn2u4ghfq4cy" path="res://assets/TinySwords/Factions/Knights/Troops/Pawn/Blue/Pawn_Blue.png" id="2_uib28"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://7aekqyq0s1ku" path="res://assets/TinySwords/Resources/Sheep/HappySheep_Idle.png" id="8_8hlsr"]
 [ext_resource type="Texture2D" uid="uid://d0ccfiowlx3yv" path="res://assets/TinySwords/Resources/Resources/W_Idle.png" id="9_1ser1"]
 [ext_resource type="Texture2D" uid="uid://cgpe0hibe1pb" path="res://assets/TinySwords/Terrain/Ground/Tilemap_Elevation.png" id="10_jd6uk"]
+[ext_resource type="Texture2D" uid="uid://xq3624dhl78n" path="res://assets/TinySwords/Factions/Knights/Buildings/House/House_Construction.png" id="11_fcbpf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cfkpu"]
 atlas = ExtResource("2_uib28")
@@ -39,6 +40,10 @@ region = Rect2(39, 70, 51, 33)
 atlas = ExtResource("10_jd6uk")
 region = Rect2(190, 254, 68, 144)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_i1qa3"]
+atlas = ExtResource("11_fcbpf")
+region = Rect2(0, 75, 128, 117)
+
 [node name="city_ui" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -46,7 +51,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
+mouse_filter = 2
 script = ExtResource("1_rboli")
 
 [node name="resources_panel" type="PanelContainer" parent="."]
@@ -178,6 +183,15 @@ icon = SubResource("AtlasTexture_8bx7h")
 icon_alignment = 1
 expand_icon = true
 
+[node name="character_hub_button" type="Button" parent="build_panel/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 7
+theme_type_variation = &"ButtonBig"
+icon = SubResource("AtlasTexture_i1qa3")
+icon_alignment = 1
+expand_icon = true
+
 [node name="city_buttons" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = 2
@@ -209,4 +223,5 @@ text = "Build Mode"
 [connection signal="pressed" from="build_panel/MarginContainer/GridContainer/food_hut_button" to="." method="on_food_hut_button_pressed"]
 [connection signal="pressed" from="build_panel/MarginContainer/GridContainer/wood_cutter_button" to="." method="on_wood_cutter_button_pressed"]
 [connection signal="pressed" from="build_panel/MarginContainer/GridContainer/wall_button" to="." method="on_wall_button_pressed"]
+[connection signal="pressed" from="build_panel/MarginContainer/GridContainer/character_hub_button" to="." method="on_character_hub_button_pressed"]
 [connection signal="pressed" from="city_buttons/MarginContainer/HBoxContainer/build_mode_button" to="." method="on_build_mode_button_pressed"]

@@ -41,6 +41,10 @@ func _process(delta: float) -> void:
         else:
             self.game_camera.global_position = player.global_position
 
+func add_character(character: Player) -> void:
+    character.player_selected_signal.connect(self.on_player_player_selected_signal)
+    self.call_deferred("add_child", character)
+
 func world_enter() -> void:
     self.visible = true
     self.player_controller.enable()
