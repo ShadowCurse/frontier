@@ -142,24 +142,9 @@ func disable() -> void:
     self.visible = false
     self.current_state = State.Disabled
 
-func enable_city_ui() -> void:
-    self.ui.enable_city_ui()
-
-func disable_city_ui() -> void:
-    self.ui.disable_city_ui()
-
 func take_damage(damage: int) -> void:
     self.current_health -= damage
     self.ui.update_health(self.current_health, self.max_health)
-
-func on_yello_village_player_enter_signal() -> void:
-    self.ui.show_notification("Found Yello Village")
-
-func on_purple_village_player_enter_signal() -> void:
-    self.ui.show_notification("Found Purple Village")
-
-func on_red_village_player_enter_signal() -> void:
-    self.ui.show_notification("Found Red Village")
 
 func on_animated_sprite_2d_animation_finished() -> void:
      match self.current_state:
@@ -180,39 +165,3 @@ func on_animated_sprite_2d_animation_finished() -> void:
 func on_weapon_area_body_entered(body: Node2D) -> void:
     if body is Enemy:
         body.take_damage(self.damage)
-
-func on_ui_build_mode_enter_signal() -> void:
-    self.current_state = State.Building
-    
-func on_ui_build_mode_exit_signal() -> void:
-    self.current_state = State.Idle
-
-func on_ui_build_house_signal() -> void:
-    self.build_house_signal.emit()
-
-func on_ui_build_gold_mine_signal() -> void:
-    self.build_gold_mine_signal.emit()
-
-func on_ui_build_food_hut_signal() -> void:
-    self.build_food_hut_signal.emit()
-
-func on_ui_build_wood_cutter_signal() -> void:
-    self.build_wood_cutter_signal.emit()
-
-func on_ui_build_wall_signal() -> void:
-    self.build_wall_signal.emit()
-    
-func on_population_update_signal(new_population: int) -> void:
-    self.ui.update_population(new_population)
-    
-func on_gold_update_signal(new_gold: int) -> void:
-    self.ui.update_gold(new_gold)
-    
-func on_food_update_signal(new_food: int) -> void:
-     self.ui.update_food(new_food)
-    
-func on_wood_update_signal(new_wood: int) -> void:
-    self.ui.update_wood(new_wood)
-
-func on_player_city_object_placed() -> void:
-    self.current_state = State.Idle
