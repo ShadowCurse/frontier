@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://becobpr455lln"]
+[gd_scene load_steps=9 format=3 uid="uid://becobpr455lln"]
 
 [ext_resource type="Script" path="res://overworld/city/city.gd" id="1_a2vwd"]
 [ext_resource type="PackedScene" uid="uid://ba5oatb3jwohl" path="res://overworld/city/city_grid_tile.tscn" id="2_0nb4e"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cnythimxbph1b" path="res://overworld/city/buildings/gold_mine.tscn" id="3_gf3vi"]
 [ext_resource type="PackedScene" uid="uid://b5so4pklxgnv" path="res://overworld/city/buildings/food_hut.tscn" id="4_2laik"]
 [ext_resource type="PackedScene" uid="uid://djyde0rq2d6i5" path="res://overworld/city/buildings/wood_cutter.tscn" id="5_noukh"]
+[ext_resource type="PackedScene" uid="uid://crk7re7tacp13" path="res://overworld/city/city_ui.tscn" id="7_1t71j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d1odw"]
 size = Vector2(1500, 1500)
@@ -27,5 +28,15 @@ z_index = -1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="city_area"]
 shape = SubResource("RectangleShape2D_d1odw")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="city_ui" parent="CanvasLayer" instance=ExtResource("7_1t71j")]
+visible = false
+
 [connection signal="body_entered" from="city_area" to="." method="on_city_area_body_entered"]
 [connection signal="body_exited" from="city_area" to="." method="on_city_area_body_exited"]
+[connection signal="build_food_hut_signal" from="CanvasLayer/city_ui" to="." method="on_city_ui_build_food_hut_signal"]
+[connection signal="build_gold_mine_signal" from="CanvasLayer/city_ui" to="." method="on_city_ui_build_gold_mine_signal"]
+[connection signal="build_house_signal" from="CanvasLayer/city_ui" to="." method="on_city_ui_build_house_signal"]
+[connection signal="build_wall_signal" from="CanvasLayer/city_ui" to="." method="on_city_ui_build_wall_signal"]
+[connection signal="build_wood_cutter_signal" from="CanvasLayer/city_ui" to="." method="on_city_ui_build_wood_cutter_signal"]

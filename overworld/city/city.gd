@@ -4,13 +4,9 @@ class_name City
 
 signal player_entered
 signal player_exited
-signal object_placed
-signal population_update_signal(int)
-signal gold_update_signal(int)
-signal food_update_signal(int)
-signal wood_update_signal(int)
 
 @onready var grid_root: Node2D = $grid_root
+@onready var city_ui: CityUi = $CanvasLayer/city_ui
 
 @export var tile_scene: PackedScene
 @export var tile_offset: float = 150.0
@@ -68,8 +64,7 @@ func _process(_delta: float) -> void:
         self.move_under_cursor_object(cursor_pos)
 
         if Input.is_action_just_pressed("game_place_object"):
-            if self.try_place_object():
-                self.object_placed.emit()
+            self.try_place_object()
 
 func move_under_cursor_object(cursor_pos: Vector2):
     for grid_tile_position in self.grid:
@@ -88,14 +83,12 @@ func move_under_cursor_object(cursor_pos: Vector2):
     self.under_cursor_object_can_place = false
     self.under_cursor_object.position = cursor_pos
 
-func try_place_object() -> bool:
+func try_place_object() -> void:
     if self.under_cursor_object_can_place:
         var tile = self.grid.get(self.under_cursor_object.position)
         if tile:
             tile.occupied = true
             self.under_cursor_object = null
-            return true
-    return false
 
 func on_city_ui_build_house_signal() -> void:
     var house: House = self.house_scene.instantiate()
@@ -138,24 +131,26 @@ func on_city_ui_build_wall_signal() -> void:
 
 func on_population_incease_signal(population: int) -> void:
     self.total_population += population
-    self.population_update_signal.emit(self.total_population)
+    self.city_ui.update_population(self.total_population)
 
 func on_gold_update_signal(gold: int) -> void:
     self.total_gold += gold
-    self.gold_update_signal.emit(self.total_gold)
+    self.city_ui.update_gold(self.total_gold)
     
 func on_food_update_signal(food: int) -> void:
     self.total_food += food
-    self.food_update_signal.emit(self.total_food)
+    self.city_ui.update_food(self.total_food)
     
 func on_wood_update_signal(wood: int) -> void:
     self.total_wood += wood
-    self.wood_update_signal.emit(self.total_wood)
+    self.city_ui.update_wood(self.total_wood)
 
 func on_city_area_body_entered(body: Node2D) -> void:
     if body is Player:
+        self.city_ui.visible = true
         self.player_entered.emit()
 
 func on_city_area_body_exited(body: Node2D) -> void:
     if body is Player:
+        self.city_ui.visible = false
         self.player_exited.emit()

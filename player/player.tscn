@@ -274,10 +274,3 @@ visible = false
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="weapon_area" to="." method="on_weapon_area_body_entered"]
-[connection signal="build_food_hut_signal" from="ui_root/ui" to="." method="on_ui_build_food_hut_signal"]
-[connection signal="build_gold_mine_signal" from="ui_root/ui" to="." method="on_ui_build_gold_mine_signal"]
-[connection signal="build_house_signal" from="ui_root/ui" to="." method="on_ui_build_house_signal"]
-[connection signal="build_mode_enter_signal" from="ui_root/ui" to="." method="on_ui_build_mode_enter_signal"]
-[connection signal="build_mode_exit_signal" from="ui_root/ui" to="." method="on_ui_build_mode_exit_signal"]
-[connection signal="build_wall_signal" from="ui_root/ui" to="." method="on_ui_build_wall_signal"]
-[connection signal="build_wood_cutter_signal" from="ui_root/ui" to="." method="on_ui_build_wood_cutter_signal"]

@@ -52,8 +52,6 @@ func world_leave() -> void:
 
 func on_player_city_player_entered() -> void:
     self.city_selected = true
-    self.player.enable_city_ui()
 
 func on_player_city_player_exited() -> void:
     self.city_selected = false
-    self.player.disable_city_ui()
