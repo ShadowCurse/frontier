@@ -56,3 +56,6 @@ func on_player_city_player_entered() -> void:
 
 func on_player_city_player_exited() -> void:
     self.city_selected = false
+
+func on_player_player_selected_signal(player: Player) -> void:
+    self.player_controller.switch_player(player)

@@ -33,5 +33,8 @@ func enable() -> void:
 func disable() -> void:
     self.player_ui.visible = false
 
+func switch_player(node: Player) -> void:
+    self.controlled_player = node
+
 func on_character_take_damage(damage: int) -> void:
     self.player_ui.update_health(self.current_health, self.max_health)

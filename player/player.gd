@@ -3,6 +3,7 @@ extends CharacterBody2D
 class_name Player
 
 signal take_damage_signal(int)
+signal player_selected_signal(Player)
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var weapon_area: Area2D = $weapon_area
@@ -25,24 +26,6 @@ enum AttackDirection {
 }
 var attacking_direction: AttackDirection = AttackDirection.None
 var last_facing_direction_left: bool = true
-
-func _input(event: InputEvent) -> void:
-     match self.current_state:
-        PlayerController.State.Disabled:
-            return
-        PlayerController.State.Idle:
-            if event.is_action_pressed("game_attack"):
-                self.current_state = PlayerController.State.Attack
-                return
-            if Input.get_vector("game_left", "game_right", "game_up", "game_down"):
-                self.current_state = PlayerController.State.Run
-                return
-        PlayerController.State.Run:
-            if event.is_action_pressed("game_attack"):
-                self.current_state = PlayerController.State.Attack
-                return
-        PlayerController.State.Attack:
-            pass
 
 func _physics_process(_delta: float) -> void:
     match self.current_state:
@@ -147,3 +130,7 @@ func on_animated_sprite_2d_animation_finished() -> void:
 func on_weapon_area_body_entered(body: Node2D) -> void:
     if body is Enemy:
         body.take_damage(self.damage)
+
+func on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+    if event.is_action_pressed("game_attack"):
+        self.player_selected_signal.emit(self)

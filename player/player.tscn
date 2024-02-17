@@ -247,6 +247,7 @@ height = 72.0
 
 [node name="player" type="CharacterBody2D"]
 collision_mask = 2
+input_pickable = true
 script = ExtResource("1_vpvyh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -266,5 +267,6 @@ monitoring = false
 [node name="weapon_collision" type="CollisionPolygon2D" parent="weapon_area"]
 polygon = PackedVector2Array(0, 0, 100, 100, 100, -100)
 
+[connection signal="input_event" from="." to="." method="on_input_event"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="weapon_area" to="." method="on_weapon_area_body_entered"]

@@ -33,6 +33,10 @@ layer_2/tile_data = PackedInt32Array(589835, 4, 0, 589836, 4, 0, 786453, 4, 0, 1
 z_index = 1
 position = Vector2(-902, 49)
 
+[node name="player2" parent="tile_map" instance=ExtResource("4_nlfwv")]
+z_index = 1
+position = Vector2(-897, 279)
+
 [node name="enemy" parent="tile_map" instance=ExtResource("4_72kh4")]
 z_index = 1
 position = Vector2(-2675, -1159)
@@ -51,7 +55,10 @@ wall_scene = ExtResource("6_nf0u7")
 
 [node name="game_camera" type="Camera2D" parent="."]
 zoom = Vector2(0.8, 0.8)
+position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 
+[connection signal="player_selected_signal" from="tile_map/player" to="." method="on_player_player_selected_signal"]
+[connection signal="player_selected_signal" from="tile_map/player2" to="." method="on_player_player_selected_signal"]
 [connection signal="player_entered" from="tile_map/player_city" to="." method="on_player_city_player_entered"]
 [connection signal="player_exited" from="tile_map/player_city" to="." method="on_player_city_player_exited"]
