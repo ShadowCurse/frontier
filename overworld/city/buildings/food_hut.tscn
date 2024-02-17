@@ -1,10 +1,10 @@
 [gd_scene load_steps=5 format=3 uid="uid://b5so4pklxgnv"]
 
-[ext_resource type="Texture2D" uid="uid://cax76t55vfy41" path="res://assets/TinySwords/Resources/Sheep/HappySheep_All.png" id="1_vuafx"]
-[ext_resource type="Script" path="res://overworld/city/food_hut.gd" id="1_xejg8"]
+[ext_resource type="Script" path="res://overworld/city/buildings/food_hut.gd" id="1_b4ilm"]
+[ext_resource type="Texture2D" uid="uid://cax76t55vfy41" path="res://assets/TinySwords/Resources/Sheep/HappySheep_All.png" id="2_foo70"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8hmtp"]
-atlas = ExtResource("1_vuafx")
+atlas = ExtResource("2_foo70")
 region = Rect2(37, 45, 53, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_srpv5"]
@@ -12,7 +12,7 @@ size = Vector2(31, 19)
 
 [node name="food_hut" type="Node2D"]
 scale = Vector2(2, 2)
-script = ExtResource("1_xejg8")
+script = ExtResource("1_b4ilm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_8hmtp")

@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://becobpr455lln" path="res://overworld/city/player_city.tscn" id="3_6tt3t"]
 [ext_resource type="PackedScene" uid="uid://b8unxc5ktifq0" path="res://enemies/enemy.tscn" id="4_72kh4"]
 [ext_resource type="PackedScene" uid="uid://cd8tkx0y8ylm6" path="res://player/player.tscn" id="4_nlfwv"]
-[ext_resource type="PackedScene" uid="uid://cfdp1a8h6vkuf" path="res://overworld/city/wall.tscn" id="6_nf0u7"]
+[ext_resource type="PackedScene" uid="uid://cfdp1a8h6vkuf" path="res://overworld/city/buildings/wall.tscn" id="6_nf0u7"]
 
 [node name="overworld" type="Node2D"]
 script = ExtResource("1_3dmib")

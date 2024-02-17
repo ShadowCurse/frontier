@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ctthoyjnhwnp7"]
 
-[ext_resource type="Script" path="res://overworld/city/house.gd" id="1_28t5d"]
+[ext_resource type="Script" path="res://overworld/city/buildings/house.gd" id="1_28t5d"]
 [ext_resource type="Texture2D" uid="uid://b7qfr1sp7fbv5" path="res://assets/TinySwords/Factions/Knights/Buildings/House/House_Blue.png" id="1_nqcwd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_twitv"]
