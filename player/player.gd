@@ -2,12 +2,6 @@ extends CharacterBody2D
 
 class_name Player
 
-signal build_house_signal
-signal build_gold_mine_signal
-signal build_food_hut_signal
-signal build_wood_cutter_signal
-signal build_wall_signal
-
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var weapon_area: Area2D = $weapon_area
 @onready var ui_root: CanvasLayer = $ui_root
@@ -23,7 +17,6 @@ enum State {
     Idle,
     Run,
     Attack,
-    Building,   
 }
 var current_state: State = State.Disabled
 
@@ -54,8 +47,6 @@ func _input(event: InputEvent) -> void:
                 return
         State.Attack:
             pass
-        State.Building:
-            pass 
 
 func _physics_process(_delta: float) -> void:
     match self.current_state:
@@ -73,8 +64,6 @@ func _physics_process(_delta: float) -> void:
                 self.velocity.y = move_toward(self.velocity.y, 0, self.speed)
             self.move_and_slide()
         State.Attack:
-            pass
-        State.Building:
             pass
 
 func _process(_delta: float) -> void:
@@ -129,8 +118,6 @@ func _process(_delta: float) -> void:
                 self.attacking_direction = AttackDirection.Down
                 self.animated_sprite_2d.play("attack_down")
                 self.weapon_area.rotation = PI / 2.0
-        State.Building:
-            self.animated_sprite_2d.play("idle")
 
 func enable() -> void:
     self.ui_root.visible = true
@@ -159,8 +146,6 @@ func on_animated_sprite_2d_animation_finished() -> void:
             self.attacking_direction = AttackDirection.None
             self.weapon_area.visible = false
             self.weapon_area.monitoring = false
-        State.Building:
-            pass
 
 func on_weapon_area_body_entered(body: Node2D) -> void:
     if body is Enemy:
