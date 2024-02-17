@@ -49,7 +49,7 @@ position = Vector2(-2718, -953)
 z_index = 1
 position = Vector2(-2513, -1078)
 
-[node name="player_city" parent="tile_map" instance=ExtResource("3_6tt3t")]
+[node name="city" parent="tile_map" instance=ExtResource("3_6tt3t")]
 z_index = 1
 wall_scene = ExtResource("6_nf0u7")
 
@@ -60,5 +60,5 @@ position_smoothing_speed = 10.0
 
 [connection signal="player_selected_signal" from="tile_map/player" to="." method="on_player_player_selected_signal"]
 [connection signal="player_selected_signal" from="tile_map/player2" to="." method="on_player_player_selected_signal"]
-[connection signal="player_entered" from="tile_map/player_city" to="." method="on_player_city_player_entered"]
-[connection signal="player_exited" from="tile_map/player_city" to="." method="on_player_city_player_exited"]
+[connection signal="player_entered" from="tile_map/city" to="." method="on_player_city_player_entered"]
+[connection signal="player_exited" from="tile_map/city" to="." method="on_player_city_player_exited"]

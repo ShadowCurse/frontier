@@ -90,6 +90,9 @@ func try_place_object() -> void:
             tile.occupied = true
             self.under_cursor_object = null
 
+func set_ui(enabled: bool) -> void:
+    self.city_ui.visible = enabled
+
 func on_city_ui_build_house_signal() -> void:
     var house: House = self.house_scene.instantiate()
     under_cursor_object = house

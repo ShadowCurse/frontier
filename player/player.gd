@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 class_name Player
 
-signal take_damage_signal(int)
+signal update_health_signal
 signal player_selected_signal(Player)
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
@@ -26,6 +26,7 @@ enum AttackDirection {
 }
 var attacking_direction: AttackDirection = AttackDirection.None
 var last_facing_direction_left: bool = true
+var in_city: bool = false
 
 func _physics_process(_delta: float) -> void:
     match self.current_state:
@@ -111,7 +112,7 @@ func set_state(state: PlayerController.State) -> void:
 
 func take_damage(damage: int) -> void:
     self.current_health -= damage
-    self.take_damage_signal.emit(damage)
+    self.update_health_signal.emit(self.current_health, self.max_health)
 
 func on_animated_sprite_2d_animation_finished() -> void:
      match self.current_state:

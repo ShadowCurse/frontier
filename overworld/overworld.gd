@@ -11,8 +11,6 @@ class_name Overworld
 @export_range(0, 10) var camera_smooth_weight: float = 0.1
 @export_range(0, 10) var camera_transition_player: float = 2.0
 
-var city_selected: bool = false
-
 var player_camera_smooth: bool = false
 var player_camera_weight: float = 0.0
 const player_camera_weight_max: float = 1.0
@@ -22,7 +20,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
     var player = self.player_controller.controlled_player
-    if self.city_selected:
+    if player.in_city:
         # var camera_position = lerp(self.game_camera.global_position, self.city.global_position, self.camera_smooth_weight)
         var camera_zoom = lerp(self.game_camera.zoom, Vector2(self.camera_city_zoom, self.camera_city_zoom), self.camera_smooth_weight)
         self.game_camera.global_position = player.global_position #camera_position.floor()
@@ -52,10 +50,11 @@ func world_leave() -> void:
     self.visible = false
 
 func on_player_city_player_entered() -> void:
-    self.city_selected = true
+    self.player_controller.controlled_player.in_city = true
 
 func on_player_city_player_exited() -> void:
-    self.city_selected = false
+    self.player_controller.controlled_player.in_city = false
 
 func on_player_player_selected_signal(player: Player) -> void:
     self.player_controller.switch_player(player)
+    self.city.set_ui(player.in_city)

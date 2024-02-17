@@ -5,14 +5,18 @@ class_name PlayerUi
 @onready var notification_panel: PanelContainer = $notification
 @onready var notification_label: Label = $notification/MarginContainer/notification_label
 @onready var notification_timer: Timer = $notification/notification_timer
-@onready var health_bar: ProgressBar = $health/MarginContainer/health_bar
-@onready var health_label: Label = $health/MarginContainer/health_label
+@onready var health_bar: ProgressBar = $left/VBoxContainer/health/MarginContainer/health_bar
+@onready var health_label: Label = $left/VBoxContainer/health/MarginContainer/health_label
+@onready var ui_minimap: Node2D = $top_right/VBoxContainer/map/MarginContainer/SubViewportContainer/SubViewport/ui_minimap
 
 func _ready() -> void:
     pass
 
 func _process(_delta: float) -> void:
     pass
+
+func track_player(player: Player) -> void:
+    self.ui_minimap.player = player
 
 func show_notification(text: String) -> void:
     self.notification_panel.visible = true
