@@ -22,9 +22,9 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
     if self.city_selected:
-        var camera_position = lerp(self.game_camera.global_position, self.player_city.global_position, self.camera_smooth_weight)
+        # var camera_position = lerp(self.game_camera.global_position, self.player_city.global_position, self.camera_smooth_weight)
         var camera_zoom = lerp(self.game_camera.zoom, Vector2(self.camera_city_zoom, self.camera_city_zoom), self.camera_smooth_weight)
-        self.game_camera.global_position = camera_position.floor()
+        self.game_camera.global_position = self.player.global_position #camera_position.floor()
         self.game_camera.zoom = camera_zoom
         self.player_camera_weight = 0.0
         self.player_camera_smooth = true
