@@ -1,43 +1,43 @@
 [gd_scene load_steps=19 format=3 uid="uid://crk7re7tacp13"]
 
-[ext_resource type="Script" path="res://overworld/city/player_city_ui.gd" id="1_bjktx"]
-[ext_resource type="Texture2D" uid="uid://ctn2u4ghfq4cy" path="res://assets/TinySwords/Factions/Knights/Troops/Pawn/Blue/Pawn_Blue.png" id="2_0wugd"]
-[ext_resource type="Texture2D" uid="uid://chtrguk37mbhg" path="res://assets/TinySwords/Resources/Resources/G_Idle.png" id="3_o6vb6"]
-[ext_resource type="Texture2D" uid="uid://bwakooea0r0o0" path="res://assets/TinySwords/Resources/Resources/M_Idle.png" id="4_dak0b"]
-[ext_resource type="Texture2D" uid="uid://cqqko1rxqiww0" path="res://assets/TinySwords/Resources/Resources/W_Idle_(NoShadow).png" id="5_5a6w0"]
-[ext_resource type="Texture2D" uid="uid://b7qfr1sp7fbv5" path="res://assets/TinySwords/Factions/Knights/Buildings/House/House_Blue.png" id="6_y6ajy"]
-[ext_resource type="Texture2D" uid="uid://bdbga1keu84ht" path="res://assets/TinySwords/Resources/Gold Mine/GoldMine_Inactive.png" id="7_n7lxp"]
-[ext_resource type="Texture2D" uid="uid://7aekqyq0s1ku" path="res://assets/TinySwords/Resources/Sheep/HappySheep_Idle.png" id="8_gggpr"]
-[ext_resource type="Texture2D" uid="uid://d0ccfiowlx3yv" path="res://assets/TinySwords/Resources/Resources/W_Idle.png" id="9_r5rxy"]
-[ext_resource type="Texture2D" uid="uid://c88v4qld5w3v2" path="res://assets/TinySwords/Factions/Knights/Buildings/House/House_Yellow.png" id="10_oemma"]
-[ext_resource type="Texture2D" uid="uid://7y7em2pju546" path="res://assets/TinySwords/Factions/Knights/Buildings/House/House_Purple.png" id="11_0ns6i"]
-[ext_resource type="Texture2D" uid="uid://dvjfh37vcsxat" path="res://assets/TinySwords/Factions/Knights/Buildings/House/House_Red.png" id="12_dvr8g"]
+[ext_resource type="Script" path="res://overworld/city/city_ui.gd" id="1_rboli"]
+[ext_resource type="Texture2D" uid="uid://ctn2u4ghfq4cy" path="res://assets/TinySwords/Factions/Knights/Troops/Pawn/Blue/Pawn_Blue.png" id="2_uib28"]
+[ext_resource type="Texture2D" uid="uid://chtrguk37mbhg" path="res://assets/TinySwords/Resources/Resources/G_Idle.png" id="3_36205"]
+[ext_resource type="Texture2D" uid="uid://bwakooea0r0o0" path="res://assets/TinySwords/Resources/Resources/M_Idle.png" id="4_l6x8k"]
+[ext_resource type="Texture2D" uid="uid://cqqko1rxqiww0" path="res://assets/TinySwords/Resources/Resources/W_Idle_(NoShadow).png" id="5_xbxmw"]
+[ext_resource type="Texture2D" uid="uid://b7qfr1sp7fbv5" path="res://assets/TinySwords/Factions/Knights/Buildings/House/House_Blue.png" id="6_r25wx"]
+[ext_resource type="Texture2D" uid="uid://bdbga1keu84ht" path="res://assets/TinySwords/Resources/Gold Mine/GoldMine_Inactive.png" id="7_gfd44"]
+[ext_resource type="Texture2D" uid="uid://7aekqyq0s1ku" path="res://assets/TinySwords/Resources/Sheep/HappySheep_Idle.png" id="8_8hlsr"]
+[ext_resource type="Texture2D" uid="uid://d0ccfiowlx3yv" path="res://assets/TinySwords/Resources/Resources/W_Idle.png" id="9_1ser1"]
+[ext_resource type="Texture2D" uid="uid://c88v4qld5w3v2" path="res://assets/TinySwords/Factions/Knights/Buildings/House/House_Yellow.png" id="10_5273i"]
+[ext_resource type="Texture2D" uid="uid://7y7em2pju546" path="res://assets/TinySwords/Factions/Knights/Buildings/House/House_Purple.png" id="11_ydt5o"]
+[ext_resource type="Texture2D" uid="uid://dvjfh37vcsxat" path="res://assets/TinySwords/Factions/Knights/Buildings/House/House_Red.png" id="12_oe6tm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e41fv"]
-atlas = ExtResource("2_0wugd")
+atlas = ExtResource("2_uib28")
 region = Rect2(64, 69, 65, 58)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_138lc"]
-atlas = ExtResource("3_o6vb6")
+atlas = ExtResource("3_36205")
 region = Rect2(44, 48, 50, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l5htp"]
-atlas = ExtResource("4_dak0b")
+atlas = ExtResource("4_l6x8k")
 region = Rect2(43, 57, 50, 43)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c34lo"]
-atlas = ExtResource("5_5a6w0")
+atlas = ExtResource("5_xbxmw")
 region = Rect2(38, 72, 52, 28)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dbirb"]
-atlas = ExtResource("8_gggpr")
+atlas = ExtResource("8_8hlsr")
 region = Rect2(39, 39, 51, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cg6ux"]
-atlas = ExtResource("9_r5rxy")
+atlas = ExtResource("9_1ser1")
 region = Rect2(39, 70, 51, 33)
 
-[node name="player_city_ui" type="Control"]
+[node name="city_ui" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,7 +45,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-script = ExtResource("1_bjktx")
+script = ExtResource("1_rboli")
 
 [node name="resources_panel" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -161,7 +161,7 @@ layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 7
 theme_type_variation = &"ButtonBig"
-icon = ExtResource("6_y6ajy")
+icon = ExtResource("6_r25wx")
 icon_alignment = 1
 expand_icon = true
 
@@ -170,7 +170,7 @@ layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 7
 theme_type_variation = &"ButtonBig"
-icon = ExtResource("7_n7lxp")
+icon = ExtResource("7_gfd44")
 icon_alignment = 1
 expand_icon = true
 
@@ -237,7 +237,7 @@ size_flags_vertical = 3
 
 [node name="yellow_city_icon" type="TextureRect" parent="villages_panel/MarginContainer/GridContainer/yellow_village_panel/VBoxContainer/yellow_city_info"]
 layout_mode = 2
-texture = ExtResource("10_oemma")
+texture = ExtResource("10_5273i")
 expand_mode = 3
 stretch_mode = 4
 
@@ -275,7 +275,7 @@ size_flags_vertical = 3
 
 [node name="purple_city_icon" type="TextureRect" parent="villages_panel/MarginContainer/GridContainer/purple_village_panel/VBoxContainer/purple_city_info"]
 layout_mode = 2
-texture = ExtResource("11_0ns6i")
+texture = ExtResource("11_ydt5o")
 expand_mode = 3
 stretch_mode = 5
 
@@ -313,7 +313,7 @@ size_flags_vertical = 3
 
 [node name="red_city_icon" type="TextureRect" parent="villages_panel/MarginContainer/GridContainer/red_village_panel/VBoxContainer/red_city_info"]
 layout_mode = 2
-texture = ExtResource("12_dvr8g")
+texture = ExtResource("12_oe6tm")
 expand_mode = 3
 stretch_mode = 5
 

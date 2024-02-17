@@ -3,7 +3,7 @@ extends Node2D
 class_name Overworld
 
 @onready var player: Player = $tile_map/player
-@onready var player_city: PlayerCity = $tile_map/player_city
+@onready var city: City = $tile_map/city
 @onready var game_camera: Camera2D = $game_camera
 
 @export var camera_city_zoom: float = 0.3
@@ -22,7 +22,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
     if self.city_selected:
-        # var camera_position = lerp(self.game_camera.global_position, self.player_city.global_position, self.camera_smooth_weight)
+        # var camera_position = lerp(self.game_camera.global_position, self.city.global_position, self.camera_smooth_weight)
         var camera_zoom = lerp(self.game_camera.zoom, Vector2(self.camera_city_zoom, self.camera_city_zoom), self.camera_smooth_weight)
         self.game_camera.global_position = self.player.global_position #camera_position.floor()
         self.game_camera.zoom = camera_zoom

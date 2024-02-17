@@ -1,6 +1,6 @@
 extends Node2D
 
-class_name PlayerCity
+class_name City
 
 signal player_entered
 signal player_exited

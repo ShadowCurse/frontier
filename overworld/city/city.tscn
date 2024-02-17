@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://becobpr455lln"]
 
-[ext_resource type="Script" path="res://overworld/city/player_city.gd" id="1_a2vwd"]
+[ext_resource type="Script" path="res://overworld/city/city.gd" id="1_a2vwd"]
 [ext_resource type="PackedScene" uid="uid://ba5oatb3jwohl" path="res://overworld/city/city_grid_tile.tscn" id="2_0nb4e"]
 [ext_resource type="PackedScene" uid="uid://ctthoyjnhwnp7" path="res://overworld/city/buildings/house.tscn" id="2_7d8li"]
 [ext_resource type="PackedScene" uid="uid://cnythimxbph1b" path="res://overworld/city/buildings/gold_mine.tscn" id="3_gf3vi"]
@@ -10,7 +10,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d1odw"]
 size = Vector2(1500, 1500)
 
-[node name="player_city" type="Node2D"]
+[node name="city" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_a2vwd")
 tile_scene = ExtResource("2_0nb4e")

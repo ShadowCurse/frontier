@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ba5oatb3jwohl"]
 
-[ext_resource type="Shader" path="res://overworld/city/player_city_tile.gdshader" id="1_wramn"]
+[ext_resource type="Shader" path="res://overworld/city/city_tile.gdshader" id="1_wramn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_62cn1"]
 shader = ExtResource("1_wramn")
