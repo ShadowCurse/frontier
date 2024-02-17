@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://vqwwft3aangw"]
+[gd_scene load_steps=8 format=3 uid="uid://vqwwft3aangw"]
 
 [ext_resource type="TileSet" uid="uid://dkenr8x2wcr0g" path="res://assets/environment_tile_set.tres" id="1_1kray"]
 [ext_resource type="Script" path="res://overworld/overworld.gd" id="1_3dmib"]
@@ -6,9 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://b8unxc5ktifq0" path="res://enemies/enemy.tscn" id="4_72kh4"]
 [ext_resource type="PackedScene" uid="uid://cd8tkx0y8ylm6" path="res://player/player.tscn" id="4_nlfwv"]
 [ext_resource type="PackedScene" uid="uid://cfdp1a8h6vkuf" path="res://overworld/city/buildings/wall.tscn" id="6_nf0u7"]
+[ext_resource type="PackedScene" uid="uid://ca18rb5qdu04r" path="res://player/player_controller.tscn" id="7_7kj2u"]
 
 [node name="overworld" type="Node2D"]
 script = ExtResource("1_3dmib")
+
+[node name="player_controller" parent="." node_paths=PackedStringArray("controlled_player") instance=ExtResource("7_7kj2u")]
+controlled_player = NodePath("../tile_map/player")
 
 [node name="tile_map" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -49,10 +53,5 @@ wall_scene = ExtResource("6_nf0u7")
 zoom = Vector2(0.8, 0.8)
 position_smoothing_speed = 10.0
 
-[connection signal="build_food_hut_signal" from="tile_map/player" to="tile_map/player_city" method="on_city_ui_build_food_hut_signal"]
-[connection signal="build_gold_mine_signal" from="tile_map/player" to="tile_map/player_city" method="on_city_ui_build_gold_mine_signal"]
-[connection signal="build_house_signal" from="tile_map/player" to="tile_map/player_city" method="on_city_ui_build_house_signal"]
-[connection signal="build_wall_signal" from="tile_map/player" to="tile_map/player_city" method="on_city_ui_build_wall_signal"]
-[connection signal="build_wood_cutter_signal" from="tile_map/player" to="tile_map/player_city" method="on_city_ui_build_wood_cutter_signal"]
 [connection signal="player_entered" from="tile_map/player_city" to="." method="on_player_city_player_entered"]
 [connection signal="player_exited" from="tile_map/player_city" to="." method="on_player_city_player_exited"]

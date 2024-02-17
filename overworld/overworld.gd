@@ -2,7 +2,7 @@ extends Node2D
 
 class_name Overworld
 
-@onready var player: Player = $tile_map/player
+@onready var player_controller: PlayerController = $player_controller
 @onready var city: City = $tile_map/city
 @onready var game_camera: Camera2D = $game_camera
 
@@ -21,10 +21,11 @@ func _ready() -> void:
     pass
 
 func _process(delta: float) -> void:
+    var player = self.player_controller.controlled_player
     if self.city_selected:
         # var camera_position = lerp(self.game_camera.global_position, self.city.global_position, self.camera_smooth_weight)
         var camera_zoom = lerp(self.game_camera.zoom, Vector2(self.camera_city_zoom, self.camera_city_zoom), self.camera_smooth_weight)
-        self.game_camera.global_position = self.player.global_position #camera_position.floor()
+        self.game_camera.global_position = player.global_position #camera_position.floor()
         self.game_camera.zoom = camera_zoom
         self.player_camera_weight = 0.0
         self.player_camera_smooth = true
@@ -35,19 +36,19 @@ func _process(delta: float) -> void:
             self.player_camera_smooth = false
             
         if self.player_camera_smooth:
-            var camera_position = lerp(self.game_camera.global_position, self.player.global_position, self.player_camera_weight)
+            var camera_position = lerp(self.game_camera.global_position, player.global_position, self.player_camera_weight)
             var camera_zoom = lerp(self.game_camera.zoom, Vector2(self.camera_player_zoom, self.camera_player_zoom), self.player_camera_weight)
             self.game_camera.global_position = camera_position.floor()
             self.game_camera.zoom = camera_zoom
         else:
-            self.game_camera.global_position = self.player.global_position
+            self.game_camera.global_position = player.global_position
 
 func world_enter() -> void:
     self.visible = true
-    self.player.enable()
+    self.player_controller.enable()
 
 func world_leave() -> void:
-    self.player.disable()
+    self.player_controller.disable()
     self.visible = false
 
 func on_player_city_player_entered() -> void:

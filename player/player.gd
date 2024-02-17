@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 class_name Player
 
+signal take_damage_signal(int)
+
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var weapon_area: Area2D = $weapon_area
 @onready var ui_root: CanvasLayer = $ui_root
@@ -12,13 +14,7 @@ class_name Player
 @export var damage: int = 20
 @export var speed: float = 600.0
 
-enum State {
-    Disabled,
-    Idle,
-    Run,
-    Attack,
-}
-var current_state: State = State.Disabled
+var current_state: PlayerController.State = PlayerController.State.Disabled
 
 enum AttackDirection {
     None,
@@ -32,29 +28,29 @@ var last_facing_direction_left: bool = true
 
 func _input(event: InputEvent) -> void:
      match self.current_state:
-        State.Disabled:
+        PlayerController.State.Disabled:
             return
-        State.Idle:
+        PlayerController.State.Idle:
             if event.is_action_pressed("game_attack"):
-                self.current_state = State.Attack
+                self.current_state = PlayerController.State.Attack
                 return
             if Input.get_vector("game_left", "game_right", "game_up", "game_down"):
-                self.current_state = State.Run
+                self.current_state = PlayerController.State.Run
                 return
-        State.Run:
+        PlayerController.State.Run:
             if event.is_action_pressed("game_attack"):
-                self.current_state = State.Attack
+                self.current_state = PlayerController.State.Attack
                 return
-        State.Attack:
+        PlayerController.State.Attack:
             pass
 
 func _physics_process(_delta: float) -> void:
     match self.current_state:
-        State.Disabled:
+        PlayerController.State.Disabled:
             return
-        State.Idle:
+        PlayerController.State.Idle:
             return
-        State.Run:
+        PlayerController.State.Run:
             var direction := Input.get_vector("game_left", "game_right", "game_up", "game_down")
             # Handle movement
             if direction:
@@ -63,16 +59,16 @@ func _physics_process(_delta: float) -> void:
                 self.velocity.x = move_toward(self.velocity.x, 0, self.speed)
                 self.velocity.y = move_toward(self.velocity.y, 0, self.speed)
             self.move_and_slide()
-        State.Attack:
+        PlayerController.State.Attack:
             pass
 
 func _process(_delta: float) -> void:
     match self.current_state:
-        State.Disabled:
+        PlayerController.State.Disabled:
             return
-        State.Idle:
+        PlayerController.State.Idle:
             self.animated_sprite_2d.play("idle")
-        State.Run:
+        PlayerController.State.Run:
             var direction := Input.get_vector("game_left", "game_right", "game_up", "game_down")
             # Handle spite directon flipping
             if direction:
@@ -85,7 +81,7 @@ func _process(_delta: float) -> void:
             else:
                 self.animated_sprite_2d.flip_h = self.last_facing_direction_left
             self.animated_sprite_2d.play("run")
-        State.Attack:
+        PlayerController.State.Attack:
             if self.attacking_direction != AttackDirection.None:
                 return
             var mouse_position = get_global_mouse_position()
@@ -119,30 +115,31 @@ func _process(_delta: float) -> void:
                 self.animated_sprite_2d.play("attack_down")
                 self.weapon_area.rotation = PI / 2.0
 
-func enable() -> void:
-    self.ui_root.visible = true
-    self.visible = true
-    self.current_state = State.Idle
-
-func disable() -> void:
-    self.ui_root.visible = false
-    self.visible = false
-    self.current_state = State.Disabled
+func set_state(state: PlayerController.State) -> void:
+   match self.current_state:
+      PlayerController.State.Disabled:
+          self.current_state = state
+      PlayerController.State.Idle:
+          self.current_state = state
+      PlayerController.State.Run:
+          self.current_state = state
+      PlayerController.State.Attack:
+          pass
 
 func take_damage(damage: int) -> void:
     self.current_health -= damage
-    self.ui.update_health(self.current_health, self.max_health)
+    self.take_damage_signal.emit(damage)
 
 func on_animated_sprite_2d_animation_finished() -> void:
      match self.current_state:
-        State.Disabled:
+        PlayerController.State.Disabled:
             return
-        State.Idle:
+        PlayerController.State.Idle:
             return
-        State.Run:
-            self.current_state = State.Idle
-        State.Attack:
-            self.current_state = State.Idle
+        PlayerController.State.Run:
+            self.current_state = PlayerController.State.Idle
+        PlayerController.State.Attack:
+            self.current_state = PlayerController.State.Idle
             self.attacking_direction = AttackDirection.None
             self.weapon_area.visible = false
             self.weapon_area.monitoring = false

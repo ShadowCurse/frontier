@@ -1,8 +1,7 @@
-[gd_scene load_steps=36 format=3 uid="uid://cd8tkx0y8ylm6"]
+[gd_scene load_steps=35 format=3 uid="uid://cd8tkx0y8ylm6"]
 
 [ext_resource type="Texture2D" uid="uid://byjy6lrmb0l3e" path="res://assets/TinySwords/Factions/Knights/Troops/Warrior/Blue/Warrior_Blue.png" id="1_1amri"]
 [ext_resource type="Script" path="res://player/player.gd" id="1_vpvyh"]
-[ext_resource type="PackedScene" uid="uid://d36etgjaa1fvo" path="res://player/player_ui.tscn" id="3_etns2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5geya"]
 atlas = ExtResource("1_1amri")
@@ -266,11 +265,6 @@ monitoring = false
 
 [node name="weapon_collision" type="CollisionPolygon2D" parent="weapon_area"]
 polygon = PackedVector2Array(0, 0, 100, 100, 100, -100)
-
-[node name="ui_root" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="ui" parent="ui_root" instance=ExtResource("3_etns2")]
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="weapon_area" to="." method="on_weapon_area_body_entered"]
