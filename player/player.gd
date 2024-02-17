@@ -78,7 +78,6 @@ func _physics_process(_delta: float) -> void:
             pass
 
 func _process(_delta: float) -> void:
-    print(self.current_state)
     match self.current_state:
         State.Disabled:
             return
