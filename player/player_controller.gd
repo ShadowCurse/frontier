@@ -15,6 +15,7 @@ enum State {
 
 func _ready() -> void:
     self.controlled_player.update_health_signal.connect(on_character_update_health_signal)
+    self.controlled_player.is_selected = true
     self.player_ui.track_player(self.controlled_player)
 
 func _input(event: InputEvent) -> void:
@@ -35,7 +36,9 @@ func disable() -> void:
     self.player_ui.visible = false
 
 func switch_player(node: Player) -> void:
+    self.controlled_player.is_selected = false
     self.controlled_player = node
+    self.controlled_player.is_selected = true
     self.controlled_player.update_health_signal.connect(on_character_update_health_signal)
     self.player_ui.track_player(self.controlled_player)
     self.player_ui.update_health(self.controlled_player.current_health, self.controlled_player.max_health)

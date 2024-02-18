@@ -25,6 +25,7 @@ enum AttackDirection {
 var attacking_direction: AttackDirection = AttackDirection.None
 var last_facing_direction_left: bool = true
 var in_city: bool = false
+var is_selected: bool = false
 
 func _physics_process(_delta: float) -> void:
     match self.current_state:

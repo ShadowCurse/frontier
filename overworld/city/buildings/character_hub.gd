@@ -19,6 +19,7 @@ func _process(_delta: float) -> void:
         self.under_cursor_object.position = cursor_pos
 
         if Input.is_action_just_pressed("game_place_object"):
+            self.overworld.activate_character(self.under_cursor_object)
             self.under_cursor_object = null
 
 func on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:

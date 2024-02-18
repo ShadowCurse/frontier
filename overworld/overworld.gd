@@ -21,9 +21,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
     var player = self.player_controller.controlled_player
     if player.in_city:
-        # var camera_position = lerp(self.game_camera.global_position, self.city.global_position, self.camera_smooth_weight)
+        var camera_position = lerp(self.game_camera.global_position, self.city.global_position, self.camera_smooth_weight)
         var camera_zoom = lerp(self.game_camera.zoom, Vector2(self.camera_city_zoom, self.camera_city_zoom), self.camera_smooth_weight)
-        self.game_camera.global_position = player.global_position #camera_position.floor()
+        self.game_camera.global_position = camera_position.floor()
         self.game_camera.zoom = camera_zoom
         self.player_camera_weight = 0.0
         self.player_camera_smooth = true
@@ -42,8 +42,10 @@ func _process(delta: float) -> void:
             self.game_camera.global_position = player.global_position
 
 func add_character(character: Player) -> void:
-    character.player_selected_signal.connect(self.on_player_player_selected_signal)
     self.call_deferred("add_child", character)
+
+func activate_character(character: Player) -> void:
+    character.player_selected_signal.connect(self.on_player_player_selected_signal)
 
 func world_enter() -> void:
     self.visible = true

@@ -158,11 +158,11 @@ func on_wood_update_signal(wood: int) -> void:
     self.city_ui.update_wood(self.total_wood)
 
 func on_city_area_body_entered(body: Node2D) -> void:
-    if body is Player:
+    if body is Player and body.is_selected:
         self.city_ui.visible = true
         self.player_entered.emit()
 
 func on_city_area_body_exited(body: Node2D) -> void:
-    if body is Player:
+    if body is Player and body.is_selected:
         self.city_ui.visible = false
         self.player_exited.emit()
