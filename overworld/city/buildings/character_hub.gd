@@ -23,7 +23,7 @@ func _process(_delta: float) -> void:
             self.under_cursor_object = null
 
 func on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-    if event.is_action("game_attack"):
+    if event.is_action("game_select_building"):
         self.ui.visible = true
 
 func on_knight_button_pressed() -> void:

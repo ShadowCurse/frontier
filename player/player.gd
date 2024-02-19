@@ -23,6 +23,7 @@ enum AttackDirection {
     Right
 }
 var attacking_direction: AttackDirection = AttackDirection.None
+var last_direction: Vector2 = Vector2.ZERO
 var last_facing_direction_left: bool = true
 var in_city: bool = false
 var is_selected: bool = false
@@ -34,10 +35,10 @@ func _physics_process(_delta: float) -> void:
         PlayerController.State.Idle:
             return
         PlayerController.State.Run:
-            var direction := Input.get_vector("game_left", "game_right", "game_up", "game_down")
+            self.last_direction = Input.get_vector("game_move_left", "game_move_right", "game_move_up", "game_move_down")
             # Handle movement
-            if direction:
-                self.velocity = direction * self.speed
+            if self.last_direction:
+                self.velocity = self.last_direction * self.speed
             else:
                 self.velocity.x = move_toward(self.velocity.x, 0, self.speed)
                 self.velocity.y = move_toward(self.velocity.y, 0, self.speed)
@@ -52,10 +53,9 @@ func _process(_delta: float) -> void:
         PlayerController.State.Idle:
             self.animated_sprite_2d.play("idle")
         PlayerController.State.Run:
-            var direction := Input.get_vector("game_left", "game_right", "game_up", "game_down")
             # Handle spite directon flipping
-            if direction:
-                if direction.x <= 0.0:
+            if self.last_direction:
+                if self.last_direction.x <= 0.0:
                     self.animated_sprite_2d.flip_h = true
                     self.last_facing_direction_left = true
                 else:

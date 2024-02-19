@@ -22,7 +22,7 @@ func _input(event: InputEvent) -> void:
       if event.is_action_pressed("game_attack"):
           self.controlled_player.set_state(State.Attack)
           return
-      if Input.get_vector("game_left", "game_right", "game_up", "game_down"):
+      if Input.get_vector("game_move_left", "game_move_right", "game_move_up", "game_move_down"):
           self.controlled_player.set_state(State.Run)
           return
       else:
