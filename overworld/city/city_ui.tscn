@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://crk7re7tacp13"]
+[gd_scene load_steps=19 format=3 uid="uid://crk7re7tacp13"]
 
 [ext_resource type="Script" path="res://overworld/city/city_ui.gd" id="1_rboli"]
 [ext_resource type="Texture2D" uid="uid://ctn2u4ghfq4cy" path="res://assets/TinySwords/Factions/Knights/Troops/Pawn/Blue/Pawn_Blue.png" id="2_uib28"]
@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bdbga1keu84ht" path="res://assets/TinySwords/Resources/Gold Mine/GoldMine_Inactive.png" id="7_gfd44"]
 [ext_resource type="Texture2D" uid="uid://7aekqyq0s1ku" path="res://assets/TinySwords/Resources/Sheep/HappySheep_Idle.png" id="8_8hlsr"]
 [ext_resource type="Texture2D" uid="uid://d0ccfiowlx3yv" path="res://assets/TinySwords/Resources/Resources/W_Idle.png" id="9_1ser1"]
-[ext_resource type="Texture2D" uid="uid://cgpe0hibe1pb" path="res://assets/TinySwords/Terrain/Ground/Tilemap_Elevation.png" id="10_jd6uk"]
+[ext_resource type="Texture2D" uid="uid://duxdwvcux60s7" path="res://assets/wall.png" id="10_yfe3t"]
 [ext_resource type="Texture2D" uid="uid://xq3624dhl78n" path="res://assets/TinySwords/Factions/Knights/Buildings/House/House_Construction.png" id="11_fcbpf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cfkpu"]
@@ -35,10 +35,6 @@ region = Rect2(39, 39, 51, 48)
 [sub_resource type="AtlasTexture" id="AtlasTexture_f537c"]
 atlas = ExtResource("9_1ser1")
 region = Rect2(39, 70, 51, 33)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8bx7h"]
-atlas = ExtResource("10_jd6uk")
-region = Rect2(190, 254, 68, 144)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i1qa3"]
 atlas = ExtResource("11_fcbpf")
@@ -179,7 +175,7 @@ layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 7
 theme_type_variation = &"ButtonBig"
-icon = SubResource("AtlasTexture_8bx7h")
+icon = ExtResource("10_yfe3t")
 icon_alignment = 1
 expand_icon = true
 

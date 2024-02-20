@@ -1,24 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://cfdp1a8h6vkuf"]
+[gd_scene load_steps=4 format=3 uid="uid://cfdp1a8h6vkuf"]
 
-[ext_resource type="Texture2D" uid="uid://cgpe0hibe1pb" path="res://assets/TinySwords/Terrain/Ground/Tilemap_Elevation.png" id="1_botka"]
 [ext_resource type="Script" path="res://overworld/city/buildings/wall.gd" id="1_w8qen"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_swhvc"]
-atlas = ExtResource("1_botka")
-region = Rect2(193, 259, 62, 125)
+[ext_resource type="Texture2D" uid="uid://duxdwvcux60s7" path="res://assets/wall.png" id="2_db3gf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_idiwu"]
-size = Vector2(58, 116)
+size = Vector2(131, 129)
 
 [node name="wall" type="Node2D"]
+scale = Vector2(1.2, 1.2)
 script = ExtResource("1_w8qen")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("AtlasTexture_swhvc")
+scale = Vector2(2, 2)
+texture = ExtResource("2_db3gf")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 2
 collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1.5, 0.5)
 shape = SubResource("RectangleShape2D_idiwu")
