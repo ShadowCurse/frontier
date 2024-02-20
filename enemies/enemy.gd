@@ -15,6 +15,7 @@ class_name Enemy
 @export var speed: float = 100.0
 @export var attack_range: float = 100.0
 @export var attack_speed: float = 1.0
+@export var on_death_exp: int = 80
 
 var player: Player
 
@@ -67,11 +68,11 @@ func _process(delta: float) -> void:
         State.Idle:
             self.animated_sprite_2d.play("idle")
         State.Persuit:
-            if (self.position - player.position).length() < self.attack_range \
+            if (self.position - self.player.position).length() < self.attack_range \
                  and self.attack_timer.is_stopped():
                 self.current_state = State.Attack
                 return
-            self.navigation_agent_2d.set_target_position(player.position)
+            self.navigation_agent_2d.set_target_position(self.player.position)
             self.last_direction = (self.navigation_agent_2d.get_next_path_position() - self.position).normalized()
             if last_direction.x < 0.0:
                 self.animated_sprite_2d.flip_h = true
@@ -90,7 +91,7 @@ func _process(delta: float) -> void:
             if !self.attack_timer.is_stopped():
                 return
             self.attack_timer.start(self.attack_speed)
-            var to_player = player.position - self.position
+            var to_player = self.player.position - self.position
             var angle = to_player.angle()
             # Start motitoring weapon area
             self.weapon_area.visible = true
@@ -126,6 +127,8 @@ func take_damage(damage: int) -> void:
     self.health_label.text = "%d" % self.current_health
     
     if self.current_health <= 0:
+        if self.player:
+            self.player.gain_exp(self.on_death_exp)
         self.queue_free()
 
 func on_follow_area_body_entered(body: Node2D) -> void:
@@ -136,7 +139,7 @@ func on_follow_area_body_entered(body: Node2D) -> void:
 
 func on_follow_area_body_exited(body: Node2D) -> void:
     if body is Player:
-        self.player = null
+        # self.player = null
         self.current_state = State.Return
         self.is_persuing = false
 

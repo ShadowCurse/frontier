@@ -3,6 +3,8 @@ extends CharacterBody2D
 class_name Player
 
 signal update_health_signal
+signal update_level_signal
+signal update_exp_signal
 signal player_selected_signal(Player)
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
@@ -10,6 +12,12 @@ signal player_selected_signal(Player)
 
 @export var max_health: int = 100
 @export var current_health: int = 100
+
+@export var level_exp: int = 100
+@export var current_exp: int = 0
+@export var current_level: int = 1
+@export var exp_per_level_mul: float = 1.5
+
 @export var damage: int = 20
 @export var speed: float = 600.0
 
@@ -112,6 +120,15 @@ func set_state(state: PlayerController.State) -> void:
 func take_damage(damage: int) -> void:
     self.current_health -= damage
     self.update_health_signal.emit(self.current_health, self.max_health)
+
+func gain_exp(exp: int) -> void:
+    self.current_exp += exp
+    if self.level_exp <= self.current_exp:
+        self.current_level += 1
+        self.current_exp -= self.level_exp
+        self.level_exp = floor(float(self.level_exp) * self.exp_per_level_mul)
+        self.update_level_signal.emit(self.current_level)
+    self.update_exp_signal.emit(self.current_exp, self.level_exp)
 
 func on_animated_sprite_2d_animation_finished() -> void:
      match self.current_state:
