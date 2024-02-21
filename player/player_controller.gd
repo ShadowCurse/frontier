@@ -15,8 +15,8 @@ enum State {
 
 func _ready() -> void:
     self.controlled_player.update_health_signal.connect(on_character_update_health_signal)
-    self.controlled_player.update_level_signal.connect(on_character_update_level_signal)
     self.controlled_player.update_exp_signal.connect(on_character_update_exp_signal)
+    self.controlled_player.update_level_signal.connect(on_character_update_level_signal)
     self.controlled_player.is_selected = true
     self.player_ui.track_player(self.controlled_player)
 
@@ -39,17 +39,19 @@ func disable() -> void:
 
 func switch_player(node: Player) -> void:
     self.controlled_player.update_health_signal.disconnect(on_character_update_health_signal)
-    self.controlled_player.update_level_signal.disconnect(on_character_update_level_signal)
     self.controlled_player.update_exp_signal.disconnect(on_character_update_exp_signal)
+    self.controlled_player.update_level_signal.disconnect(on_character_update_level_signal)
     self.controlled_player.is_selected = false
 
     self.controlled_player = node
     self.controlled_player.is_selected = true
     self.controlled_player.update_health_signal.connect(on_character_update_health_signal)
-    self.controlled_player.update_level_signal.connect(on_character_update_level_signal)
     self.controlled_player.update_exp_signal.connect(on_character_update_exp_signal)
+    self.controlled_player.update_level_signal.connect(on_character_update_level_signal)
     self.player_ui.track_player(self.controlled_player)
     self.player_ui.update_health(self.controlled_player.current_health, self.controlled_player.max_health)
+    self.player_ui.update_exp(self.controlled_player.current_exp, self.controlled_player.level_exp)
+    self.player_ui.update_level(self.controlled_player.current_level)
 
 func on_character_update_health_signal(current_health: int, max_health: int) -> void:
     self.player_ui.update_health(current_health, max_health)
