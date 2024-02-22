@@ -17,8 +17,6 @@ class_name Enemy
 @export var attack_speed: float = 1.0
 @export var on_death_exp: int = 80
 
-var player: Player
-
 enum State {
     Disabled,
     Idle,
@@ -36,6 +34,10 @@ enum AttackDirection {
     Right
 }
 var attacking_direction: AttackDirection = AttackDirection.None
+
+var targets: Array[Node2D]
+var current_target: Node2D
+
 var last_facing_direction_left: bool = true
 var last_direction: Vector2 = Vector2.ZERO
 var original_position: Vector2 = Vector2.ZERO
@@ -68,11 +70,11 @@ func _process(delta: float) -> void:
         State.Idle:
             self.animated_sprite_2d.play("idle")
         State.Persuit:
-            if (self.position - self.player.position).length() < self.attack_range \
+            if (self.position - self.current_target.position).length() < self.attack_range \
                  and self.attack_timer.is_stopped():
                 self.current_state = State.Attack
                 return
-            self.navigation_agent_2d.set_target_position(self.player.position)
+            self.navigation_agent_2d.set_target_position(self.current_target.position)
             self.last_direction = (self.navigation_agent_2d.get_next_path_position() - self.position).normalized()
             if last_direction.x < 0.0:
                 self.animated_sprite_2d.flip_h = true
@@ -91,7 +93,7 @@ func _process(delta: float) -> void:
             if !self.attack_timer.is_stopped():
                 return
             self.attack_timer.start(self.attack_speed)
-            var to_player = self.player.position - self.position
+            var to_player = self.current_target.position - self.position
             var angle = to_player.angle()
             # Start motitoring weapon area
             self.weapon_area.visible = true
@@ -127,21 +129,31 @@ func take_damage(damage: int) -> void:
     self.health_label.text = "%d" % self.current_health
     
     if self.current_health <= 0:
-        if self.player:
-            self.player.gain_exp(self.on_death_exp)
+        if self.current_target is Player:
+            self.current_target.gain_exp(self.on_death_exp)
         self.queue_free()
 
 func on_follow_area_body_entered(body: Node2D) -> void:
-    if body is Player:
-        self.player = body
+    self.targets.append(body)
+    if self.current_target != null:
+        if body is Player:
+            if body.is_selected:
+                self.current_target = body
+    else:
+        self.current_target = body
         self.current_state = State.Persuit
         self.is_persuing = true
 
 func on_follow_area_body_exited(body: Node2D) -> void:
-    if body is Player:
-        # self.player = null
-        self.current_state = State.Return
-        self.is_persuing = false
+    var index = self.targets.find(body)
+    if index != -1:
+        self.targets.remove_at(index)
+
+    if self.current_target == body:
+        self.current_target = self.targets.front()
+        if not self.current_target:
+            self.current_state = State.Return
+            self.is_persuing = false
 
 func on_navigation_agent_2d_target_reached() -> void:
     self.current_state = State.Idle
