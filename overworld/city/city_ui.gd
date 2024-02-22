@@ -72,16 +72,16 @@ func set_wall_cost(cost: int) -> void:
 func set_character_hub_cost(cost: int) -> void:
     self.character_hub_button.text = "%d" % cost
 
-func update_population(new_population: int) -> void:
+func set_population(new_population: int) -> void:
     self.population_label.text = "%d" % new_population
     
-func update_gold(new_gold: int) -> void:
+func set_gold(new_gold: int) -> void:
     self.gold_label.text = "%d" % new_gold
     
-func update_food(new_food: int) -> void:
+func set_food(new_food: int) -> void:
     self.food_label.text = "%d" % new_food
     
-func update_wood(new_wood: int) -> void:
+func set_wood(new_wood: int) -> void:
     self.wood_label.text = "%d" % new_wood
 
 func on_build_mode_button_pressed() -> void:

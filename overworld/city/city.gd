@@ -22,6 +22,11 @@ signal player_exited
 @export var wall_scene: PackedScene
 @export var character_hub_scene: PackedScene
 
+@export var total_population: int = 0
+@export var total_gold: int = 10
+@export var total_food: int = 20
+@export var total_wood: int = 100
+
 @export var house_gold_cost: int = 50
 @export var gold_mine_wood_cost: int = 30
 @export var food_hut_wood_cost: int = 20
@@ -42,16 +47,16 @@ var food_huts: Array[FoodHut] = []
 var wood_cutters: Array[WoodCutter] = []
 var walls: Array[Wall] = []
 
-var total_population: int = 0
-var total_gold: int = 0
-var total_food: int = 0
-var total_wood: int = 0
-
 var under_cursor_object: Node2D = null
 var under_cursor_object_can_place: bool = false
 
 func _ready() -> void:
     # initial ci ui update
+    self.city_ui.set_population(self.total_population)
+    self.city_ui.set_gold(self.total_gold)
+    self.city_ui.set_food(self.total_food)
+    self.city_ui.set_wood(self.total_wood)
+
     self.city_ui.set_house_cost(self.house_gold_cost)
     self.city_ui.set_gold_mine_cost(self.gold_mine_wood_cost)
     self.city_ui.set_food_hut_cost(self.food_hut_wood_cost)
@@ -116,8 +121,11 @@ func on_city_ui_build_house_signal() -> void:
     if self.total_gold < self.house_gold_cost:
         return
 
-    self.city_ui.hide_modes()
     self.total_gold -= self.house_gold_cost
+
+    self.city_ui.hide_modes()
+    self.city_ui.set_gold(self.total_gold)
+
     var house: House = self.house_scene.instantiate()
     under_cursor_object = house
     house.population_update_signal.connect(on_population_incease_signal)
@@ -129,8 +137,11 @@ func on_city_ui_build_gold_mine_signal() -> void:
     if self.total_wood < self.gold_mine_wood_cost:
         return
 
-    self.city_ui.hide_modes()
     self.total_wood -= self.gold_mine_wood_cost
+
+    self.city_ui.hide_modes()
+    self.city_ui.set_wood(self.total_wood)
+
     var gold_mine: GoldMine = self.gold_mine_scene.instantiate()
     under_cursor_object = gold_mine
     gold_mine.gold_update_signal.connect(on_gold_update_signal)
@@ -139,11 +150,14 @@ func on_city_ui_build_gold_mine_signal() -> void:
     self.gold_mines.append(gold_mine)
     
 func on_city_ui_build_food_hut_signal() -> void:
-    if self.total_wood < self.gold_mine_wood_cost:
+    if self.total_wood < self.food_hut_wood_cost:
         return
 
-    self.city_ui.hide_modes()
     self.total_wood -= self.food_hut_wood_cost
+
+    self.city_ui.hide_modes()
+    self.city_ui.set_wood(self.total_wood)
+
     var food_hut: FoodHut = self.food_hut_scene.instantiate()
     under_cursor_object = food_hut
     food_hut.food_update_signal.connect(on_food_update_signal)
@@ -152,11 +166,14 @@ func on_city_ui_build_food_hut_signal() -> void:
     self.food_huts.append(food_hut)
     
 func on_city_ui_build_wood_cutter_signal() -> void:
-    if self.total_wood < self.gold_mine_wood_cost:
+    if self.total_wood < self.wood_cutter_wood_cost:
         return
 
-    self.city_ui.hide_modes()
     self.total_wood -= self.wood_cutter_wood_cost
+
+    self.city_ui.hide_modes()
+    self.city_ui.set_wood(self.total_wood)
+
     var wood_cutter: WoodCutter = self.wood_cutter_scene.instantiate()
     under_cursor_object = wood_cutter
     wood_cutter.wood_update_signal.connect(on_wood_update_signal)
@@ -165,11 +182,14 @@ func on_city_ui_build_wood_cutter_signal() -> void:
     self.wood_cutters.append(wood_cutter)
     
 func on_city_ui_build_wall_signal() -> void:
-    if self.total_wood < self.gold_mine_wood_cost:
+    if self.total_wood < self.wall_wood_cost:
         return
 
-    self.city_ui.hide_modes()
     self.total_wood -= self.wall_wood_cost
+
+    self.city_ui.hide_modes()
+    self.city_ui.set_wood(self.total_wood)
+
     var wall: Wall = self.wall_scene.instantiate()
     under_cursor_object = wall
 
@@ -180,8 +200,11 @@ func on_city_ui_build_character_hub_signal() -> void:
     if self.total_food < self.character_hub_food_cost:
         return
 
-    self.city_ui.hide_modes()
     self.total_food -= self.character_hub_food_cost
+
+    self.city_ui.hide_modes()
+    self.city_ui.set_food(self.total_food)
+
     var character_hub: CharacterHub = self.character_hub_scene.instantiate()
     character_hub.overworld = self.overworld
     under_cursor_object = character_hub
@@ -190,19 +213,19 @@ func on_city_ui_build_character_hub_signal() -> void:
 
 func on_population_incease_signal(population: int) -> void:
     self.total_population += population
-    self.city_ui.update_population(self.total_population)
+    self.city_ui.set_population(self.total_population)
 
 func on_gold_update_signal(gold: int) -> void:
     self.total_gold += gold
-    self.city_ui.update_gold(self.total_gold)
+    self.city_ui.set_gold(self.total_gold)
     
 func on_food_update_signal(food: int) -> void:
     self.total_food += food
-    self.city_ui.update_food(self.total_food)
+    self.city_ui.set_food(self.total_food)
     
 func on_wood_update_signal(wood: int) -> void:
     self.total_wood += wood
-    self.city_ui.update_wood(self.total_wood)
+    self.city_ui.set_wood(self.total_wood)
 
 func on_city_area_body_entered(body: Node2D) -> void:
     if body is Player and body.is_selected:
