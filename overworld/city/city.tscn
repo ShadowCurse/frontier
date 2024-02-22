@@ -28,6 +28,7 @@ character_hub_scene = ExtResource("8_ywhpg")
 z_index = -1
 
 [node name="city_area" type="Area2D" parent="."]
+collision_layer = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="city_area"]
 shape = SubResource("RectangleShape2D_d1odw")

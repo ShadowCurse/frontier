@@ -260,7 +260,7 @@ bg_color = Color(0.682353, 0, 0.227451, 1)
 
 [node name="enemy" type="CharacterBody2D"]
 collision_layer = 8
-collision_mask = 11
+collision_mask = 43
 script = ExtResource("1_msime")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -279,6 +279,7 @@ debug_enabled = true
 
 [node name="follow_area" type="Area2D" parent="."]
 collision_layer = 16
+collision_mask = 33
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="follow_area"]
 shape = SubResource("CircleShape2D_ct515")

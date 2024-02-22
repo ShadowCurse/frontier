@@ -45,7 +45,7 @@ var is_persuing: bool = false
 var damaged_this_attack: bool = false
 
 func _ready() -> void:
-    self.original_position = self.position
+    self.original_position = self.global_position
     self.health_bar.set_value_no_signal(1)
 
 func _physics_process(delta: float) -> void:
@@ -70,12 +70,12 @@ func _process(delta: float) -> void:
         State.Idle:
             self.animated_sprite_2d.play("idle")
         State.Persuit:
-            if (self.position - self.current_target.position).length() < self.attack_range \
+            if (self.global_position - self.current_target.global_position).length() < self.attack_range \
                  and self.attack_timer.is_stopped():
                 self.current_state = State.Attack
                 return
-            self.navigation_agent_2d.set_target_position(self.current_target.position)
-            self.last_direction = (self.navigation_agent_2d.get_next_path_position() - self.position).normalized()
+            self.navigation_agent_2d.set_target_position(self.current_target.global_position)
+            self.last_direction = (self.navigation_agent_2d.get_next_path_position() - self.global_position).normalized()
             if last_direction.x < 0.0:
                 self.animated_sprite_2d.flip_h = true
             else:
@@ -83,7 +83,7 @@ func _process(delta: float) -> void:
             self.animated_sprite_2d.play("run")
         State.Return:
             self.navigation_agent_2d.set_target_position(self.original_position)
-            self.last_direction = (self.navigation_agent_2d.get_next_path_position() - self.position).normalized()
+            self.last_direction = (self.navigation_agent_2d.get_next_path_position() - self.global_position).normalized()
             if last_direction.x < 0.0:
                 self.animated_sprite_2d.flip_h = true
             else:
@@ -93,7 +93,7 @@ func _process(delta: float) -> void:
             if !self.attack_timer.is_stopped():
                 return
             self.attack_timer.start(self.attack_speed)
-            var to_player = self.current_target.position - self.position
+            var to_player = self.current_target.global_position - self.global_position
             var angle = to_player.angle()
             # Start motitoring weapon area
             self.weapon_area.visible = true

@@ -46,7 +46,7 @@ position = Vector2(-2718, -953)
 
 [node name="enemy3" parent="tile_map" instance=ExtResource("4_72kh4")]
 z_index = 1
-position = Vector2(-2513, -1078)
+position = Vector2(-1474, 83)
 
 [node name="city" parent="tile_map" node_paths=PackedStringArray("overworld") instance=ExtResource("3_6tt3t")]
 z_index = 1
