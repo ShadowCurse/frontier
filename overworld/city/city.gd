@@ -22,6 +22,13 @@ signal player_exited
 @export var wall_scene: PackedScene
 @export var character_hub_scene: PackedScene
 
+@export var house_gold_cost: int = 50
+@export var gold_mine_wood_cost: int = 30
+@export var food_hut_wood_cost: int = 20
+@export var wood_cutter_wood_cost: int = 20
+@export var wall_wood_cost: int = 90
+@export var character_hub_food_cost: int = 50
+
 class GridTile:
     var node: Node2D
     var occupied: bool
@@ -44,6 +51,15 @@ var under_cursor_object: Node2D = null
 var under_cursor_object_can_place: bool = false
 
 func _ready() -> void:
+    # initial ci ui update
+    self.city_ui.set_house_cost(self.house_gold_cost)
+    self.city_ui.set_gold_mine_cost(self.gold_mine_wood_cost)
+    self.city_ui.set_food_hut_cost(self.food_hut_wood_cost)
+    self.city_ui.set_wood_cutter_cost(self.wood_cutter_wood_cost)
+    self.city_ui.set_wall_cost(self.wall_wood_cost)
+    self.city_ui.set_character_hub_cost(self.character_hub_food_cost)
+    
+    # generate cells
     var half_offset = self.tile_offset / 2.0
     var empty_delta = (self.grid_size - self.grid_clear_center_size) / 2.0
     var bottom_left_corner = self.position - Vector2(half_offset * (self.grid_size - 1), half_offset * (self.grid_size - 1))
@@ -97,6 +113,11 @@ func set_ui(enabled: bool) -> void:
     self.city_ui.visible = enabled
 
 func on_city_ui_build_house_signal() -> void:
+    if self.total_gold < self.house_gold_cost:
+        return
+
+    self.city_ui.hide_modes()
+    self.total_gold -= self.house_gold_cost
     var house: House = self.house_scene.instantiate()
     under_cursor_object = house
     house.population_update_signal.connect(on_population_incease_signal)
@@ -105,6 +126,11 @@ func on_city_ui_build_house_signal() -> void:
     self.houses.append(house)
     
 func on_city_ui_build_gold_mine_signal() -> void:
+    if self.total_wood < self.gold_mine_wood_cost:
+        return
+
+    self.city_ui.hide_modes()
+    self.total_wood -= self.gold_mine_wood_cost
     var gold_mine: GoldMine = self.gold_mine_scene.instantiate()
     under_cursor_object = gold_mine
     gold_mine.gold_update_signal.connect(on_gold_update_signal)
@@ -113,6 +139,11 @@ func on_city_ui_build_gold_mine_signal() -> void:
     self.gold_mines.append(gold_mine)
     
 func on_city_ui_build_food_hut_signal() -> void:
+    if self.total_wood < self.gold_mine_wood_cost:
+        return
+
+    self.city_ui.hide_modes()
+    self.total_wood -= self.food_hut_wood_cost
     var food_hut: FoodHut = self.food_hut_scene.instantiate()
     under_cursor_object = food_hut
     food_hut.food_update_signal.connect(on_food_update_signal)
@@ -121,6 +152,11 @@ func on_city_ui_build_food_hut_signal() -> void:
     self.food_huts.append(food_hut)
     
 func on_city_ui_build_wood_cutter_signal() -> void:
+    if self.total_wood < self.gold_mine_wood_cost:
+        return
+
+    self.city_ui.hide_modes()
+    self.total_wood -= self.wood_cutter_wood_cost
     var wood_cutter: WoodCutter = self.wood_cutter_scene.instantiate()
     under_cursor_object = wood_cutter
     wood_cutter.wood_update_signal.connect(on_wood_update_signal)
@@ -129,6 +165,11 @@ func on_city_ui_build_wood_cutter_signal() -> void:
     self.wood_cutters.append(wood_cutter)
     
 func on_city_ui_build_wall_signal() -> void:
+    if self.total_wood < self.gold_mine_wood_cost:
+        return
+
+    self.city_ui.hide_modes()
+    self.total_wood -= self.wall_wood_cost
     var wall: Wall = self.wall_scene.instantiate()
     under_cursor_object = wall
 
@@ -136,9 +177,15 @@ func on_city_ui_build_wall_signal() -> void:
     self.walls.append(wall)
 
 func on_city_ui_build_character_hub_signal() -> void:
+    if self.total_food < self.character_hub_food_cost:
+        return
+
+    self.city_ui.hide_modes()
+    self.total_food -= self.character_hub_food_cost
     var character_hub: CharacterHub = self.character_hub_scene.instantiate()
     character_hub.overworld = self.overworld
     under_cursor_object = character_hub
+
     self.call_deferred("add_child", character_hub)
 
 func on_population_incease_signal(population: int) -> void:

@@ -15,6 +15,12 @@ signal build_character_hub_signal
 @onready var gold_label: Label = $resources_panel/MarginContainer/HBoxContainer/gold_label
 @onready var food_label: Label = $resources_panel/MarginContainer/HBoxContainer/food_label
 @onready var wood_label: Label = $resources_panel/MarginContainer/HBoxContainer/wood_label
+@onready var house_button: Button = $build_panel/MarginContainer/ScrollContainer/Control/house/HBoxContainer/house_button
+@onready var gold_mine_button: Button = $build_panel/MarginContainer/ScrollContainer/Control/gold_mine/HBoxContainer/gold_mine_button
+@onready var food_hut_button: Button = $build_panel/MarginContainer/ScrollContainer/Control/food_hut/HBoxContainer/food_hut_button
+@onready var wood_cutter_button: Button = $build_panel/MarginContainer/ScrollContainer/Control/wood_cutter/HBoxContainer/wood_cutter_button
+@onready var wall_button: Button = $build_panel/MarginContainer/ScrollContainer/Control/wall/HBoxContainer/wall_button
+@onready var character_hub_button: Button = $build_panel/MarginContainer/ScrollContainer/Control/character_hub/HBoxContainer/character_hub_button
 
 func _ready() -> void:
     pass
@@ -31,28 +37,40 @@ func hide_modes() -> void:
     self.build_panel.visible = false
 
 func on_house_button_pressed() -> void:
-    self.hide_modes()
     self.build_house_signal.emit()
     
 func on_gold_mine_button_pressed() -> void:
-    self.hide_modes()
     self.build_gold_mine_signal.emit()
     
 func on_food_hut_button_pressed() -> void:
-    self.hide_modes()
     self.build_food_hut_signal.emit()
     
 func on_wood_cutter_button_pressed() -> void:
-    self.hide_modes()
     self.build_wood_cutter_signal.emit()
 
 func on_wall_button_pressed() -> void:
-    self.hide_modes()
     self.build_wall_signal.emit()
 
 func on_character_hub_button_pressed() -> void:
-    self.hide_modes()
     self.build_character_hub_signal.emit()
+
+func set_house_cost(cost: int) -> void:
+    self.house_button.text = "%d" % cost
+    
+func set_gold_mine_cost(cost: int) -> void:
+    self.gold_mine_button.text = "%d" % cost
+
+func set_food_hut_cost(cost: int) -> void:
+    self.food_hut_button.text = "%d" % cost
+    
+func set_wood_cutter_cost(cost: int) -> void:
+    self.wood_cutter_button.text = "%d" % cost
+
+func set_wall_cost(cost: int) -> void:
+    self.wall_button.text = "%d" % cost
+
+func set_character_hub_cost(cost: int) -> void:
+    self.character_hub_button.text = "%d" % cost
 
 func update_population(new_population: int) -> void:
     self.population_label.text = "%d" % new_population
