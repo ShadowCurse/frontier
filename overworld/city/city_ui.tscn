@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://crk7re7tacp13"]
+[gd_scene load_steps=25 format=3 uid="uid://crk7re7tacp13"]
 
 [ext_resource type="Script" path="res://overworld/city/city_ui.gd" id="1_rboli"]
 [ext_resource type="Texture2D" uid="uid://ctn2u4ghfq4cy" path="res://assets/TinySwords/Factions/Knights/Troops/Pawn/Blue/Pawn_Blue.png" id="2_uib28"]
@@ -28,17 +28,41 @@ region = Rect2(43, 57, 50, 43)
 atlas = ExtResource("5_xbxmw")
 region = Rect2(38, 72, 52, 28)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_whi4p"]
+atlas = ExtResource("3_36205")
+region = Rect2(46.3917, 48.1721, 44.7129, 52.0331)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3213i"]
+atlas = ExtResource("9_1ser1")
+region = Rect2(38.077, 70.0762, 50.0547, 31.853)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_oy0gg"]
 atlas = ExtResource("8_8hlsr")
 region = Rect2(39, 39, 51, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_138bo"]
+atlas = ExtResource("9_1ser1")
+region = Rect2(38.077, 70.0762, 50.0547, 31.853)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f537c"]
 atlas = ExtResource("9_1ser1")
 region = Rect2(39, 70, 51, 33)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_0l6uo"]
+atlas = ExtResource("9_1ser1")
+region = Rect2(38.077, 70.0762, 50.0547, 31.853)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x854l"]
+atlas = ExtResource("9_1ser1")
+region = Rect2(38.077, 70.0762, 50.0547, 31.853)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_i1qa3"]
 atlas = ExtResource("11_fcbpf")
 region = Rect2(0, 75, 128, 117)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o5xlh"]
+atlas = ExtResource("4_l6x8k")
+region = Rect2(39.4671, 56.8773, 54.0116, 39.5689)
 
 [node name="city_ui" type="Control"]
 layout_mode = 3
@@ -130,63 +154,176 @@ theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="GridContainer" type="GridContainer" parent="build_panel/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="build_panel/MarginContainer"]
 layout_mode = 2
-columns = 2
 
-[node name="house_button" type="Button" parent="build_panel/MarginContainer/GridContainer"]
+[node name="Control" type="VBoxContainer" parent="build_panel/MarginContainer/ScrollContainer"]
+custom_minimum_size = Vector2(100, 500)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="house" type="MarginContainer" parent="build_panel/MarginContainer/ScrollContainer/Control"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="build_panel/MarginContainer/ScrollContainer/Control/house"]
+layout_mode = 2
+
+[node name="house_icon" type="TextureRect" parent="build_panel/MarginContainer/ScrollContainer/Control/house/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("6_r25wx")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="house_button" type="Button" parent="build_panel/MarginContainer/ScrollContainer/Control/house/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 5
+theme_type_variation = &"ButtonBig"
+text = "50"
+icon = SubResource("AtlasTexture_whi4p")
+alignment = 0
+icon_alignment = 2
+
+[node name="gold_mine" type="MarginContainer" parent="build_panel/MarginContainer/ScrollContainer/Control"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="build_panel/MarginContainer/ScrollContainer/Control/gold_mine"]
+layout_mode = 2
+
+[node name="gold_mine_icon" type="TextureRect" parent="build_panel/MarginContainer/ScrollContainer/Control/gold_mine/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("7_gfd44")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="gold_mine_button" type="Button" parent="build_panel/MarginContainer/ScrollContainer/Control/gold_mine/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 7
 theme_type_variation = &"ButtonBig"
-icon = ExtResource("6_r25wx")
-icon_alignment = 1
-expand_icon = true
+text = "50"
+icon = SubResource("AtlasTexture_3213i")
+alignment = 0
+icon_alignment = 2
 
-[node name="gold_mine_button" type="Button" parent="build_panel/MarginContainer/GridContainer"]
+[node name="food_hut" type="MarginContainer" parent="build_panel/MarginContainer/ScrollContainer/Control"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="build_panel/MarginContainer/ScrollContainer/Control/food_hut"]
+layout_mode = 2
+
+[node name="food_hut_icon" type="TextureRect" parent="build_panel/MarginContainer/ScrollContainer/Control/food_hut/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = SubResource("AtlasTexture_oy0gg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="food_hut_button" type="Button" parent="build_panel/MarginContainer/ScrollContainer/Control/food_hut/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 7
 theme_type_variation = &"ButtonBig"
-icon = ExtResource("7_gfd44")
-icon_alignment = 1
-expand_icon = true
+text = "20"
+icon = SubResource("AtlasTexture_138bo")
+alignment = 0
+icon_alignment = 2
 
-[node name="food_hut_button" type="Button" parent="build_panel/MarginContainer/GridContainer"]
+[node name="wood_cutter" type="MarginContainer" parent="build_panel/MarginContainer/ScrollContainer/Control"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="build_panel/MarginContainer/ScrollContainer/Control/wood_cutter"]
+layout_mode = 2
+
+[node name="wood_cutter_icon" type="TextureRect" parent="build_panel/MarginContainer/ScrollContainer/Control/wood_cutter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = SubResource("AtlasTexture_f537c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="wood_cutter_button" type="Button" parent="build_panel/MarginContainer/ScrollContainer/Control/wood_cutter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 7
 theme_type_variation = &"ButtonBig"
-icon = SubResource("AtlasTexture_oy0gg")
-icon_alignment = 1
-expand_icon = true
+text = "10"
+icon = SubResource("AtlasTexture_0l6uo")
+alignment = 0
+icon_alignment = 2
 
-[node name="wood_cutter_button" type="Button" parent="build_panel/MarginContainer/GridContainer"]
+[node name="wall" type="MarginContainer" parent="build_panel/MarginContainer/ScrollContainer/Control"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="build_panel/MarginContainer/ScrollContainer/Control/wall"]
+layout_mode = 2
+
+[node name="wall_icon" type="TextureRect" parent="build_panel/MarginContainer/ScrollContainer/Control/wall/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("10_yfe3t")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="wall_button" type="Button" parent="build_panel/MarginContainer/ScrollContainer/Control/wall/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 7
 theme_type_variation = &"ButtonBig"
-icon = SubResource("AtlasTexture_f537c")
-icon_alignment = 1
-expand_icon = true
+text = "90"
+icon = SubResource("AtlasTexture_x854l")
+alignment = 0
+icon_alignment = 2
 
-[node name="wall_button" type="Button" parent="build_panel/MarginContainer/GridContainer"]
+[node name="character_hub" type="MarginContainer" parent="build_panel/MarginContainer/ScrollContainer/Control"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="build_panel/MarginContainer/ScrollContainer/Control/character_hub"]
+layout_mode = 2
+
+[node name="character_hub_icon" type="TextureRect" parent="build_panel/MarginContainer/ScrollContainer/Control/character_hub/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = SubResource("AtlasTexture_i1qa3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="character_hub_button" type="Button" parent="build_panel/MarginContainer/ScrollContainer/Control/character_hub/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 7
 theme_type_variation = &"ButtonBig"
-icon = ExtResource("10_yfe3t")
-icon_alignment = 1
-expand_icon = true
-
-[node name="character_hub_button" type="Button" parent="build_panel/MarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 7
-size_flags_vertical = 7
-theme_type_variation = &"ButtonBig"
-icon = SubResource("AtlasTexture_i1qa3")
-icon_alignment = 1
-expand_icon = true
+text = "50"
+icon = SubResource("AtlasTexture_o5xlh")
+alignment = 0
+icon_alignment = 2
 
 [node name="city_buttons" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -214,10 +351,10 @@ size_flags_vertical = 4
 theme_type_variation = &"ButtonMid"
 text = "Build Mode"
 
-[connection signal="pressed" from="build_panel/MarginContainer/GridContainer/house_button" to="." method="on_house_button_pressed"]
-[connection signal="pressed" from="build_panel/MarginContainer/GridContainer/gold_mine_button" to="." method="on_gold_mine_button_pressed"]
-[connection signal="pressed" from="build_panel/MarginContainer/GridContainer/food_hut_button" to="." method="on_food_hut_button_pressed"]
-[connection signal="pressed" from="build_panel/MarginContainer/GridContainer/wood_cutter_button" to="." method="on_wood_cutter_button_pressed"]
-[connection signal="pressed" from="build_panel/MarginContainer/GridContainer/wall_button" to="." method="on_wall_button_pressed"]
-[connection signal="pressed" from="build_panel/MarginContainer/GridContainer/character_hub_button" to="." method="on_character_hub_button_pressed"]
+[connection signal="pressed" from="build_panel/MarginContainer/ScrollContainer/Control/house/HBoxContainer/house_button" to="." method="on_house_button_pressed"]
+[connection signal="pressed" from="build_panel/MarginContainer/ScrollContainer/Control/gold_mine/HBoxContainer/gold_mine_button" to="." method="on_gold_mine_button_pressed"]
+[connection signal="pressed" from="build_panel/MarginContainer/ScrollContainer/Control/food_hut/HBoxContainer/food_hut_button" to="." method="on_food_hut_button_pressed"]
+[connection signal="pressed" from="build_panel/MarginContainer/ScrollContainer/Control/wood_cutter/HBoxContainer/wood_cutter_button" to="." method="on_wood_cutter_button_pressed"]
+[connection signal="pressed" from="build_panel/MarginContainer/ScrollContainer/Control/wall/HBoxContainer/wall_button" to="." method="on_wall_button_pressed"]
+[connection signal="pressed" from="build_panel/MarginContainer/ScrollContainer/Control/character_hub/HBoxContainer/character_hub_button" to="." method="on_character_hub_button_pressed"]
 [connection signal="pressed" from="city_buttons/MarginContainer/HBoxContainer/build_mode_button" to="." method="on_build_mode_button_pressed"]

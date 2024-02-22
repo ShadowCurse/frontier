@@ -24,7 +24,8 @@ func _process(_delta: float) -> void:
     
 func _unhandled_input(event: InputEvent) -> void:
     if event is InputEventMouseButton:
-        self.hide_modes()
+        if event.button_index != MOUSE_BUTTON_WHEEL_UP and event.button_index != MOUSE_BUTTON_WHEEL_DOWN:
+            self.hide_modes()
 
 func hide_modes() -> void:
     self.build_panel.visible = false
