@@ -42,7 +42,8 @@ var last_facing_direction_left: bool = true
 var last_direction: Vector2 = Vector2.ZERO
 var original_position: Vector2 = Vector2.ZERO
 var is_persuing: bool = false
-var damaged_this_attack: bool = false
+
+var objects_in_damage_area: Array[Node2D]
 
 func _ready() -> void:
     self.original_position = self.global_position
@@ -174,11 +175,20 @@ func on_animated_sprite_2d_animation_finished() -> void:
             else:
                 self.current_state = State.Idle
             self.attacking_direction = AttackDirection.None
+
+            # need to damage objects in the area
+            # before disabling weapon area
+            for body in self.objects_in_damage_area:
+                if body is Player:
+                    body.take_damage(self.damage)
+
             self.weapon_area.visible = false
             self.weapon_area.monitoring = false
-            self.damaged_this_attack = false
+
+func on_weapon_area_body_entered(body: Node2D) -> void:
+    self.objects_in_damage_area.append(body)
 
 func on_weapon_area_body_exited(body: Node2D) -> void:
-    if body is Player and !self.damaged_this_attack:
-        body.take_damage(self.damage)
-        self.damaged_this_attack = true
+    var index = self.objects_in_damage_area.find(body)
+    if index != -1:
+        self.objects_in_damage_area.remove_at(index)
