@@ -23,9 +23,9 @@ signal player_exited
 @export var character_hub_scene: PackedScene
 
 @export var total_population: int = 0
-@export var total_gold: int = 10
-@export var total_food: int = 20
-@export var total_wood: int = 100
+@export var total_gold: int = 1000
+@export var total_food: int = 2000
+@export var total_wood: int = 10000
 
 @export var house_gold_cost: int = 50
 @export var gold_mine_wood_cost: int = 30

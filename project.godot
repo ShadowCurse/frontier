@@ -76,3 +76,4 @@ game_select_building={
 2d_physics/layer_5="enemy_radius"
 2d_physics/layer_6="building"
 2d_physics/layer_7="city_area"
+2d_physics/layer_8="building_interaction"

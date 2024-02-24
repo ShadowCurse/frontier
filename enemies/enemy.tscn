@@ -288,6 +288,7 @@ debug_color = Color(0, 0.623529, 0.537255, 0.419608)
 [node name="weapon_area" type="Area2D" parent="."]
 visible = false
 collision_layer = 4
+collision_mask = 33
 input_pickable = false
 monitoring = false
 

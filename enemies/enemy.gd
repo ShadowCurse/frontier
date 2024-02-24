@@ -179,7 +179,7 @@ func on_animated_sprite_2d_animation_finished() -> void:
             # need to damage objects in the area
             # before disabling weapon area
             for body in self.objects_in_damage_area:
-                if body is Player:
+                if body.has_method("take_damage"):
                     body.take_damage(self.damage)
 
             self.weapon_area.visible = false

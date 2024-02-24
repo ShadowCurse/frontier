@@ -34,7 +34,7 @@ position = Vector2(-902, 49)
 
 [node name="player2" parent="tile_map" instance=ExtResource("4_nlfwv")]
 z_index = 1
-position = Vector2(-897, 279)
+position = Vector2(-892, 690)
 
 [node name="enemy" parent="tile_map" instance=ExtResource("4_72kh4")]
 z_index = 1
