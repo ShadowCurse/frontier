@@ -35,8 +35,10 @@ signal player_exited
 @export var character_hub_food_cost: int = 50
 
 class GridTile:
-    var node: Node2D
-    var occupied: bool
+    var tile_node: Node2D
+    # this magically becomes null  
+    # when bulding is destroyed and calls queue_free() 
+    var building_node: Node2D
 
 # map of Vector2 to GridTile
 var grid: Dictionary = {}
@@ -77,8 +79,8 @@ func _ready() -> void:
             var tile = self.tile_scene.instantiate()
             tile.position = bottom_left_corner + Vector2(x * self.tile_offset, y * self.tile_offset)
             var grid_tile = GridTile.new()
-            grid_tile.node = tile
-            grid_tile.occupied = false
+            grid_tile.tile_node = tile
+            grid_tile.building_node = null
             self.grid[tile.position] = grid_tile
             self.grid_root.call_deferred("add_child", tile)
 
@@ -99,7 +101,7 @@ func move_under_cursor_object(cursor_pos: Vector2):
         var tile = self.grid[grid_tile_position]
         if tile_left < cursor_pos.x && cursor_pos.x < tile_right \
           && tile_bottom < cursor_pos.y && cursor_pos.y < tile_top \
-          && tile.occupied == false:
+          && tile.building_node == null:
             self.under_cursor_object.position = grid_tile_position
             self.under_cursor_object_can_place = true
             return
@@ -111,7 +113,7 @@ func try_place_object() -> void:
     if self.under_cursor_object_can_place:
         var tile = self.grid.get(self.under_cursor_object.position)
         if tile:
-            tile.occupied = true
+            tile.building_node = self.under_cursor_object
             self.under_cursor_object = null
 
 func set_ui(enabled: bool) -> void:
