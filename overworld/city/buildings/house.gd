@@ -9,7 +9,7 @@ signal spawn_character_signal(PackedScene)
 @onready var health_bar: ProgressBar = $health_bar
 
 const building_gold_cost: int = 0
-const building_wood_cost: int = 0
+const building_wood_cost: int = 50
 const building_stone_cost: int = 0
 
 @export var knight_scene: PackedScene

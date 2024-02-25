@@ -8,7 +8,7 @@ signal selected(Node2D)
 
 const building_gold_cost: int = 0
 const building_wood_cost: int = 0
-const building_stone_cost: int = 0
+const building_stone_cost: int = 30
 
 @export var max_health: int = 100
 @export var current_health: int = 100

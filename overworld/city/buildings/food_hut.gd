@@ -10,7 +10,7 @@ signal food_update_signal(int)
 @onready var health_bar: ProgressBar = $health_bar
 
 const building_gold_cost: int = 0
-const building_wood_cost: int = 0
+const building_wood_cost: int = 20
 const building_stone_cost: int = 0
 
 @export var production_speed: float = 0.3

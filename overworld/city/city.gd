@@ -60,10 +60,10 @@ func _ready() -> void:
     self.city_ui.set_food(self.total_food)
 
     self.city_ui.set_house_cost(House.building_gold_cost, House.building_wood_cost, House.building_stone_cost)
-    self.city_ui.set_mine_cost(Mine.building_gold_cost, House.building_wood_cost, House.building_stone_cost)
-    self.city_ui.set_food_hut_cost(FoodHut.building_gold_cost, House.building_wood_cost, House.building_stone_cost)
-    self.city_ui.set_wood_cutter_cost(WoodCutter.building_gold_cost, House.building_wood_cost, House.building_stone_cost)
-    self.city_ui.set_wall_cost(Wall.building_gold_cost, House.building_wood_cost, House.building_stone_cost)
+    self.city_ui.set_mine_cost(Mine.building_gold_cost, Mine.building_wood_cost, Mine.building_stone_cost)
+    self.city_ui.set_food_hut_cost(FoodHut.building_gold_cost, FoodHut.building_wood_cost, FoodHut.building_stone_cost)
+    self.city_ui.set_wood_cutter_cost(WoodCutter.building_gold_cost, WoodCutter.building_wood_cost, WoodCutter.building_stone_cost)
+    self.city_ui.set_wall_cost(Wall.building_gold_cost, Wall.building_wood_cost, Wall.building_stone_cost)
     
     # generate cells
     var half_offset = self.tile_offset / 2.0
