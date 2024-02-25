@@ -464,6 +464,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_type_variation = &"ButtonMid"
+toggle_mode = true
 text = "Remove"
 
 [connection signal="pressed" from="build_panel/MarginContainer/ScrollContainer/Control/house/HBoxContainer/VBoxContainer/build_button" to="." method="on_house_button_pressed"]
@@ -472,4 +473,4 @@ text = "Remove"
 [connection signal="pressed" from="build_panel/MarginContainer/ScrollContainer/Control/wood_cutter/HBoxContainer/VBoxContainer/build_button" to="." method="on_wood_cutter_button_pressed"]
 [connection signal="pressed" from="build_panel/MarginContainer/ScrollContainer/Control/wall/HBoxContainer/VBoxContainer/build_button" to="." method="on_wall_button_pressed"]
 [connection signal="pressed" from="city_buttons/MarginContainer/HBoxContainer/build_mode_button" to="." method="on_build_mode_button_pressed"]
-[connection signal="pressed" from="city_buttons/MarginContainer/HBoxContainer/remove_mode_button" to="." method="on_build_mode_button_pressed"]
+[connection signal="toggled" from="city_buttons/MarginContainer/HBoxContainer/remove_mode_button" to="." method="on_remove_mode_button_toggled"]

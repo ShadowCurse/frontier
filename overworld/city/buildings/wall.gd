@@ -2,6 +2,8 @@ extends Node2D
 
 class_name Wall
 
+signal selected(Node2D)
+
 @onready var health_bar: ProgressBar = $health_bar
 
 const building_gold_cost: int = 0
@@ -24,3 +26,7 @@ func take_damage(damage: int) -> void:
     
     if self.current_health <= 0:
         self.queue_free()
+
+func on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+    if event.is_action("game_select_building"):
+        self.selected.emit(self)

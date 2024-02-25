@@ -2,6 +2,7 @@ extends Node2D
 
 class_name FoodHut
 
+signal selected(Node2D)
 signal food_update_signal(int)
 
 @onready var timer: Timer = $Timer
@@ -36,3 +37,7 @@ func take_damage(damage: int) -> void:
 
 func on_timer_timeout() -> void:
     self.food_update_signal.emit(1)
+
+func on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+    if event.is_action("game_select_building"):
+        self.selected.emit(self)

@@ -155,6 +155,7 @@ func on_city_ui_build_house_signal() -> void:
     self.city_ui.hide_modes()
 
     var house: House = self.house_scene.instantiate()
+    house.selected.connect(self.on_building_selected)
     house.spawn_character_signal.connect(self.on_spawn_character_signal)
     under_cursor_object = house
     self.grid_placement = GridPlacement.Building
@@ -172,6 +173,7 @@ func on_city_ui_build_mine_signal() -> void:
     self.city_ui.hide_modes()
 
     var mine: Mine = self.mine_scene.instantiate()
+    mine.selected.connect(self.on_building_selected)
     under_cursor_object = mine
     self.grid_placement = GridPlacement.Building
     mine.stone_update_signal.connect(on_stone_update_signal)
@@ -189,6 +191,7 @@ func on_city_ui_build_food_hut_signal() -> void:
     self.city_ui.hide_modes()
 
     var food_hut: FoodHut = self.food_hut_scene.instantiate()
+    food_hut.selected.connect(self.on_building_selected)
     under_cursor_object = food_hut
     self.grid_placement = GridPlacement.Building
     food_hut.food_update_signal.connect(on_food_update_signal)
@@ -206,6 +209,7 @@ func on_city_ui_build_wood_cutter_signal() -> void:
     self.city_ui.hide_modes()
 
     var wood_cutter: WoodCutter = self.wood_cutter_scene.instantiate()
+    wood_cutter.selected.connect(self.on_building_selected)
     under_cursor_object = wood_cutter
     self.grid_placement = GridPlacement.Building
     wood_cutter.wood_update_signal.connect(on_wood_update_signal)
@@ -223,11 +227,19 @@ func on_city_ui_build_wall_signal() -> void:
     self.city_ui.hide_modes()
 
     var wall: Wall = self.wall_scene.instantiate()
+    wall.selected.connect(self.on_building_selected)
     under_cursor_object = wall
     self.grid_placement = GridPlacement.Building
 
     self.call_deferred("add_child", wall)
     self.walls.append(wall)
+
+func on_building_selected(node: Node2D) -> void:
+    match self.city_ui.interaction_mode:
+        CityUi.InteractionMode.Build:
+            pass
+        CityUi.InteractionMode.Remove:
+            node.queue_free()
 
 func on_spawn_character_signal(scene: PackedScene) -> void:
     if self.total_gold < self.knight_gold_cost:

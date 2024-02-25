@@ -41,6 +41,14 @@ signal build_wall_signal
 @onready var wall_wood_cost: Label = $build_panel/MarginContainer/ScrollContainer/Control/wall/HBoxContainer/VBoxContainer/HBoxContainer/wood_cost
 @onready var wall_stone_cost: Label = $build_panel/MarginContainer/ScrollContainer/Control/wall/HBoxContainer/VBoxContainer/HBoxContainer/stone_cost
 
+@onready var remove_mode_button: Button = $city_buttons/MarginContainer/HBoxContainer/remove_mode_button
+
+enum InteractionMode {
+    Build,
+    Remove
+}
+var interaction_mode: InteractionMode = InteractionMode.Build
+
 func _ready() -> void:
     pass
 
@@ -109,3 +117,11 @@ func set_wood(new_wood: int) -> void:
 
 func on_build_mode_button_pressed() -> void:
     self.build_panel.visible = true
+    self.remove_mode_button.button_pressed = false
+    self.interaction_mode = InteractionMode.Build
+
+func on_remove_mode_button_toggled(toggled_on: bool) -> void:
+    if toggled_on:
+        self.interaction_mode = InteractionMode.Remove
+    else:
+        self.interaction_mode = InteractionMode.Build

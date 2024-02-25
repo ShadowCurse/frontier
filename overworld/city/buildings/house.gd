@@ -2,6 +2,7 @@ extends Node2D
 
 class_name House
 
+signal selected(Node2D)
 signal spawn_character_signal(PackedScene)
 
 @onready var ui: Control = $ui
@@ -36,3 +37,4 @@ func on_knight_button_pressed() -> void:
 func on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
     if event.is_action("game_select_building"):
         self.ui.visible = true
+        self.selected.emit(self)
