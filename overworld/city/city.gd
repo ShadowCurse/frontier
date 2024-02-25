@@ -20,7 +20,6 @@ signal player_exited
 @export var food_hut_scene: PackedScene
 @export var wood_cutter_scene: PackedScene
 @export var wall_scene: PackedScene
-@export var character_hub_scene: PackedScene
 
 @export var total_population: int = 0
 @export var total_gold: int = 1000
@@ -32,9 +31,8 @@ signal player_exited
 @export var food_hut_wood_cost: int = 20
 @export var wood_cutter_wood_cost: int = 20
 @export var wall_wood_cost: int = 90
-@export var character_hub_food_cost: int = 50
 
-@export var knight_gold_cost: int = CharacterHub.knight_gold_cost
+@export var knight_gold_cost: int = House.knight_gold_cost
 
 class GridTile:
     var tile_node: Node2D
@@ -71,7 +69,6 @@ func _ready() -> void:
     self.city_ui.set_food_hut_cost(self.food_hut_wood_cost)
     self.city_ui.set_wood_cutter_cost(self.wood_cutter_wood_cost)
     self.city_ui.set_wall_cost(self.wall_wood_cost)
-    self.city_ui.set_character_hub_cost(self.character_hub_food_cost)
     
     # generate cells
     var half_offset = self.tile_offset / 2.0
@@ -217,22 +214,6 @@ func on_city_ui_build_wall_signal() -> void:
 
     self.call_deferred("add_child", wall)
     self.walls.append(wall)
-
-func on_city_ui_build_character_hub_signal() -> void:
-    if self.total_food < self.character_hub_food_cost:
-        return
-
-    self.total_food -= self.character_hub_food_cost
-
-    self.city_ui.hide_modes()
-    self.city_ui.set_food(self.total_food)
-
-    var character_hub: CharacterHub = self.character_hub_scene.instantiate()
-    under_cursor_object = character_hub
-    self.grid_placement = GridPlacement.Building
-    character_hub.spawn_character_signal.connect(on_spawn_character_signal)
-
-    self.call_deferred("add_child", character_hub)
 
 func on_spawn_character_signal(scene: PackedScene) -> void:
     if self.total_gold < self.knight_gold_cost:

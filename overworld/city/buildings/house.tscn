@@ -1,43 +1,102 @@
-[gd_scene load_steps=5 format=3 uid="uid://ctthoyjnhwnp7"]
+[gd_scene load_steps=9 format=3 uid="uid://rrq63x5hqfh7"]
 
 [ext_resource type="Script" path="res://overworld/city/buildings/house.gd" id="1_28t5d"]
-[ext_resource type="Texture2D" uid="uid://b7qfr1sp7fbv5" path="res://assets/TinySwords/Factions/Knights/Buildings/House/House_Blue.png" id="1_nqcwd"]
+[ext_resource type="Texture2D" uid="uid://byjy6lrmb0l3e" path="res://assets/TinySwords/Factions/Knights/Troops/Warrior/Blue/Warrior_Blue.png" id="3_1dd26"]
+[ext_resource type="Texture2D" uid="uid://b7qfr1sp7fbv5" path="res://assets/TinySwords/Factions/Knights/Buildings/House/House_Blue.png" id="3_vqx0t"]
+[ext_resource type="Texture2D" uid="uid://cr8hup84bpppq" path="res://assets/TinySwords/Factions/Knights/Troops/Archer/Archer + Bow/Archer_Blue_(NoArms).png" id="4_str6s"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_67w08"]
-size = Vector2(98, 141)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1xd35"]
+size = Vector2(84, 120)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51nmg"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ga46a"]
+atlas = ExtResource("3_1dd26")
+region = Rect2(48.9999, 37.433, 101, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2pgir"]
+atlas = ExtResource("4_str6s")
+region = Rect2(50.9999, 43, 85, 106)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bixnt"]
 bg_color = Color(0.666667, 0, 0.278431, 1)
 
-[node name="house" type="StaticBody2D"]
+[node name="character_hub" type="StaticBody2D"]
 collision_layer = 32
 collision_mask = 25
+input_pickable = true
 script = ExtResource("1_28t5d")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_nqcwd")
+texture = ExtResource("3_vqx0t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 1.5)
-shape = SubResource("RectangleShape2D_67w08")
+position = Vector2(-1, 9)
+shape = SubResource("RectangleShape2D_1xd35")
 
-[node name="Timer" type="Timer" parent="."]
-one_shot = true
+[node name="ui" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = -145.0
+offset_top = -321.0
+offset_right = -145.0
+offset_bottom = -321.0
+
+[node name="PanelContainer" type="PanelContainer" parent="ui"]
+layout_mode = 0
+offset_right = 301.0
+offset_bottom = 266.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ui/PanelContainer"]
+layout_mode = 2
+
+[node name="knight" type="MarginContainer" parent="ui/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ui/PanelContainer/VBoxContainer/knight"]
+layout_mode = 2
+
+[node name="knight_texture" type="TextureRect" parent="ui/PanelContainer/VBoxContainer/knight/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_ga46a")
+
+[node name="knight_button" type="Button" parent="ui/PanelContainer/VBoxContainer/knight/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_type_variation = &"ButtonBig"
+text = "100 G"
+
+[node name="archer" type="MarginContainer" parent="ui/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ui/PanelContainer/VBoxContainer/archer"]
+layout_mode = 2
+
+[node name="archer_texture" type="TextureRect" parent="ui/PanelContainer/VBoxContainer/archer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_2pgir")
+
+[node name="archer_button" type="Button" parent="ui/PanelContainer/VBoxContainer/archer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_type_variation = &"ButtonBig"
+text = "200 G"
 
 [node name="health_bar" type="ProgressBar" parent="."]
 offset_left = -61.0
-offset_top = -133.0
+offset_top = -96.0
 offset_right = 62.0
-offset_bottom = -106.0
-theme_override_styles/fill = SubResource("StyleBoxFlat_51nmg")
+offset_bottom = -69.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_bixnt")
 max_value = 1.0
 value = 1.0
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
-offset_left = -28.0
-offset_top = -100.0
-offset_right = 34.0
-offset_bottom = -73.0
-max_value = 1.0
-
-[connection signal="timeout" from="Timer" to="." method="on_timer_timeout"]
+[connection signal="input_event" from="." to="." method="on_input_event"]
+[connection signal="pressed" from="ui/PanelContainer/VBoxContainer/knight/HBoxContainer/knight_button" to="." method="on_knight_button_pressed"]
