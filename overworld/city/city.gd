@@ -127,6 +127,11 @@ func try_place_object() -> void:
 func set_ui(enabled: bool) -> void:
     self.city_ui.visible = enabled
 
+func update_ui_resources() -> void:
+    self.city_ui.set_gold(self.total_gold)
+    self.city_ui.set_wood(self.total_wood)
+    self.city_ui.set_stone(self.total_stone)
+
 func try_deduce_cost(gold: int, wood: int, stone: int) -> bool:
     if self.total_gold < gold:
         return false
@@ -139,9 +144,7 @@ func try_deduce_cost(gold: int, wood: int, stone: int) -> bool:
     self.total_wood -= wood
     self.total_stone -= stone
 
-    self.city_ui.set_gold(self.total_gold)
-    self.city_ui.set_wood(self.total_wood)
-    self.city_ui.set_stone(self.total_stone)
+    self.update_ui_resources()
 
     return true
 
@@ -239,6 +242,10 @@ func on_building_selected(node: Node2D) -> void:
         CityUi.InteractionMode.Build:
             pass
         CityUi.InteractionMode.Remove:
+            self.total_gold += node.building_gold_cost
+            self.total_wood += node.building_wood_cost
+            self.total_stone += node.building_stone_cost
+            self.update_ui_resources()
             node.queue_free()
 
 func on_spawn_character_signal(scene: PackedScene) -> void:
