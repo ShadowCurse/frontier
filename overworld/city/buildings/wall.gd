@@ -4,6 +4,10 @@ class_name Wall
 
 @onready var health_bar: ProgressBar = $health_bar
 
+const building_gold_cost: int = 0
+const building_wood_cost: int = 0
+const building_stone_cost: int = 0
+
 @export var max_health: int = 100
 @export var current_health: int = 100
 

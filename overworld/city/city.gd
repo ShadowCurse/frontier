@@ -16,21 +16,15 @@ signal player_exited
 @export var grid_clear_center_size: int = 1
 
 @export var house_scene: PackedScene
-@export var gold_mine_scene: PackedScene
+@export var mine_scene: PackedScene
 @export var food_hut_scene: PackedScene
 @export var wood_cutter_scene: PackedScene
 @export var wall_scene: PackedScene
 
-@export var total_population: int = 0
 @export var total_gold: int = 1000
-@export var total_food: int = 2000
 @export var total_wood: int = 10000
-
-@export var house_gold_cost: int = 50
-@export var gold_mine_wood_cost: int = 30
-@export var food_hut_wood_cost: int = 20
-@export var wood_cutter_wood_cost: int = 20
-@export var wall_wood_cost: int = 90
+@export var total_stone: int = 10000
+@export var total_food: int = 2000
 
 @export var knight_gold_cost: int = House.knight_gold_cost
 
@@ -50,7 +44,7 @@ enum GridPlacement {
 var grid_placement: GridPlacement = GridPlacement.Building
 
 var houses: Array[House] = []
-var gold_mines: Array[GoldMine] = []
+var mines: Array[Mine] = []
 var food_huts: Array[FoodHut] = []
 var wood_cutters: Array[WoodCutter] = []
 var walls: Array[Wall] = []
@@ -61,14 +55,15 @@ var under_cursor_object_can_place: bool = false
 func _ready() -> void:
     # initial ci ui update
     self.city_ui.set_gold(self.total_gold)
-    self.city_ui.set_food(self.total_food)
     self.city_ui.set_wood(self.total_wood)
+    self.city_ui.set_stone(self.total_stone)
+    self.city_ui.set_food(self.total_food)
 
-    self.city_ui.set_house_cost(self.house_gold_cost)
-    self.city_ui.set_gold_mine_cost(self.gold_mine_wood_cost)
-    self.city_ui.set_food_hut_cost(self.food_hut_wood_cost)
-    self.city_ui.set_wood_cutter_cost(self.wood_cutter_wood_cost)
-    self.city_ui.set_wall_cost(self.wall_wood_cost)
+    self.city_ui.set_house_cost(House.building_gold_cost, House.building_wood_cost, House.building_stone_cost)
+    self.city_ui.set_mine_cost(Mine.building_gold_cost, House.building_wood_cost, House.building_stone_cost)
+    self.city_ui.set_food_hut_cost(FoodHut.building_gold_cost, House.building_wood_cost, House.building_stone_cost)
+    self.city_ui.set_wood_cutter_cost(WoodCutter.building_gold_cost, House.building_wood_cost, House.building_stone_cost)
+    self.city_ui.set_wall_cost(Wall.building_gold_cost, House.building_wood_cost, House.building_stone_cost)
     
     # generate cells
     var half_offset = self.tile_offset / 2.0
@@ -132,47 +127,66 @@ func try_place_object() -> void:
 func set_ui(enabled: bool) -> void:
     self.city_ui.visible = enabled
 
+func try_deduce_cost(gold: int, wood: int, stone: int) -> bool:
+    if self.total_gold < gold:
+        return false
+    if self.total_wood < wood:
+        return false
+    if self.total_stone < stone:
+        return false
+
+    self.total_gold -= gold
+    self.total_wood -= wood
+    self.total_stone -= stone
+
+    self.city_ui.set_gold(self.total_gold)
+    self.city_ui.set_wood(self.total_wood)
+    self.city_ui.set_stone(self.total_stone)
+
+    return true
+
 func on_city_ui_build_house_signal() -> void:
-    if self.total_gold < self.house_gold_cost:
+    if !self.try_deduce_cost(\
+      House.building_gold_cost,\
+      House.building_wood_cost,\
+      House.building_stone_cost):
         return
     
-    self.total_gold -= self.house_gold_cost
-
     self.city_ui.hide_modes()
-    self.city_ui.set_gold(self.total_gold)
 
     var house: House = self.house_scene.instantiate()
+    house.spawn_character_signal.connect(self.on_spawn_character_signal)
     under_cursor_object = house
     self.grid_placement = GridPlacement.Building
 
     self.call_deferred("add_child", house)
     self.houses.append(house)
     
-func on_city_ui_build_gold_mine_signal() -> void:
-    if self.total_wood < self.gold_mine_wood_cost:
+func on_city_ui_build_mine_signal() -> void:
+    if !self.try_deduce_cost(\
+      Mine.building_gold_cost,\
+      Mine.building_wood_cost,\
+      Mine.building_stone_cost):
         return
 
-    self.total_wood -= self.gold_mine_wood_cost
-
     self.city_ui.hide_modes()
-    self.city_ui.set_wood(self.total_wood)
 
-    var gold_mine: GoldMine = self.gold_mine_scene.instantiate()
-    under_cursor_object = gold_mine
+    var mine: Mine = self.mine_scene.instantiate()
+    under_cursor_object = mine
     self.grid_placement = GridPlacement.Building
-    gold_mine.gold_update_signal.connect(on_gold_update_signal)
+    mine.stone_update_signal.connect(on_stone_update_signal)
 
-    self.call_deferred("add_child", gold_mine)
-    self.gold_mines.append(gold_mine)
+    self.call_deferred("add_child", mine)
+    self.mines.append(mine)
     
 func on_city_ui_build_food_hut_signal() -> void:
-    if self.total_wood < self.food_hut_wood_cost:
+    if !self.try_deduce_cost(\
+      FoodHut.building_gold_cost,\
+      FoodHut.building_wood_cost,\
+      FoodHut.building_stone_cost):
         return
 
-    self.total_wood -= self.food_hut_wood_cost
-
     self.city_ui.hide_modes()
-    self.city_ui.set_wood(self.total_wood)
 
     var food_hut: FoodHut = self.food_hut_scene.instantiate()
     under_cursor_object = food_hut
@@ -183,13 +197,13 @@ func on_city_ui_build_food_hut_signal() -> void:
     self.food_huts.append(food_hut)
     
 func on_city_ui_build_wood_cutter_signal() -> void:
-    if self.total_wood < self.wood_cutter_wood_cost:
+    if !self.try_deduce_cost(\
+      WoodCutter.building_gold_cost,\
+      WoodCutter.building_wood_cost,\
+      WoodCutter.building_stone_cost):
         return
 
-    self.total_wood -= self.wood_cutter_wood_cost
-
     self.city_ui.hide_modes()
-    self.city_ui.set_wood(self.total_wood)
 
     var wood_cutter: WoodCutter = self.wood_cutter_scene.instantiate()
     under_cursor_object = wood_cutter
@@ -200,13 +214,13 @@ func on_city_ui_build_wood_cutter_signal() -> void:
     self.wood_cutters.append(wood_cutter)
     
 func on_city_ui_build_wall_signal() -> void:
-    if self.total_wood < self.wall_wood_cost:
+    if !self.try_deduce_cost(\
+      Wall.building_gold_cost,\
+      Wall.building_wood_cost,\
+      Wall.building_stone_cost):
         return
 
-    self.total_wood -= self.wall_wood_cost
-
     self.city_ui.hide_modes()
-    self.city_ui.set_wood(self.total_wood)
 
     var wall: Wall = self.wall_scene.instantiate()
     under_cursor_object = wall
@@ -231,9 +245,9 @@ func on_spawn_character_signal(scene: PackedScene) -> void:
     
     self.overworld.add_character(knight)
 
-func on_gold_update_signal(gold: int) -> void:
-    self.total_gold += gold
-    self.city_ui.set_gold(self.total_gold)
+func on_stone_update_signal(stone: int) -> void:
+    self.total_stone += stone
+    self.city_ui.set_stone(self.total_stone)
     
 func on_food_update_signal(food: int) -> void:
     self.total_food += food

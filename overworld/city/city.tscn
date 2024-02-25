@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://overworld/city/city.gd" id="1_a2vwd"]
 [ext_resource type="PackedScene" uid="uid://ba5oatb3jwohl" path="res://overworld/city/city_grid_tile.tscn" id="2_0nb4e"]
 [ext_resource type="PackedScene" uid="uid://rrq63x5hqfh7" path="res://overworld/city/buildings/house.tscn" id="3_a5xsj"]
-[ext_resource type="PackedScene" uid="uid://cnythimxbph1b" path="res://overworld/city/buildings/gold_mine.tscn" id="3_gf3vi"]
+[ext_resource type="PackedScene" uid="uid://cnythimxbph1b" path="res://overworld/city/buildings/mine.tscn" id="3_gf3vi"]
 [ext_resource type="PackedScene" uid="uid://b5so4pklxgnv" path="res://overworld/city/buildings/food_hut.tscn" id="4_2laik"]
 [ext_resource type="PackedScene" uid="uid://djyde0rq2d6i5" path="res://overworld/city/buildings/wood_cutter.tscn" id="5_noukh"]
 [ext_resource type="PackedScene" uid="uid://crk7re7tacp13" path="res://overworld/city/city_ui.tscn" id="7_1t71j"]
@@ -17,7 +17,7 @@ y_sort_enabled = true
 script = ExtResource("1_a2vwd")
 tile_scene = ExtResource("2_0nb4e")
 house_scene = ExtResource("3_a5xsj")
-gold_mine_scene = ExtResource("3_gf3vi")
+mine_scene = ExtResource("3_gf3vi")
 food_hut_scene = ExtResource("4_2laik")
 wood_cutter_scene = ExtResource("5_noukh")
 wall_scene = ExtResource("7_rike3")
@@ -38,9 +38,8 @@ visible = false
 
 [connection signal="body_entered" from="city_area" to="." method="on_city_area_body_entered"]
 [connection signal="body_exited" from="city_area" to="." method="on_city_area_body_exited"]
-[connection signal="build_character_hub_signal" from="CanvasLayer/city_ui" to="." method="on_city_ui_build_character_hub_signal"]
 [connection signal="build_food_hut_signal" from="CanvasLayer/city_ui" to="." method="on_city_ui_build_food_hut_signal"]
-[connection signal="build_gold_mine_signal" from="CanvasLayer/city_ui" to="." method="on_city_ui_build_gold_mine_signal"]
 [connection signal="build_house_signal" from="CanvasLayer/city_ui" to="." method="on_city_ui_build_house_signal"]
+[connection signal="build_mine_signal" from="CanvasLayer/city_ui" to="." method="on_city_ui_build_mine_signal"]
 [connection signal="build_wall_signal" from="CanvasLayer/city_ui" to="." method="on_city_ui_build_wall_signal"]
 [connection signal="build_wood_cutter_signal" from="CanvasLayer/city_ui" to="." method="on_city_ui_build_wood_cutter_signal"]

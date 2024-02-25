@@ -1,12 +1,16 @@
 extends Node2D
 
-class_name GoldMine
+class_name Mine
 
-signal gold_update_signal(int)
+signal stone_update_signal(int)
 
 @onready var timer: Timer = $Timer
 @onready var progress_bar: ProgressBar = $ProgressBar
 @onready var health_bar: ProgressBar = $health_bar
+
+const building_gold_cost: int = 0
+const building_wood_cost: int = 0
+const building_stone_cost: int = 0
 
 @export var production_speed: float = 0.3
 @export var max_health: int = 100
@@ -31,4 +35,4 @@ func take_damage(damage: int) -> void:
         self.queue_free()
 
 func on_timer_timeout() -> void:
-    self.gold_update_signal.emit(1)
+    self.stone_update_signal.emit(1)
