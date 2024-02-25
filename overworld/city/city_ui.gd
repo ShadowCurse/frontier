@@ -11,10 +11,11 @@ signal build_character_hub_signal
 
 @onready var build_panel: PanelContainer = $build_panel
 
-@onready var population_label: Label = $resources_panel/MarginContainer/HBoxContainer/population_label
 @onready var gold_label: Label = $resources_panel/MarginContainer/HBoxContainer/gold_label
 @onready var food_label: Label = $resources_panel/MarginContainer/HBoxContainer/food_label
+@onready var stone_label: Label = $resources_panel/MarginContainer/HBoxContainer/stone_label
 @onready var wood_label: Label = $resources_panel/MarginContainer/HBoxContainer/wood_label
+
 @onready var house_button: Button = $build_panel/MarginContainer/ScrollContainer/Control/house/HBoxContainer/house_button
 @onready var gold_mine_button: Button = $build_panel/MarginContainer/ScrollContainer/Control/gold_mine/HBoxContainer/gold_mine_button
 @onready var food_hut_button: Button = $build_panel/MarginContainer/ScrollContainer/Control/food_hut/HBoxContainer/food_hut_button
@@ -72,15 +73,15 @@ func set_wall_cost(cost: int) -> void:
 func set_character_hub_cost(cost: int) -> void:
     self.character_hub_button.text = "%d" % cost
 
-func set_population(new_population: int) -> void:
-    self.population_label.text = "%d" % new_population
-    
 func set_gold(new_gold: int) -> void:
     self.gold_label.text = "%d" % new_gold
     
 func set_food(new_food: int) -> void:
     self.food_label.text = "%d" % new_food
     
+func set_stone(new_stone: int) -> void:
+    self.stone_label.text = "%d" % new_stone 
+
 func set_wood(new_wood: int) -> void:
     self.wood_label.text = "%d" % new_wood
 

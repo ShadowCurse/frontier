@@ -1,8 +1,8 @@
-[gd_scene load_steps=25 format=3 uid="uid://crk7re7tacp13"]
+[gd_scene load_steps=24 format=3 uid="uid://crk7re7tacp13"]
 
 [ext_resource type="Script" path="res://overworld/city/city_ui.gd" id="1_rboli"]
-[ext_resource type="Texture2D" uid="uid://ctn2u4ghfq4cy" path="res://assets/TinySwords/Factions/Knights/Troops/Pawn/Blue/Pawn_Blue.png" id="2_uib28"]
 [ext_resource type="Texture2D" uid="uid://chtrguk37mbhg" path="res://assets/TinySwords/Resources/Resources/G_Idle.png" id="3_36205"]
+[ext_resource type="Texture2D" uid="uid://cl86yhw6xxdvb" path="res://assets/brick.png" id="4_8f7fi"]
 [ext_resource type="Texture2D" uid="uid://bwakooea0r0o0" path="res://assets/TinySwords/Resources/Resources/M_Idle.png" id="4_l6x8k"]
 [ext_resource type="Texture2D" uid="uid://cqqko1rxqiww0" path="res://assets/TinySwords/Resources/Resources/W_Idle_(NoShadow).png" id="5_xbxmw"]
 [ext_resource type="Texture2D" uid="uid://b7qfr1sp7fbv5" path="res://assets/TinySwords/Factions/Knights/Buildings/House/House_Blue.png" id="6_r25wx"]
@@ -11,10 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://d0ccfiowlx3yv" path="res://assets/TinySwords/Resources/Resources/W_Idle.png" id="9_1ser1"]
 [ext_resource type="Texture2D" uid="uid://duxdwvcux60s7" path="res://assets/wall.png" id="10_yfe3t"]
 [ext_resource type="Texture2D" uid="uid://xq3624dhl78n" path="res://assets/TinySwords/Factions/Knights/Buildings/House/House_Construction.png" id="11_fcbpf"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cfkpu"]
-atlas = ExtResource("2_uib28")
-region = Rect2(64, 69, 65, 58)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hc6tc"]
 atlas = ExtResource("3_36205")
@@ -96,17 +92,6 @@ theme_override_constants/margin_bottom = 10
 [node name="HBoxContainer" type="HBoxContainer" parent="resources_panel/MarginContainer"]
 layout_mode = 2
 
-[node name="population" type="TextureRect" parent="resources_panel/MarginContainer/HBoxContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_cfkpu")
-expand_mode = 3
-stretch_mode = 4
-
-[node name="population_label" type="Label" parent="resources_panel/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "0"
-
 [node name="gold" type="TextureRect" parent="resources_panel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_hc6tc")
@@ -126,6 +111,17 @@ stretch_mode = 4
 
 [node name="food_label" type="Label" parent="resources_panel/MarginContainer/HBoxContainer"]
 layout_mode = 2
+text = "0"
+
+[node name="stone" type="TextureRect" parent="resources_panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_8f7fi")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="stone_label" type="Label" parent="resources_panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
 text = "0"
 
 [node name="wood" type="TextureRect" parent="resources_panel/MarginContainer/HBoxContainer"]

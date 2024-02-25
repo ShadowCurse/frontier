@@ -62,7 +62,6 @@ var under_cursor_object_can_place: bool = false
 
 func _ready() -> void:
     # initial ci ui update
-    self.city_ui.set_population(self.total_population)
     self.city_ui.set_gold(self.total_gold)
     self.city_ui.set_food(self.total_food)
     self.city_ui.set_wood(self.total_wood)
@@ -148,7 +147,6 @@ func on_city_ui_build_house_signal() -> void:
     var house: House = self.house_scene.instantiate()
     under_cursor_object = house
     self.grid_placement = GridPlacement.Building
-    house.population_update_signal.connect(on_population_incease_signal)
 
     self.call_deferred("add_child", house)
     self.houses.append(house)
@@ -251,10 +249,6 @@ func on_spawn_character_signal(scene: PackedScene) -> void:
     self.grid_placement = GridPlacement.Character
     
     self.overworld.add_character(knight)
-
-func on_population_incease_signal(population: int) -> void:
-    self.total_population += population
-    self.city_ui.set_population(self.total_population)
 
 func on_gold_update_signal(gold: int) -> void:
     self.total_gold += gold
