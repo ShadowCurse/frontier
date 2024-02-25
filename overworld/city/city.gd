@@ -34,6 +34,8 @@ signal player_exited
 @export var wall_wood_cost: int = 90
 @export var character_hub_food_cost: int = 50
 
+@export var knight_gold_cost: int = CharacterHub.knight_gold_cost
+
 class GridTile:
     var tile_node: Node2D
     # this magically becomes null  
@@ -42,6 +44,12 @@ class GridTile:
 
 # map of Vector2 to GridTile
 var grid: Dictionary = {}
+
+enum GridPlacement {
+    Building,
+    Character,
+}
+var grid_placement: GridPlacement = GridPlacement.Building
 
 var houses: Array[House] = []
 var gold_mines: Array[GoldMine] = []
@@ -93,27 +101,36 @@ func _process(_delta: float) -> void:
             self.try_place_object()
 
 func move_under_cursor_object(cursor_pos: Vector2):
-    for grid_tile_position in self.grid:
-        var tile_left = grid_tile_position.x - self.tile_offset / 2.0
-        var tile_right = grid_tile_position.x + self.tile_offset / 2.0
-        var tile_top = grid_tile_position.y + self.tile_offset / 2.0
-        var tile_bottom = grid_tile_position.y - self.tile_offset / 2.0
-        var tile = self.grid[grid_tile_position]
-        if tile_left < cursor_pos.x && cursor_pos.x < tile_right \
-          && tile_bottom < cursor_pos.y && cursor_pos.y < tile_top \
-          && tile.building_node == null:
-            self.under_cursor_object.position = grid_tile_position
-            self.under_cursor_object_can_place = true
-            return
+    match self.grid_placement:
+        GridPlacement.Building:
+            for grid_tile_position in self.grid:
+                var tile_left = grid_tile_position.x - self.tile_offset / 2.0
+                var tile_right = grid_tile_position.x + self.tile_offset / 2.0
+                var tile_top = grid_tile_position.y + self.tile_offset / 2.0
+                var tile_bottom = grid_tile_position.y - self.tile_offset / 2.0
+                var tile = self.grid[grid_tile_position]
+                if tile_left < cursor_pos.x && cursor_pos.x < tile_right \
+                && tile_bottom < cursor_pos.y && cursor_pos.y < tile_top \
+                && tile.building_node == null:
+                    self.under_cursor_object.position = grid_tile_position
+                    self.under_cursor_object_can_place = true
+                    return
 
-    self.under_cursor_object_can_place = false
-    self.under_cursor_object.position = cursor_pos
+            self.under_cursor_object_can_place = false
+            self.under_cursor_object.position = cursor_pos
+        GridPlacement.Character:
+            self.overworld.activate_character(self.under_cursor_object)
+            self.under_cursor_object.position = cursor_pos
 
 func try_place_object() -> void:
-    if self.under_cursor_object_can_place:
-        var tile = self.grid.get(self.under_cursor_object.position)
-        if tile:
-            tile.building_node = self.under_cursor_object
+    match self.grid_placement:
+        GridPlacement.Building:
+            if self.under_cursor_object_can_place:
+                var tile = self.grid.get(self.under_cursor_object.position)
+                if tile:
+                    tile.building_node = self.under_cursor_object
+                    self.under_cursor_object = null
+        GridPlacement.Character:
             self.under_cursor_object = null
 
 func set_ui(enabled: bool) -> void:
@@ -122,7 +139,7 @@ func set_ui(enabled: bool) -> void:
 func on_city_ui_build_house_signal() -> void:
     if self.total_gold < self.house_gold_cost:
         return
-
+    
     self.total_gold -= self.house_gold_cost
 
     self.city_ui.hide_modes()
@@ -130,6 +147,7 @@ func on_city_ui_build_house_signal() -> void:
 
     var house: House = self.house_scene.instantiate()
     under_cursor_object = house
+    self.grid_placement = GridPlacement.Building
     house.population_update_signal.connect(on_population_incease_signal)
 
     self.call_deferred("add_child", house)
@@ -146,6 +164,7 @@ func on_city_ui_build_gold_mine_signal() -> void:
 
     var gold_mine: GoldMine = self.gold_mine_scene.instantiate()
     under_cursor_object = gold_mine
+    self.grid_placement = GridPlacement.Building
     gold_mine.gold_update_signal.connect(on_gold_update_signal)
 
     self.call_deferred("add_child", gold_mine)
@@ -162,6 +181,7 @@ func on_city_ui_build_food_hut_signal() -> void:
 
     var food_hut: FoodHut = self.food_hut_scene.instantiate()
     under_cursor_object = food_hut
+    self.grid_placement = GridPlacement.Building
     food_hut.food_update_signal.connect(on_food_update_signal)
 
     self.call_deferred("add_child", food_hut)
@@ -178,6 +198,7 @@ func on_city_ui_build_wood_cutter_signal() -> void:
 
     var wood_cutter: WoodCutter = self.wood_cutter_scene.instantiate()
     under_cursor_object = wood_cutter
+    self.grid_placement = GridPlacement.Building
     wood_cutter.wood_update_signal.connect(on_wood_update_signal)
 
     self.call_deferred("add_child", wood_cutter)
@@ -194,6 +215,7 @@ func on_city_ui_build_wall_signal() -> void:
 
     var wall: Wall = self.wall_scene.instantiate()
     under_cursor_object = wall
+    self.grid_placement = GridPlacement.Building
 
     self.call_deferred("add_child", wall)
     self.walls.append(wall)
@@ -208,10 +230,27 @@ func on_city_ui_build_character_hub_signal() -> void:
     self.city_ui.set_food(self.total_food)
 
     var character_hub: CharacterHub = self.character_hub_scene.instantiate()
-    character_hub.overworld = self.overworld
     under_cursor_object = character_hub
+    self.grid_placement = GridPlacement.Building
+    character_hub.spawn_character_signal.connect(on_spawn_character_signal)
 
     self.call_deferred("add_child", character_hub)
+
+func on_spawn_character_signal(scene: PackedScene) -> void:
+    if self.total_gold < self.knight_gold_cost:
+        return
+
+    self.total_gold -= self.knight_gold_cost
+
+    self.city_ui.hide_modes()
+    self.city_ui.set_gold(self.total_gold)
+    
+    var knight: Player = scene.instantiate()
+    
+    under_cursor_object = knight
+    self.grid_placement = GridPlacement.Character
+    
+    self.overworld.add_character(knight)
 
 func on_population_incease_signal(population: int) -> void:
     self.total_population += population

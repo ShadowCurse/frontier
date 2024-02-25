@@ -346,10 +346,17 @@ layout_mode = 2
 
 [node name="build_mode_button" type="Button" parent="city_buttons/MarginContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_type_variation = &"ButtonMid"
-text = "Build Mode"
+text = "Build"
+
+[node name="remove_mode_button" type="Button" parent="city_buttons/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_type_variation = &"ButtonMid"
+text = "Remove"
 
 [connection signal="pressed" from="build_panel/MarginContainer/ScrollContainer/Control/house/HBoxContainer/house_button" to="." method="on_house_button_pressed"]
 [connection signal="pressed" from="build_panel/MarginContainer/ScrollContainer/Control/gold_mine/HBoxContainer/gold_mine_button" to="." method="on_gold_mine_button_pressed"]
@@ -358,3 +365,4 @@ text = "Build Mode"
 [connection signal="pressed" from="build_panel/MarginContainer/ScrollContainer/Control/wall/HBoxContainer/wall_button" to="." method="on_wall_button_pressed"]
 [connection signal="pressed" from="build_panel/MarginContainer/ScrollContainer/Control/character_hub/HBoxContainer/character_hub_button" to="." method="on_character_hub_button_pressed"]
 [connection signal="pressed" from="city_buttons/MarginContainer/HBoxContainer/build_mode_button" to="." method="on_build_mode_button_pressed"]
+[connection signal="pressed" from="city_buttons/MarginContainer/HBoxContainer/remove_mode_button" to="." method="on_build_mode_button_pressed"]

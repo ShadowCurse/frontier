@@ -51,6 +51,20 @@ position = Vector2(-1474, 83)
 [node name="city" parent="tile_map" node_paths=PackedStringArray("overworld") instance=ExtResource("3_6tt3t")]
 z_index = 1
 overworld = NodePath("../..")
+tile_offset = null
+grid_size = null
+grid_clear_center_size = null
+total_population = null
+total_gold = null
+total_food = null
+total_wood = null
+house_gold_cost = null
+gold_mine_wood_cost = null
+food_hut_wood_cost = null
+wood_cutter_wood_cost = null
+wall_wood_cost = null
+character_hub_food_cost = null
+knight_gold_cost = null
 
 [node name="game_camera" type="Camera2D" parent="."]
 zoom = Vector2(0.8, 0.8)
