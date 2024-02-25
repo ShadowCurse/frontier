@@ -26,8 +26,6 @@ signal player_exited
 @export var total_stone: int = 10000
 @export var total_food: int = 2000
 
-@export var knight_gold_cost: int = House.knight_gold_cost
-
 class GridTile:
     var tile_node: Node2D
     # this magically becomes null  
@@ -248,21 +246,11 @@ func on_building_selected(node: Node2D) -> void:
             self.update_ui_resources()
             node.queue_free()
 
-func on_spawn_character_signal(scene: PackedScene) -> void:
-    if self.total_gold < self.knight_gold_cost:
-        return
-
-    self.total_gold -= self.knight_gold_cost
-
-    self.city_ui.hide_modes()
-    self.city_ui.set_gold(self.total_gold)
-    
-    var knight: Player = scene.instantiate()
-    
-    under_cursor_object = knight
+func on_spawn_character_signal(character: Node2D) -> void:
+    under_cursor_object = character
     self.grid_placement = GridPlacement.Character
     
-    self.overworld.add_character(knight)
+    self.overworld.add_character(character)
 
 func on_stone_update_signal(stone: int) -> void:
     self.total_stone += stone

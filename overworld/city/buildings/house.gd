@@ -3,7 +3,7 @@ extends Node2D
 class_name House
 
 signal selected(Node2D)
-signal spawn_character_signal(PackedScene)
+signal spawn_character_signal(Node2D)
 
 @onready var ui: Control = $ui
 @onready var health_bar: ProgressBar = $health_bar
@@ -13,10 +13,10 @@ const building_wood_cost: int = 50
 const building_stone_cost: int = 0
 
 @export var knight_scene: PackedScene
-const knight_gold_cost: int = 100
 
 @export var max_health: int = 100
 @export var current_health: int = 100
+var spawned_character: Node2D = null
 
 func _unhandled_input(event: InputEvent) -> void:
     if event is InputEventMouseButton:
@@ -32,9 +32,11 @@ func take_damage(damage: int) -> void:
 
 func on_knight_button_pressed() -> void:
     self.ui.visible = false
-    self.spawn_character_signal.emit(self.knight_scene)
+    var knight = self.knight_scene.instantiate()
+    self.spawned_character = knight
+    self.spawn_character_signal.emit(knight)
 
 func on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-    if event.is_action("game_select_building"):
+    if event.is_action("game_select_building") && self.spawned_character == null:
         self.ui.visible = true
         self.selected.emit(self)
