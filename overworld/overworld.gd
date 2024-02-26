@@ -43,6 +43,7 @@ func _process(delta: float) -> void:
 
 func add_character(character: Player) -> void:
     self.call_deferred("add_child", character)
+    self.player_controller.add_player(character)
 
 func activate_character(character: Player) -> void:
     character.player_selected_signal.connect(self.on_player_player_selected_signal)

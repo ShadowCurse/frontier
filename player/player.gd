@@ -6,12 +6,13 @@ signal update_health_signal
 signal update_level_signal
 signal update_exp_signal
 signal player_selected_signal(Player)
+signal dead_signal(Player)
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var weapon_area: Area2D = $weapon_area
 
 @export var max_health: int = 100
-@export var current_health: int = 100
+@export var current_health: int = 10
 
 @export var level_exp: int = 100
 @export var current_exp: int = 0
@@ -123,6 +124,8 @@ func set_state(state: PlayerController.State) -> void:
 func take_damage(damage: int) -> void:
     self.current_health -= damage
     self.update_health_signal.emit(self.current_health, self.max_health)
+    if self.current_health <= 0:
+        self.dead_signal.emit(self)
 
 func gain_exp(exp: int) -> void:
     self.current_exp += exp
