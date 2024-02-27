@@ -4,7 +4,7 @@ extends Node2D
 @onready var tile_map: TileMap = $TileMap
 @onready var player_icon: Sprite2D = $TileMap/player_icon
 
-var player: Player
+var tracked_character: Character
 
 func _ready() -> void:
     for cell_coord in game_map.get_used_cells(2):
@@ -13,4 +13,4 @@ func _ready() -> void:
         self.tile_map.set_cell(0, cell_coord, source_id, atlas_coords)
 
 func _process(_delta: float) -> void:
-    self.player_icon.position = player.position
+    self.player_icon.position = tracked_character.position

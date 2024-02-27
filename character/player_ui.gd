@@ -18,8 +18,8 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
     pass
 
-func track_player(player: Player) -> void:
-    self.ui_minimap.player = player
+func track_character(character: Character) -> void:
+    self.ui_minimap.tracked_character = character
 
 func show_notification(text: String) -> void:
     self.notification_panel.visible = true

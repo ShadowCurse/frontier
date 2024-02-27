@@ -4,14 +4,14 @@
 [ext_resource type="Script" path="res://overworld/overworld.gd" id="1_3dmib"]
 [ext_resource type="PackedScene" uid="uid://becobpr455lln" path="res://overworld/city/city.tscn" id="3_6tt3t"]
 [ext_resource type="PackedScene" uid="uid://b8unxc5ktifq0" path="res://enemies/enemy.tscn" id="4_72kh4"]
-[ext_resource type="PackedScene" uid="uid://cd8tkx0y8ylm6" path="res://player/player.tscn" id="4_nlfwv"]
-[ext_resource type="PackedScene" uid="uid://ca18rb5qdu04r" path="res://player/player_controller.tscn" id="7_7kj2u"]
+[ext_resource type="PackedScene" uid="uid://cd8tkx0y8ylm6" path="res://character/character.tscn" id="4_nlfwv"]
+[ext_resource type="PackedScene" uid="uid://ca18rb5qdu04r" path="res://character/player_controller.tscn" id="7_7kj2u"]
 
-[node name="overworld" type="Node2D"]
+[node name="overworld" type="Node2D" node_paths=PackedStringArray("starting_character")]
 script = ExtResource("1_3dmib")
+starting_character = NodePath("tile_map/player")
 
-[node name="player_controller" parent="." node_paths=PackedStringArray("controlled_player") instance=ExtResource("7_7kj2u")]
-controlled_player = NodePath("../tile_map/player")
+[node name="player_controller" parent="." instance=ExtResource("7_7kj2u")]
 
 [node name="tile_map" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -54,24 +54,14 @@ overworld = NodePath("../..")
 tile_offset = null
 grid_size = null
 grid_clear_center_size = null
-total_population = null
 total_gold = null
-total_food = null
 total_wood = null
-house_gold_cost = null
-gold_mine_wood_cost = null
-food_hut_wood_cost = null
-wood_cutter_wood_cost = null
-wall_wood_cost = null
-character_hub_food_cost = null
-knight_gold_cost = null
+total_food = null
 
 [node name="game_camera" type="Camera2D" parent="."]
 zoom = Vector2(0.8, 0.8)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 
-[connection signal="player_selected_signal" from="tile_map/player" to="." method="on_player_player_selected_signal"]
-[connection signal="player_selected_signal" from="tile_map/player2" to="." method="on_player_player_selected_signal"]
 [connection signal="player_entered" from="tile_map/city" to="." method="on_player_city_player_entered"]
 [connection signal="player_exited" from="tile_map/city" to="." method="on_player_city_player_exited"]

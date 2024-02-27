@@ -6,6 +6,8 @@ class_name Overworld
 @onready var city: City = $tile_map/city
 @onready var game_camera: Camera2D = $game_camera
 
+@export var starting_character: Character
+
 @export var camera_city_zoom: float = 0.3
 @export var camera_player_zoom: float = 0.8
 @export_range(0, 10) var camera_smooth_weight: float = 0.1
@@ -16,10 +18,11 @@ var player_camera_weight: float = 0.0
 const player_camera_weight_max: float = 1.0
 
 func _ready() -> void:
-    pass
+    self.player_controller.add_character(self.starting_character)
+    self.player_controller.select_character(self.starting_character)
 
 func _process(delta: float) -> void:
-    var player = self.player_controller.controlled_player
+    var player = self.player_controller.controlled_character
     if player.in_city:
         var camera_position = lerp(self.game_camera.global_position, self.city.global_position, self.camera_smooth_weight)
         var camera_zoom = lerp(self.game_camera.zoom, Vector2(self.camera_city_zoom, self.camera_city_zoom), self.camera_smooth_weight)
@@ -41,12 +44,12 @@ func _process(delta: float) -> void:
         else:
             self.game_camera.global_position = player.global_position
 
-func add_character(character: Player) -> void:
+func add_character(character: Character) -> void:
     self.call_deferred("add_child", character)
-    self.player_controller.add_player(character)
 
-func activate_character(character: Player) -> void:
-    character.player_selected_signal.connect(self.on_player_player_selected_signal)
+func activate_character(character: Character) -> void:
+    character.character_selected_signal.connect(self.on_character_selected_signal)
+    self.player_controller.add_character(character)
 
 func world_enter() -> void:
     self.visible = true
@@ -57,11 +60,10 @@ func world_leave() -> void:
     self.visible = false
 
 func on_player_city_player_entered() -> void:
-    self.player_controller.controlled_player.in_city = true
+    self.player_controller.controlled_character.in_city = true
 
 func on_player_city_player_exited() -> void:
-    self.player_controller.controlled_player.in_city = false
+    self.player_controller.controlled_character.in_city = false
 
-func on_player_player_selected_signal(player: Player) -> void:
-    self.player_controller.switch_player(player)
-    self.city.set_ui(player.in_city)
+func on_character_selected_signal(character: Character) -> void:
+    self.city.set_ui(character.in_city)

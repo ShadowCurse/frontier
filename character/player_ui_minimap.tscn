@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cdgjn1vonodr1"]
 
-[ext_resource type="Script" path="res://player/player_ui_minimap.gd" id="1_gu0oq"]
+[ext_resource type="Script" path="res://character/player_ui_minimap.gd" id="1_gu0oq"]
 [ext_resource type="TileSet" uid="uid://dkenr8x2wcr0g" path="res://assets/environment_tile_set.tres" id="2_0sf8k"]
 [ext_resource type="Texture2D" uid="uid://byjy6lrmb0l3e" path="res://assets/TinySwords/Factions/Knights/Troops/Warrior/Blue/Warrior_Blue.png" id="3_0jvwi"]
 

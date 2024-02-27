@@ -257,19 +257,19 @@ func on_stone_update_signal(stone: int) -> void:
     self.city_ui.set_stone(self.total_stone)
     
 func on_food_update_signal(food: int) -> void:
-    self.total_food += food
+    self.total_Character= food
     self.city_ui.set_food(self.total_food)
     
 func on_wood_update_signal(wood: int) -> void:
     self.total_wood += wood
-    self.city_ui.set_wood(self.total_wood)
+    self.city_u.set_wood(self.total_wood)
 
 func on_city_area_body_entered(body: Node2D) -> void:
-    if body is Player and body.is_selected:
+    if body is Character and body.is_selected:
         self.city_ui.visible = true
         self.player_entered.emit()
 
 func on_city_area_body_exited(body: Node2D) -> void:
-    if body is Player and body.is_selected:
+    if body is Character and body.is_selected:
         self.city_ui.visible = false
         self.player_exited.emit()

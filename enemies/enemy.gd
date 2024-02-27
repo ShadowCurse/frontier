@@ -130,14 +130,14 @@ func take_damage(damage: int) -> void:
     self.health_label.text = "%d" % self.current_health
     
     if self.current_health <= 0:
-        if self.current_target is Player:
+        if self.current_target is Character:
             self.current_target.gain_exp(self.on_death_exp)
         self.queue_free()
 
 func on_follow_area_body_entered(body: Node2D) -> void:
     self.targets.append(body)
     if self.current_target != null:
-        if body is Player:
+        if body is Character:
             if body.is_selected:
                 self.current_target = body
     else:

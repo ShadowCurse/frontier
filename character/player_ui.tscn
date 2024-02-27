@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://d36etgjaa1fvo"]
 
-[ext_resource type="Script" path="res://player/player_ui.gd" id="1_ky2jm"]
-[ext_resource type="PackedScene" uid="uid://cdgjn1vonodr1" path="res://player/player_ui_minimap.tscn" id="2_l5bns"]
+[ext_resource type="Script" path="res://character/player_ui.gd" id="1_ky2jm"]
+[ext_resource type="PackedScene" uid="uid://cdgjn1vonodr1" path="res://character/player_ui_minimap.tscn" id="2_l5bns"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_x51in"]
 viewport_path = NodePath("top_right/VBoxContainer/map/MarginContainer/SubViewportContainer/SubViewport")

@@ -1,18 +1,18 @@
 extends CharacterBody2D
 
-class_name Player
+class_name Character
 
 signal update_health_signal
 signal update_level_signal
 signal update_exp_signal
-signal player_selected_signal(Player)
-signal dead_signal(Player)
+signal character_selected_signal(Character)
+signal dead_signal(Character)
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var weapon_area: Area2D = $weapon_area
 
 @export var max_health: int = 100
-@export var current_health: int = 10
+@export var current_health: int = 100
 
 @export var level_exp: int = 100
 @export var current_exp: int = 0
@@ -156,4 +156,4 @@ func on_weapon_area_body_entered(body: Node2D) -> void:
 
 func on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
     if event.is_action_pressed("game_attack"):
-        self.player_selected_signal.emit(self)
+        self.character_selected_signal.emit(self)
