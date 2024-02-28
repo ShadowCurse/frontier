@@ -40,19 +40,15 @@ total_wood = null
 total_food = null
 
 [node name="enemy" parent="." instance=ExtResource("4_72kh4")]
-z_index = 1
 position = Vector2(-2675, -1159)
 
 [node name="enemy2" parent="." instance=ExtResource("4_72kh4")]
-z_index = 1
 position = Vector2(-2718, -953)
 
 [node name="enemy3" parent="." instance=ExtResource("4_72kh4")]
-z_index = 1
 position = Vector2(-1474, 83)
 
 [node name="player" parent="." instance=ExtResource("4_nlfwv")]
-z_index = 1
 position = Vector2(-906, -5)
 
 [node name="game_camera" type="Camera2D" parent="."]

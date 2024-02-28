@@ -259,6 +259,7 @@ radius = 472.424
 bg_color = Color(0.682353, 0, 0.227451, 1)
 
 [node name="enemy" type="CharacterBody2D"]
+z_index = 1
 collision_layer = 8
 collision_mask = 43
 script = ExtResource("1_msime")
