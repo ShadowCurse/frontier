@@ -3,7 +3,7 @@ extends Node2D
 class_name Overworld
 
 @onready var player_controller: PlayerController = $player_controller
-@onready var city: City = $tile_map/city
+@onready var city: City = $city
 @onready var game_camera: Camera2D = $game_camera
 
 @export var starting_character: Character
