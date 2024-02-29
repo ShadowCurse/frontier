@@ -279,6 +279,7 @@ avoidance_enabled = true
 debug_enabled = true
 
 [node name="follow_area" type="Area2D" parent="."]
+visible = false
 collision_layer = 16
 collision_mask = 33
 

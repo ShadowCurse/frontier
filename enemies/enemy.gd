@@ -9,6 +9,7 @@ class_name Enemy
 @onready var health_bar: ProgressBar = $health_ui/health_bar
 @onready var health_label: Label = $health_ui/health_label
 
+@export var default_target: Node2D
 @export var max_health: int = 100
 @export var current_health: int = 100
 @export var damage: int = 10
@@ -48,6 +49,10 @@ var objects_in_damage_area: Array[Node2D]
 func _ready() -> void:
     self.original_position = self.global_position
     self.health_bar.set_value_no_signal(1)
+    if self.default_target:
+        self.current_target = self.default_target
+        self.current_state = State.Persuit
+        self.is_persuing = true
 
 func _physics_process(delta: float) -> void:
     match self.current_state:
@@ -137,9 +142,8 @@ func take_damage(damage: int) -> void:
 func on_follow_area_body_entered(body: Node2D) -> void:
     self.targets.append(body)
     if self.current_target != null:
-        if body is Character:
-            if body.is_selected:
-                self.current_target = body
+        if body.position - self.position < self.current_target.position - self.position:
+            self.current_target = body
     else:
         self.current_target = body
         self.current_state = State.Persuit
@@ -153,8 +157,11 @@ func on_follow_area_body_exited(body: Node2D) -> void:
     if self.current_target == body:
         self.current_target = self.targets.front()
         if not self.current_target:
-            self.current_state = State.Return
-            self.is_persuing = false
+            if self.default_target == null:
+                self.current_state = State.Return
+                self.is_persuing = false
+            else:
+                self.current_target = self.default_target
 
 func on_navigation_agent_2d_target_reached() -> void:
     self.current_state = State.Idle

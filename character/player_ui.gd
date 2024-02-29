@@ -11,12 +11,21 @@ class_name PlayerUi
 @onready var exp_bar: ProgressBar = $left/VBoxContainer/experience/MarginContainer/HBoxContainer/MarginContainer/exp_bar
 @onready var exp_label: Label = $left/VBoxContainer/experience/MarginContainer/HBoxContainer/MarginContainer/exp_label
 @onready var ui_minimap: Node2D = $top_right/VBoxContainer/map/MarginContainer/SubViewportContainer/SubViewport/ui_minimap
+@onready var next_wave_time: Label = $top_right/VBoxContainer/next_wave_time/MarginContainer/HBoxContainer/next_wave_time
 
 func _ready() -> void:
     pass
 
 func _process(_delta: float) -> void:
     pass
+
+func update_timer(time_left: float) -> void:
+    var minutes = int(time_left) / 60
+    var seconds = int(time_left) % 60
+    if minutes != 0:
+        self.next_wave_time.text = "%d : %d" % [minutes, seconds]
+    else:
+        self.next_wave_time.text = "%d" % seconds
 
 func track_character(character: Character) -> void:
     self.ui_minimap.tracked_character = character

@@ -5,6 +5,8 @@ class_name Overworld
 @onready var player_controller: PlayerController = $player_controller
 @onready var city: City = $city
 @onready var game_camera: Camera2D = $game_camera
+@onready var enemy_spawner: EnemySpawner = $enemy_spawner
+@onready var wave_timer: Timer = $wave_timer
 
 @export var starting_character: Character
 
@@ -22,6 +24,7 @@ func _ready() -> void:
     self.player_controller.select_character(self.starting_character)
 
 func _process(delta: float) -> void:
+    self.player_controller.update_timer(self.wave_timer.time_left)
     var player = self.player_controller.controlled_character
     if player.in_city:
         var camera_position = lerp(self.game_camera.global_position, self.city.global_position, self.camera_smooth_weight)
@@ -67,3 +70,8 @@ func on_player_city_player_exited() -> void:
 
 func on_character_selected_signal(character: Character) -> void:
     self.city.set_ui(character.in_city)
+
+func on_wave_timer_timeout() -> void:
+    self.enemy_spawner.spawn()
+    self.wave_timer.wait_time *= 2.0
+    self.wave_timer.start()

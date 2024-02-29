@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://wkruw7m1n7pv"]
+
+[ext_resource type="Script" path="res://enemies/enemy_spawner.gd" id="1_f555v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1w0d5"]
+size = Vector2(779, 427)
+
+[node name="enemy_spawner" type="Node2D"]
+script = ExtResource("1_f555v")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_1w0d5")

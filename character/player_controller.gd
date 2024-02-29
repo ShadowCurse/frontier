@@ -26,6 +26,9 @@ func _input(event: InputEvent) -> void:
               self.controlled_character.set_state(State.Idle)
               return
 
+func update_timer(time_left: float) -> void:
+    self.player_ui.update_timer(time_left)
+
 func enable() -> void:
     self.player_ui.visible = true
 
