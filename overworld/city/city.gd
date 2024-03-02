@@ -20,6 +20,7 @@ signal player_exited
 @export var food_hut_scene: PackedScene
 @export var wood_cutter_scene: PackedScene
 @export var wall_scene: PackedScene
+@export var angled_wall_scene: PackedScene
 
 @export var total_gold: int = 1000
 @export var total_wood: int = 10000
@@ -82,9 +83,12 @@ func _ready() -> void:
             self.grid_root.call_deferred("add_child", tile)
 
 func _process(_delta: float) -> void:
-    if under_cursor_object:
+    if self.under_cursor_object:
         var cursor_pos = get_global_mouse_position()
         self.move_under_cursor_object(cursor_pos)
+        
+        if Input.is_action_just_pressed("game_rotate_object"):
+            self.under_cursor_object.rotate(PI / 2)
 
         if Input.is_action_just_pressed("game_place_object"):
             self.try_place_object()
@@ -228,6 +232,23 @@ func on_city_ui_build_wall_signal() -> void:
     self.city_ui.hide_modes()
 
     var wall: Wall = self.wall_scene.instantiate()
+    wall.selected.connect(self.on_building_selected)
+    under_cursor_object = wall
+    self.grid_placement = GridPlacement.Building
+
+    self.call_deferred("add_child", wall)
+    self.walls.append(wall)
+
+func on_city_ui_build_angled_wall_signal() -> void:
+    if !self.try_deduce_cost(\
+      Wall.building_gold_cost,\
+      Wall.building_wood_cost,\
+      Wall.building_stone_cost):
+        return
+
+    self.city_ui.hide_modes()
+
+    var wall: Wall = self.angled_wall_scene.instantiate()
     wall.selected.connect(self.on_building_selected)
     under_cursor_object = wall
     self.grid_placement = GridPlacement.Building

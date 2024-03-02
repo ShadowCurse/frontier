@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://crk7re7tacp13"]
+[gd_scene load_steps=19 format=3 uid="uid://crk7re7tacp13"]
 
 [ext_resource type="Script" path="res://overworld/city/city_ui.gd" id="1_rboli"]
 [ext_resource type="Texture2D" uid="uid://chtrguk37mbhg" path="res://assets/TinySwords/Resources/Resources/G_Idle.png" id="3_36205"]
@@ -9,7 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://bdbga1keu84ht" path="res://assets/TinySwords/Resources/Gold Mine/GoldMine_Inactive.png" id="7_gfd44"]
 [ext_resource type="Texture2D" uid="uid://7aekqyq0s1ku" path="res://assets/TinySwords/Resources/Sheep/HappySheep_Idle.png" id="8_8hlsr"]
 [ext_resource type="Texture2D" uid="uid://d0ccfiowlx3yv" path="res://assets/TinySwords/Resources/Resources/W_Idle.png" id="9_1ser1"]
-[ext_resource type="Texture2D" uid="uid://duxdwvcux60s7" path="res://assets/wall.png" id="10_yfe3t"]
+[ext_resource type="Texture2D" uid="uid://cc2ffc303jxh0" path="res://assets/wall_wood_strait.png" id="10_rvtya"]
+[ext_resource type="Texture2D" uid="uid://ouca84f1g0vf" path="res://assets/wall_wood_angle.png" id="11_oght0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hc6tc"]
 atlas = ExtResource("3_36205")
@@ -387,7 +388,7 @@ layout_mode = 2
 [node name="wall_icon" type="TextureRect" parent="build_panel/MarginContainer/ScrollContainer/Control/wall/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("10_yfe3t")
+texture = ExtResource("10_rvtya")
 expand_mode = 1
 stretch_mode = 5
 
@@ -433,6 +434,65 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "build"
 
+[node name="angled_wall" type="MarginContainer" parent="build_panel/MarginContainer/ScrollContainer/Control"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="build_panel/MarginContainer/ScrollContainer/Control/angled_wall"]
+layout_mode = 2
+
+[node name="wall_icon" type="TextureRect" parent="build_panel/MarginContainer/ScrollContainer/Control/angled_wall/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("11_oght0")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="build_panel/MarginContainer/ScrollContainer/Control/angled_wall/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="build_panel/MarginContainer/ScrollContainer/Control/angled_wall/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="gold_icon" type="TextureRect" parent="build_panel/MarginContainer/ScrollContainer/Control/angled_wall/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_whi4p")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="gold_cost" type="Label" parent="build_panel/MarginContainer/ScrollContainer/Control/angled_wall/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="wood_icon" type="TextureRect" parent="build_panel/MarginContainer/ScrollContainer/Control/angled_wall/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_i36us")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="wood_cost" type="Label" parent="build_panel/MarginContainer/ScrollContainer/Control/angled_wall/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="stone_icon" type="TextureRect" parent="build_panel/MarginContainer/ScrollContainer/Control/angled_wall/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_8f7fi")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="stone_cost" type="Label" parent="build_panel/MarginContainer/ScrollContainer/Control/angled_wall/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="build_button" type="Button" parent="build_panel/MarginContainer/ScrollContainer/Control/angled_wall/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "build"
+
 [node name="city_buttons" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = 2
@@ -472,5 +532,6 @@ text = "Remove"
 [connection signal="pressed" from="build_panel/MarginContainer/ScrollContainer/Control/food_hut/HBoxContainer/VBoxContainer/build_button" to="." method="on_food_hut_button_pressed"]
 [connection signal="pressed" from="build_panel/MarginContainer/ScrollContainer/Control/wood_cutter/HBoxContainer/VBoxContainer/build_button" to="." method="on_wood_cutter_button_pressed"]
 [connection signal="pressed" from="build_panel/MarginContainer/ScrollContainer/Control/wall/HBoxContainer/VBoxContainer/build_button" to="." method="on_wall_button_pressed"]
+[connection signal="pressed" from="build_panel/MarginContainer/ScrollContainer/Control/angled_wall/HBoxContainer/VBoxContainer/build_button" to="." method="on_angle_wall_button_pressed"]
 [connection signal="pressed" from="city_buttons/MarginContainer/HBoxContainer/build_mode_button" to="." method="on_build_mode_button_pressed"]
 [connection signal="toggled" from="city_buttons/MarginContainer/HBoxContainer/remove_mode_button" to="." method="on_remove_mode_button_toggled"]

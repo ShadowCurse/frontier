@@ -1,10 +1,10 @@
 [gd_scene load_steps=5 format=3 uid="uid://cfdp1a8h6vkuf"]
 
 [ext_resource type="Script" path="res://overworld/city/buildings/wall.gd" id="1_w8qen"]
-[ext_resource type="Texture2D" uid="uid://duxdwvcux60s7" path="res://assets/wall.png" id="2_db3gf"]
+[ext_resource type="Texture2D" uid="uid://cc2ffc303jxh0" path="res://assets/wall_wood_strait.png" id="2_ruvky"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_idiwu"]
-size = Vector2(131, 129)
+size = Vector2(32.5, 128.167)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ucub7"]
 bg_color = Color(0.666667, 0, 0.278431, 1)
@@ -17,18 +17,20 @@ input_pickable = true
 script = ExtResource("1_w8qen")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
 scale = Vector2(2, 2)
-texture = ExtResource("2_db3gf")
+texture = ExtResource("2_ruvky")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.5, 0.5)
+position = Vector2(0.416668, 0.0833321)
 shape = SubResource("RectangleShape2D_idiwu")
 
 [node name="health_bar" type="ProgressBar" parent="."]
-offset_left = -60.8333
-offset_top = -94.1667
-offset_right = 62.1667
-offset_bottom = -67.1667
+visible = false
+offset_left = -24.1667
+offset_top = -15.8333
+offset_right = 20.8333
+offset_bottom = 11.1667
 theme_override_styles/fill = SubResource("StyleBoxFlat_ucub7")
 max_value = 1.0
 value = 1.0
