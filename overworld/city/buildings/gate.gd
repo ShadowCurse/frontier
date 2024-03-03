@@ -30,9 +30,6 @@ func _process(delta: float) -> void:
 
 func take_damage(damage: int) -> void:
     self.current_health -= damage
-    var percent = float(self.current_health) / float(self.max_health)
-    self.health_bar.set_value_no_signal(percent)
-    
     if self.current_health <= 0:
         self.queue_free()
 

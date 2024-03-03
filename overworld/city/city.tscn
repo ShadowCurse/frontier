@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cnythimxbph1b" path="res://overworld/city/buildings/mine.tscn" id="3_gf3vi"]
 [ext_resource type="PackedScene" uid="uid://b5so4pklxgnv" path="res://overworld/city/buildings/food_hut.tscn" id="4_2laik"]
 [ext_resource type="PackedScene" uid="uid://djyde0rq2d6i5" path="res://overworld/city/buildings/wood_cutter.tscn" id="5_noukh"]
-[ext_resource type="PackedScene" uid="uid://crk7re7tacp13" path="res://overworld/city/city_ui.tscn" id="7_1t71j"]
+[ext_resource type="PackedScene" uid="uid://crk7re7tacp13" path="res://overworld/city/ui/city_ui.tscn" id="7_1t71j"]
 [ext_resource type="PackedScene" uid="uid://cfdp1a8h6vkuf" path="res://overworld/city/buildings/wall.tscn" id="7_rike3"]
 [ext_resource type="PackedScene" uid="uid://fikt4dtbf0op" path="res://overworld/city/buildings/angled_wall.tscn" id="8_prvhi"]
 [ext_resource type="PackedScene" uid="uid://c2dee4afwniuf" path="res://overworld/city/buildings/gate.tscn" id="9_h8ebb"]
