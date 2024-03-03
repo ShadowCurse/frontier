@@ -8,6 +8,7 @@ signal build_food_hut_signal
 signal build_wood_cutter_signal
 signal build_wall_signal
 signal build_angle_wall_signal
+signal build_gate_signal
 
 @onready var build_panel: PanelContainer = $build_panel
 
@@ -46,6 +47,12 @@ signal build_angle_wall_signal
 @onready var angled_wall_gold_cost: Label = $build_panel/MarginContainer/ScrollContainer/Control/angled_wall/HBoxContainer/VBoxContainer/HBoxContainer/gold_cost
 @onready var angled_wall_wood_cost: Label = $build_panel/MarginContainer/ScrollContainer/Control/angled_wall/HBoxContainer/VBoxContainer/HBoxContainer/wood_cost
 @onready var angled_wall_stone_cost: Label = $build_panel/MarginContainer/ScrollContainer/Control/angled_wall/HBoxContainer/VBoxContainer/HBoxContainer/stone_cost
+
+@onready var gate_build_button: Button = $build_panel/MarginContainer/ScrollContainer/Control/gate/HBoxContainer/VBoxContainer/build_button
+@onready var gate_gold_cost: Label = $build_panel/MarginContainer/ScrollContainer/Control/gate/HBoxContainer/VBoxContainer/HBoxContainer/gold_cost
+@onready var gate_wood_cost: Label = $build_panel/MarginContainer/ScrollContainer/Control/gate/HBoxContainer/VBoxContainer/HBoxContainer/wood_cost
+@onready var gate_stone_cost: Label = $build_panel/MarginContainer/ScrollContainer/Control/gate/HBoxContainer/VBoxContainer/HBoxContainer/stone_cost
+
 
 @onready var remove_mode_button: Button = $city_buttons/MarginContainer/HBoxContainer/remove_mode_button
 
@@ -87,6 +94,9 @@ func on_wall_button_pressed() -> void:
 func on_angle_wall_button_pressed() -> void:
     self.build_angle_wall_signal.emit()
 
+func on_gate_button_pressed() -> void:
+    self.build_gate_signal.emit()
+
 func set_house_cost(gold: int, wood: int, stone: int) -> void:
     self.house_gold_cost.text = "%d" % gold
     self.house_wood_cost.text = "%d" % wood
@@ -115,6 +125,11 @@ func set_wall_cost(gold: int, wood: int, stone: int) -> void:
     self.angled_wall_gold_cost.text = "%d" % gold
     self.angled_wall_wood_cost.text = "%d" % wood
     self.angled_wall_stone_cost.text = "%d" % stone
+
+func set_gate_cost(gold: int, wood: int, stone: int) -> void:
+    self.gate_gold_cost.text = "%d" % gold
+    self.gate_wood_cost.text = "%d" % wood
+    self.gate_stone_cost.text = "%d" % stone
 
 func set_gold(new_gold: int) -> void:
     self.gold_label.text = "%d" % new_gold

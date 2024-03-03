@@ -21,6 +21,7 @@ signal player_exited
 @export var wood_cutter_scene: PackedScene
 @export var wall_scene: PackedScene
 @export var angled_wall_scene: PackedScene
+@export var gate_scene: PackedScene
 
 @export var total_gold: int = 1000
 @export var total_wood: int = 10000
@@ -47,6 +48,7 @@ var mines: Array[Mine] = []
 var food_huts: Array[FoodHut] = []
 var wood_cutters: Array[WoodCutter] = []
 var walls: Array[Wall] = []
+var gates: Array[Gate] = []
 
 var under_cursor_object: Node2D = null
 var under_cursor_object_can_place: bool = false
@@ -255,6 +257,23 @@ func on_city_ui_build_angled_wall_signal() -> void:
 
     self.call_deferred("add_child", wall)
     self.walls.append(wall)
+
+func on_city_ui_build_gaten_signal() -> void:
+    if !self.try_deduce_cost(\
+      Gate.building_gold_cost,\
+      Gate.building_wood_cost,\
+      Gate.building_stone_cost):
+        return
+
+    self.city_ui.hide_modes()
+
+    var gate: Gate = self.gate_scene.instantiate()
+    gate.selected.connect(self.on_building_selected)
+    under_cursor_object = gate
+    self.grid_placement = GridPlacement.Building
+
+    self.call_deferred("add_child", gate)
+    self.gates.append(gate)
 
 func on_building_selected(node: Node2D) -> void:
     match self.city_ui.interaction_mode:
