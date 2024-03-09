@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://vqwwft3aangw"]
+[gd_scene load_steps=9 format=3 uid="uid://vqwwft3aangw"]
 
 [ext_resource type="TileSet" uid="uid://dkenr8x2wcr0g" path="res://assets/environment_tile_set.tres" id="1_1kray"]
 [ext_resource type="Script" path="res://overworld/overworld.gd" id="1_3dmib"]
 [ext_resource type="PackedScene" uid="uid://becobpr455lln" path="res://overworld/city/city.tscn" id="3_6tt3t"]
 [ext_resource type="PackedScene" uid="uid://b8unxc5ktifq0" path="res://enemies/enemy.tscn" id="4_72kh4"]
 [ext_resource type="PackedScene" uid="uid://cd8tkx0y8ylm6" path="res://character/character.tscn" id="4_nlfwv"]
+[ext_resource type="PackedScene" uid="uid://btxnfioqtggnn" path="res://overworld/city/buildings/town_haul.tscn" id="5_521hh"]
 [ext_resource type="PackedScene" uid="uid://ca18rb5qdu04r" path="res://character/player_controller.tscn" id="7_7kj2u"]
 [ext_resource type="PackedScene" uid="uid://wkruw7m1n7pv" path="res://enemies/enemy_spawner.tscn" id="7_k8rjy"]
 
@@ -33,6 +34,8 @@ layer_2/tile_data = PackedInt32Array(589835, 4, 0, 589836, 4, 0, 786453, 4, 0, 1
 [node name="city" parent="." node_paths=PackedStringArray("overworld") instance=ExtResource("3_6tt3t")]
 z_index = 1
 overworld = NodePath("..")
+
+[node name="town_haul" parent="city" instance=ExtResource("5_521hh")]
 
 [node name="enemy" parent="." instance=ExtResource("4_72kh4")]
 position = Vector2(-2675, -1159)
